@@ -72,9 +72,9 @@ providers: [{
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true,
     },
-  // {
-  //   provide:LocationStrategy, useClass: HashLocationStrategy,
-  // },
+  {
+    provide:LocationStrategy, useClass: HashLocationStrategy,
+  },
   {
     provide: ShopService
   },
