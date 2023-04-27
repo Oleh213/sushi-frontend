@@ -3,14 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "sushi-postbuild": "ng build"
-  },
-  "engines": {
-    "node": "19.x"
+    "aws deploy": "aws s3 async dist/sushi-frontend s3:"
   },
   "private": true,
   "dependencies": {

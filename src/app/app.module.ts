@@ -15,12 +15,8 @@ import {LoadingInterceptor} from "../shared/components/loading/loading.intercept
 import {SpinnerComponent} from "../shared/components/loading/spinner/spinner.component";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {CheckoutComponent} from './components/checkout/checkout.component';
-import {FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from '../manager-menu/components/login/login.component';
-import { ManagerMenuComponent } from '../manager-menu/components/manager-menu-navbar/manager-menu.component';
-import { ProfileComponent } from '../manager-menu/components/profile/profile.component';
-import { NewOrdersComponent } from '../manager-menu/components/new-orders/new-orders.component';
-import { OrderDetailsComponent } from '../manager-menu/components/new-orders/order-details/order-details.component';
 import { ToastComponent } from './toast-notofication/toast/toast.component';
 import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -28,8 +24,9 @@ import {IvyCarouselModule} from "angular-responsive-carousel";
 import { HumburgerComponent } from './components/header/humburger/humburger.component';
 import {ManagerMenuModule} from "../manager-menu/manager-menu.module";
 import {SharedModule} from "../shared/shared.module";
-import {HashLocationStrategy, LocationStrategy, NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -60,22 +57,27 @@ export function tokenGetter() {
         allowedDomains: environments.tokenWhiteListedDomains
       }
     }),
+
     FormsModule,
     ReactiveFormsModule,
     IvyCarouselModule,
     ManagerMenuModule,
     NgOptimizedImage,
   ],
-  providers: [{
+
+providers: [{
     provide: AUTH_API_URL,
     useValue: environments.authApi
   },
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true,
     },
-    {
-      provide: ShopService
-    },
+  {
+    provide:LocationStrategy, useClass: HashLocationStrategy,
+  },
+  {
+    provide: ShopService
+  },
 
     {
       provide: ToastComponent
