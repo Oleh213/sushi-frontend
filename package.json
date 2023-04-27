@@ -9,6 +9,9 @@
     "test": "ng test",
     "sushi-postbuild": "ng build"
   },
+  "engines": {
+    "node": "19.x"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.1.0",
