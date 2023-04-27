@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sushi-postbuild": "ng build"
   },
   "private": true,
   "dependencies": {
@@ -33,8 +34,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.1.2",
-    "@angular/cli": "~15.1.2",
-    "@angular/compiler-cli": "^15.1.0",
+    "@angular/cli": "^15.2.7",
+    "@angular/compiler-cli": "^15.2.8",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
