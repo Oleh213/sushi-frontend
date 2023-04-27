@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="title-container">
+    <div class="title">Мій кошик</div>
+    <div class="clearCart" (click)="dellAll()">ОЧИСТИТИ КОШИК</div>
+  </div>
+  <div class="cartItems">
+    <div class="cartItem" *ngFor="let item of cartItems">
+      <div class="productInfo">
+        <div class="imageContainer">
+          <img class="image" src="{{item.image}}">
+        </div>
+        <div class="name-weight">
+          <div class="name-dell">
+            <div class="name">{{item.productName.toUpperCase()}}</div>
+            <div class="dell" (click)="dellItem(item.productId)">X</div>
+          </div>
+          <div class="weight" *ngIf="item.weight>0">{{item.weight}} г</div>
+        </div>
+      </div>
+      <div class="count-price">
+        <div class="price-dell Phone">
+          <div class="dell" (click)="dellItem(item.productId)">X</div>
+          <div class="price">{{item.price}} ₴</div>
+
+        </div>
+        <div class="count-container">
+          <div class="remove" (click)="remove(item.productId)">-</div>
+          <div class="count">{{item.count}} шт</div>
+          <div class="add" (click)="add(item.productId)">+</div>
+        </div>
+        <div class="price-dell PC">
+          <div class="price">{{item.price}} ₴</div>
+          <div class="dell" (click)="dellItem(item.productId)">X</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="checkout" *ngIf="show">
+    <div class="totalPrice">
+      <label class="price-lable">РАЗОМ</label>
+      <span class="price">{{countTotalPrice()}} ₴</span>
+    </div>
+    <div class="go" routerLink="/checkout">ПЕРЕЙТИ ДО ОФОРМЛЕННЯ</div>
+  </div>
+</div>
+<app-spinner></app-spinner>

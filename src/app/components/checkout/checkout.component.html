@@ -1,0 +1,155 @@
+<div class="container" *ngIf="isShow()">
+  <div class="left">
+    <div class="title">Оформлення замовлення</div>
+    <div class='userInfo-title-container edition'>
+      <div class='items-title'><span class="number"><span>1</span></span>Контактна інформація</div>
+    </div>
+      <div class="userInfo">
+        <div class="name block">
+          <label class="input">
+            <input class="input__field" [(ngModel)]="contactInfo.name" type="text" placeholder=" "  />
+            <span class="input__label">Імʼя *</span>
+          </label>
+        </div>
+        <div class="phoneNumber block">
+          <label class="input">
+            <input class="input__field" [(ngModel)]="contactInfo.phoneNumber" type="text" placeholder=" " />
+            <span class="input__label">Телефон *</span>
+          </label>
+        </div>
+        <div class="surname block">
+          <label class="input">
+            <input class="input__field" [(ngModel)]="contactInfo.surName" type="text" placeholder=" "  />
+            <span class="input__label">Прізвище</span>
+          </label>
+        </div>
+        <div class="email block">
+          <label class="input">
+            <input class="input__field" type="text" placeholder=" "  [(ngModel)]="contactInfo.email"/>
+            <span class="input__label" >E-mail адреса </span>
+          </label>
+        </div>
+      </div>
+    <div class='delivery-title-container edition'>
+      <div class='items-title'><span class="number"><span>2</span></span>Деталі доставки</div>
+    </div>
+    <div class="delivery-container">
+      <div class="deliveryOptions">
+          <div class="picUp-container deliveryOption" (click)="changeDeliveryOption('picUp')">
+            <div class="border"><div class="dot" *ngIf="deliveryOption.picUp"></div></div>
+            <label class="text">Самовивіз</label>
+          </div>
+          <div class="deliveryOrder-container deliveryOption" (click)="changeDeliveryOption('delivery')">
+            <div class="border"><div class="dot" *ngIf="deliveryOption.delivery"></div></div>
+            <label class="text">Доставка</label>
+          </div>
+        <div class="deliveryInfo" *ngIf="deliveryOption.delivery">
+          <div class="street info">
+            <label class="input">
+              <input class="input__field" type="text" placeholder=" " [(ngModel)]="deliveryOption.street" />
+              <span class="input__label" >Вулиця</span>
+            </label>
+          </div>
+          <div class="house info">
+            <label class="input">
+              <input class="input__field" type="text" [(ngModel)]="deliveryOption.house" placeholder=" "  />
+              <span class="input__label">Дім</span>
+            </label>
+          </div>
+          <div class="flat info">
+            <label class="input">
+              <input class="input__field" type="text" [(ngModel)]="deliveryOption.flat" placeholder=" "  />
+              <span class="input__label">Квартира</span>
+            </label>
+          </div>
+          <div class="entrance info">
+            <label class="input">
+              <input class="input__field" type="text" [(ngModel)]="deliveryOption.entrance" placeholder=" "  />
+              <span class="input__label">Підʼїзд</span>
+            </label>
+          </div>
+          <div class="domofon info">
+            <label class="input">
+              <input class="input__field" type="text" [(ngModel)]="deliveryOption.domofon" placeholder=" "  />
+              <span class="input__label">Домофон</span>
+            </label>
+          </div>
+          <div class="flour info">
+            <label class="input">
+              <input class="input__field" type="text" [(ngModel)]="deliveryOption.flour" placeholder=" "  />
+              <span class="input__label">Поверх</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='delivery-title-container edition'>
+      <div class='items-title'><span class="number"><span>3</span></span>Умови доставки</div>
+    </div>
+    <div class="deliveryTime">
+      <div class="asap time" (click)="changeDeliveryTime('asap')">
+        <div class="border"><div class="dot" *ngIf="deliveryOption.asap"></div></div>
+        <label class="text">Якомога швидше</label>
+      </div>
+      <div class="choseTime time" (click)="changeDeliveryTime('onTime')">
+        <div class="border"><div class="dot" *ngIf="deliveryOption.onTime"></div></div>
+        <label class="text">На певну годину</label>
+      </div>
+      <div class="selectHour" *ngIf="deliveryOption.onTime">
+        <select class="selector" [(ngModel)]="deliveryOption.deliveryTime">
+          <option  *ngFor="let category of initialHours" >
+            {{category.toLocaleTimeString()}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class='delivery-title-container edition'>
+      <div class='items-title'><span class="number"><span>4</span></span>Метод оплати</div>
+    </div>
+    <div class="paymentMethod">
+      <div class="cash payment" (click)="changePaymentMethod('cash')">
+        <div class="border"><div class="dot" *ngIf="paymentMethod.cash"></div></div>
+        <label class="text">Готівкою</label>
+      </div>
+      <div class="cardInStore payment" (click)="changePaymentMethod('cardInStore')">
+        <div class="border"><div class="dot" *ngIf="paymentMethod.cardInStore"></div></div>
+        <label class="text">Картою при отримуванні </label>
+      </div>
+      <div class="cardOnline payment" (click)="changePaymentMethod('cardOnline')">
+        <div class="border"><div class="dot" *ngIf="paymentMethod.cardOnline"></div></div>
+        <label class="text">Картою онлайн</label>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="orderInfo">
+      <div class="subTotalPrice">
+        <label class="lable">Загальна сума</label>
+        <span class="price">{{subTotalPrice}} ₴</span>
+      </div>
+      <div class="discount" *ngIf="promoCode.promoDiscount>0">
+        <label class="lable">Знижка</label>
+        <span class="price">{{promoCode.promoDiscount}} ₴</span>
+      </div>
+      <div class="totalPrice">
+        <label class="lable">РАЗОМ</label>
+        <span class="price">{{totalPrice - promoCode.promoDiscount}}₴</span>
+      </div>
+      <div class="promoCode-container">
+        <label class="promoLabel" (click)="openClosePromoField()">{{promoCode.promoField?'Не використовувати промокод': 'У мене є промокод'}}</label>
+        <div class="promoCode" *ngIf="promoCode.promoField">
+          <label class="input">
+            <div class="input__field">
+              <input class="input__field2" [(ngModel)]="promoCode.usedPromoCode" type="text" placeholder=" ">
+              <div class="button" (click)="usePromoCode()">></div>
+            </div>
+            <span class="input__label">Промокод</span>
+          </label>
+        </div>
+      </div>
+      <div class="submit" [ngClass]="{'go': checkSubmit()}" (click)="makeOrder()">ЗАМОВИТИ</div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>
+

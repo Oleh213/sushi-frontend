@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="slider">
+    <div class="image-container" (click)="router.navigate([imageSlider[currentIndex].description])" >
+      <img class="image" src="{{getCurrentSlideUrl()}}" alt="">
+    </div>
+    <div class="slide_buttons">
+    </div>
+    <div class="directional" *ngIf="isShow">
+      <div (click)="goToPrevious()" class="leftArrow arrow">❰</div>
+      <div (click)="goToNext()" class="rightArrow arrow">❱</div>
+    </div>
+  </div>
+</div>
+
+
+<app-spinner></app-spinner>
+
+

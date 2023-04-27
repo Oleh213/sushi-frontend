@@ -1,0 +1,102 @@
+import {Component, OnInit} from '@angular/core';
+import {ShopService} from "../../../app/services/shop.service";
+import {CurrentFilter, Order, OrderStatus, OrderStatusValues, PaymentMethodValues} from "../../../app/models/orders";
+import {DatePipe} from "@angular/common";
+import {Guid} from "guid-typescript";
+import {Subscription} from "rxjs";
+import {OrderService} from "../../../app/services/order.service";
+import {LoaderService} from "../../../shared/components/loading/loader.service";
+import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
+
+@Component({
+  selector: 'app-new-orders',
+  templateUrl: './new-orders.component.html',
+  styleUrls: ['./new-orders.component.scss']
+})
+export class NewOrdersComponent implements OnInit{
+  public orders: Array<Order> = [];
+  public ordersFilter: Array<Order> = [];
+  public orderStatusValues = OrderStatusValues;
+  public statuses = OrderStatus;
+  public paymentMethodValues = PaymentMethodValues;
+  public orderStatuses = OrderStatusValues;
+  private pipe = new DatePipe('en-US');
+  public model = false;
+  public order: Order = new Order();
+  private subscriptions: Subscription[] = [];
+  public currentFilter: number = 10;
+  constructor(private shop: ShopService,
+              private orderService: OrderService,
+              private errorService: ErrorHandlerService,
+  ) {
+  }
+  ngOnInit(): void {
+    this.shop.getNewOrders().subscribe(res=> {
+      this.orders = res
+      this.ordersFilter = res
+      },
+      error => {
+      this.errorService.handleError(error);
+      });
+    this.subscriptions.push(this.orderService.retrieveMappedObject()
+      .pipe()
+      .subscribe( (receivedObj: Order) => { this.addToInbox(receivedObj);}));
+  }
+
+  changeCategory(status: number) {
+    if(status===10){
+      this.ordersFilter = this.orders.filter(x=> x.orderStatus ===
+        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus || x.orderStatus !== this.statuses.Completed
+      )
+    }
+    else {
+      this.ordersFilter = this.orders.filter(x=> x.orderStatus === status)
+    }
+  }
+  getCount(status: number): number{
+    let count = 0;
+    if(status === 10){
+      this.orders.filter(x=> x.orderStatus ===
+        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus || x.orderStatus !== this.statuses.Completed
+      ).forEach(x=> {count+=1});
+    }
+    else {
+      this.orders.filter(x=> x.orderStatus === status).forEach(x=> {count+=1});
+    }
+    return count;
+  }
+
+  getDetail(order: Order){
+    this.order = order;
+    this.model = true;
+  }
+  changeStatus(orderId: Guid, orderStatus: OrderStatus){
+    this.shop.changeOrderStatus(orderId,orderStatus).subscribe(res=> {
+    })
+  }
+  addToInbox(obj: Order) {
+    if(this.ordersFilter.find(x=> x.orderId == obj.orderId))
+    {
+      this.ordersFilter.forEach(x=>{
+        if(x.orderId == obj.orderId){
+        x.orderStatus = obj.orderStatus;
+        x.deliveryOptions = obj.deliveryOptions;
+      }})
+      this.ordersFilter = this.orders.filter(x=> x.orderStatus ===
+        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus || x.orderStatus !== this.statuses.Completed
+      )
+      this.changeCategory(this.currentFilter);
+    }
+    else {
+      let newObj = {...obj};
+      this.ordersFilter = this.orders.filter(x=> x.orderId !== obj.orderId)
+      this.ordersFilter.push(newObj);
+      this.orders.push(newObj)
+      this.changeCategory(this.currentFilter);
+    }
+  }
+  changeFilter(status: number){
+      this.currentFilter = status
+  }
+
+}

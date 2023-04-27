@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="burger-logo">
+    <div class="burger" (click)="open()">
+      <img src="https://img.icons8.com/ios-glyphs/480/null/menu--v1.png" alt="" class="menu">
+    </div>
+    <div class="logo" >
+      <span class="text"  routerLink="">UMAMI</span>
+    </div>
+  </div>
+
+  <div class="context">
+    <div class="menu" routerLink="/menu">Меню</div>
+    <div class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">
+      <img src="https://img.icons8.com/ios/500/null/admin-settings-male.png" class="manager-menu" alt="">
+    </div>
+  </div>
+
+</div>
+<app-humburger>
+
+</app-humburger>

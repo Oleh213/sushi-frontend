@@ -1,0 +1,18 @@
+<div class='backdrop'></div>
+<div class="content">
+  <div class="container">
+    <div class='imgContainer' (click)="onClose()"><img src='https://img.icons8.com/ios/100/null/close-window--v1.png' alt="close"  class='img'></div>
+    <div class="selection">
+      <div class="menu item" (click)="goToPage('menu')">Меню</div>
+      <div class="underline" ></div>
+      <div class="profile item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/profile')">Профіль</div>
+      <div class="newOrders item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/new-orders')">Нові замовлення</div>
+      <div class="newOrders item" *ngIf="user === UserRole.Admin" (click)="goToPage('manager-menu/admin-menu')">Меню адміністратора</div>
+      <div class="underline" *ngIf="user === UserRole.Admin || user === UserRole.Manager"></div>
+      <div class="exit item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="logout()">Вийти</div>
+    </div>
+  </div>
+  <div class="container2" (click)="onClose()">
+  </div>
+</div>
+

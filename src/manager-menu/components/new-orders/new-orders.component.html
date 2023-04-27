@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="content" [ngClass]="{newOrdersBorder: getCount(statuses.AwaitingConfirm)> 0}">
+    <div class="title">Нові замовлення</div>
+    <div class="filter">
+      <div class="filterItem"  [ngClass]="{active: currentFilter === 10}" (click)="changeCategory(10); changeFilter(10)">Всe <span class="count" *ngIf="getCount(10)>0">{{getCount(10)}}</span></div>
+      <div class="filterItem" [ngClass]="{newOrder: getCount(statuses.AwaitingConfirm)>0, active: currentFilter == statuses.AwaitingConfirm}" (click)="changeCategory(statuses.AwaitingConfirm); changeFilter(statuses.AwaitingConfirm)">Очікує підтвердження <span class="count" *ngIf="getCount(statuses.AwaitingConfirm)>0">{{getCount(statuses.AwaitingConfirm)}}</span></div>
+      <div class="filterItem" [ngClass]="{active: currentFilter == statuses.Cooking}" (click)="changeCategory(statuses.Cooking); changeFilter(statuses.Cooking)">Готується <span class="count" *ngIf="getCount(statuses.Cooking)>0">{{getCount(statuses.Cooking)}}</span></div>
+      <div class="filterItem" [ngClass]="{active: currentFilter == statuses.AwaitingPicUp}" (click)="changeCategory(statuses.AwaitingPicUp); changeFilter(statuses.AwaitingPicUp)">Готове до видачі<span class="count" *ngIf="getCount(statuses.AwaitingPicUp)>0"> {{getCount(statuses.AwaitingPicUp)}}</span></div>
+      <div class="filterItem" [ngClass]="{active: currentFilter == statuses.Delivered}" (click)="changeCategory(statuses.Delivered); changeFilter(statuses.Delivered)">Відправленно <span class="count" *ngIf="getCount(statuses.Delivered)>0">{{getCount(statuses.Delivered)}}</span></div>
+    </div>
+    <div class="orders">
+      <div class="order" *ngFor="let order of ordersFilter">
+        <div class="top">
+          <div class="date-number">
+            <div class="date">{{ order.orderTime | dateFormat}}</div>
+            <div class="number">№ {{order.orderNumber}}</div>
+          </div>
+          <div class="status">{{orderStatuses[order.orderStatus].value}}</div>
+        </div>
+        <div class="price">Загальна сумма: {{order.totalPrice}}</div>
+        <div class="delivery-payment-method">
+          <div class="deliveryMethod">{{order.deliveryOptions.asap ? 'Самовивіз':'Доставка'}}</div>
+          <div class="paymentMethod">{{paymentMethodValues[order.paymentMethod].value}}</div>
+        </div>
+        <div class="underline"></div>
+        <div class="orderItems">
+          <div class="orderItem" *ngFor="let product of order.orderLists">
+            <div class="name">{{product.name}}</div>
+            <div class="count">x {{product.count}}</div>
+          </div>
+        </div>
+        <div class="underline"></div>
+        <div class="details-changeStatus">
+          <div class="detailsButton" (click)="getDetail(order)" >Деталі</div>
+          <div class="confirm" *ngIf="order.orderStatus === statuses.AwaitingConfirm" (click)="changeStatus(order.orderId,statuses.Cooking)">Підтвердити</div>
+          <div class="reject" *ngIf="order.orderStatus === statuses.AwaitingConfirm" (click)="changeStatus(order.orderId,statuses.Canceled)">Відхилити</div>
+          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.delivery" (click)="changeStatus(order.orderId,statuses.Delivered)">Відправленно</div>
+          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.picUp" (click)="changeStatus(order.orderId,statuses.AwaitingPicUp)">Готове до видачі</div>
+          <div class="complete" *ngIf="order.orderStatus === statuses.Delivered || order.orderStatus ===  statuses.AwaitingPicUp" (click)="changeStatus(order.orderId,statuses.Completed)">Завершити</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>
+
+<app-order-details
+  *ngIf='model'
+  [data]="order"
+  (close)='model = false'
+>
+</app-order-details>
