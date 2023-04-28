@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ShopService} from "../../../app/services/shop.service";
-import {CurrentFilter, Order, OrderStatus, OrderStatusValues, PaymentMethodValues} from "../../../app/models/orders";
-import {DatePipe} from "@angular/common";
+import {Order, OrderStatus, OrderStatusValues, PaymentMethodValues} from "../../../app/models/orders";
 import {Guid} from "guid-typescript";
 import {Subscription} from "rxjs";
 import {OrderService} from "../../../app/services/order.service";
-import {LoaderService} from "../../../shared/components/loading/loader.service";
 import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
 
 @Component({
@@ -20,7 +18,6 @@ export class NewOrdersComponent implements OnInit{
   public statuses = OrderStatus;
   public paymentMethodValues = PaymentMethodValues;
   public orderStatuses = OrderStatusValues;
-  private pipe = new DatePipe('en-US');
   public model = false;
   public order: Order = new Order();
   private subscriptions: Subscription[] = [];
@@ -36,7 +33,7 @@ export class NewOrdersComponent implements OnInit{
       this.ordersFilter = res
       },
       error => {
-      this.errorService.handleError(error);
+      // this.errorService.handleError(error);
       });
     this.subscriptions.push(this.orderService.retrieveMappedObject()
       .pipe()

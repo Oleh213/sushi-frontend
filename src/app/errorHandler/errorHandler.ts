@@ -14,12 +14,6 @@ export class ErrorHandlerService {
     if (error.status === 500) {
       location.href = 'error-page'
     }
-    else if (error.status === 404) {
-      location.href = 'error-page'
-    }
-    else {
-      location.href = 'error-page'
-    }
   }
-  
+
 }
