@@ -11,6 +11,4 @@ export class OrderDetailsComponent {
   @Input() data: Order = new Order();
   public paymentMethodValues = PaymentMethodValues;
 
-
-
 }

@@ -66,6 +66,11 @@ export class NewOrdersComponent implements OnInit{
   getDetail(order: Order){
     this.order = order;
     this.model = true;
+    const bodyList = document.getElementsByTagName('body');
+    if (bodyList && bodyList.length > 0) {
+      const body = bodyList[0];
+      body.classList.add('modal-open');
+    }
   }
   changeStatus(orderId: Guid, orderStatus: OrderStatus){
     this.shop.changeOrderStatus(orderId,orderStatus).subscribe(res=> {
@@ -95,5 +100,16 @@ export class NewOrdersComponent implements OnInit{
   changeFilter(status: number){
       this.currentFilter = status
   }
+
+  closeModal(){
+    this.model = false;
+
+    const bodyList = document.getElementsByTagName('body');
+    if (bodyList && bodyList.length > 0) {
+      const body = bodyList[0];
+      body.classList.remove('modal-open');
+    }
+  }
+
 
 }
