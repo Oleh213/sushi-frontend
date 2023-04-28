@@ -28,7 +28,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/web.config"
+              "src/vercel.json"
             ],
             "styles": [
               "src/styles.scss"

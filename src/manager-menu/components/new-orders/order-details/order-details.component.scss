@@ -25,7 +25,9 @@
   left: 25%;
   z-index: 1050;
   width: 50%;
-  min-height: 680px;
+  //min-height: 680px;
+  height: 90%;
+  overflow: scroll;
   border-radius: 10px;
   background: #FFFFFF;
   box-shadow: 3px 3px 15px rgb(143, 143, 143);
@@ -89,4 +91,13 @@
 .underline{
   margin: 20px 0;
   border-top: 1px solid #efefef;
+}
+
+@media (max-width: 830px) {
+  .container {
+    height: 80%;
+    overflow: scroll;
+    left: 10%;
+    width: 80%;
+  }
 }

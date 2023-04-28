@@ -34,7 +34,7 @@ export class HumburgerComponent implements OnInit{
     const backDrop = this.el.nativeElement.querySelector('.backdrop');
     const close = this.el.nativeElement.querySelector('.imgContainer');
     const content = this.el.nativeElement.querySelector('.content');
-    const container = this.el.nativeElement.querySelector('.container');
+    // const container = this.el.nativeElement.querySelector('.container');
     backDrop.style.display ='flex';
     close.style.display ='flex';
     content.style.display ='flex';
@@ -62,8 +62,6 @@ export class HumburgerComponent implements OnInit{
     content.style.display ='none';
     backDrop.style.display ='none';
     close.style.display ='none';
-
-
   }
 
 
