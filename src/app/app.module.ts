@@ -26,7 +26,7 @@ import {ManagerMenuModule} from "../manager-menu/manager-menu.module";
 import {SharedModule} from "../shared/shared.module";
 import {NgOptimizedImage} from "@angular/common";
 import { ErrorPageComponent } from './components/error-page/error-page.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AgmCoreModule } from '@agm/core';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -57,12 +57,14 @@ export function tokenGetter() {
         allowedDomains: environments.tokenWhiteListedDomains
       }
     }),
-
     FormsModule,
     ReactiveFormsModule,
     IvyCarouselModule,
     ManagerMenuModule,
     NgOptimizedImage,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAl6G985ANRdxocfm2QYQzzPeHYqYdxDk4'
+    }),
   ],
 
 providers: [{

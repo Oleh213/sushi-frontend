@@ -1,11 +1,11 @@
 <div class="content" *ngIf="!isLogin()">
   <div class="container" id="container" [ngClass]="{ 'right-panel-active': isSignUp }">
-    <div class="form-container sign-in-container">
-      <form [formGroup]="loginForm" autocomplete="off" novalidate>
-        <h1>Sign in</h1>
+    <div class="form-container">
+      <form [formGroup]="loginForm" autocomplete="off" novalidate class="form">
+        <h1 class="logo">Sign in</h1>
         <input type="text"  formControlName="username" class="form-control" placeholder="Username"  #name />
         <input type="password" id="password" formControlName="password" class="form-control"  placeholder="Password"   #password />
-        <button type="submit"  (click)='login(name.value, password.value)'>Sign In</button>
+        <button type="submit" class="submit"  (click)='login(name.value, password.value)'>Sign In</button>
       </form>
     </div>
   </div>

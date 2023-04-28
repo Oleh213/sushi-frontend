@@ -7,7 +7,7 @@
     display: flex;
     color: #b06c1b;
     margin: 0 0 0 20px;
-    cursor: pointer;
+    //cursor: pointer;
     letter-spacing: 5px;
     .burger{
       display: none;
@@ -51,6 +51,9 @@
       display: flex;
       justify-content: space-between;
       width: 55%;
+      &:focus{
+        outline: none;
+      }
       .burger {
         display: flex;
       }
