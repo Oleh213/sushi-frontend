@@ -11,6 +11,7 @@ import {NewOrdersComponent} from "../manager-menu/components/new-orders/new-orde
 import {MainComponent} from "./components/main/main.component";
 import {AdminMenuComponent} from "../manager-menu/components/admin-menu/admin-menu.component";
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
+import {AppComponent} from "./app.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,9 @@ const routes: Routes = [
   },
   {
     path: 'error-page', component: ErrorPageComponent,
+  },
+  {
+    path: '', component: MainComponent,
   },
   {
     path: '', component: MainComponent,
