@@ -12,6 +12,9 @@
     .burger{
       display: none;
     }
+    .logo{
+      font-size: 25px;
+    }
   }
   .context{
     display: flex;
@@ -50,7 +53,7 @@
     .burger-logo {
       display: flex;
       justify-content: space-between;
-      width: 55%;
+      width: 58%;
       &:focus{
         outline: none;
       }

@@ -11,7 +11,7 @@ import {NewOrdersComponent} from "../manager-menu/components/new-orders/new-orde
 import {MainComponent} from "./components/main/main.component";
 import {AdminMenuComponent} from "../manager-menu/components/admin-menu/admin-menu.component";
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
-import {AppComponent} from "./app.component";
+import {ContactComponent} from "./components/contact/contact.component";
 
 
 const routes: Routes = [
@@ -23,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'checkout', component: CheckoutComponent,
+  },
+  {
+    path: 'contact', component: ContactComponent,
   },
   {
     path: 'manager-menu-login', component: LoginComponent,

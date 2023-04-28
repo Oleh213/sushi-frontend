@@ -27,6 +27,7 @@ import {SharedModule} from "../shared/shared.module";
 import {NgOptimizedImage} from "@angular/common";
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { AgmCoreModule } from '@agm/core';
+import { ContactComponent } from './components/contact/contact.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -44,6 +45,7 @@ export function tokenGetter() {
     FooterComponent,
     HumburgerComponent,
     ErrorPageComponent,
+    ContactComponent,
   ],
   imports: [
     SharedModule,

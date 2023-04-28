@@ -12,8 +12,10 @@ import {ErrorHandlerService} from "../../errorHandler/errorHandler";
 export class MainComponent implements OnInit{
   public currentIndex: number = 0;
   public timeoutId: number = 0;
-  isShow = false;
+  public isShow = false;
   public imageSlider: Array<ImagesSlider> = [];
+  lat: number = 51.678418;
+  lng: number = 7.809007;
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService
