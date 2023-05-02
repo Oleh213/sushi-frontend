@@ -31,31 +31,48 @@ export class MainComponent implements OnInit{
       })
     this.resetTimer();
 
-
     let loader = new Loader({
       apiKey: "AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys",
     });
     loader.load().then()
 
+    this.marketFunction();
+
+  }
+
+  marketFunction(){
     const location = {
-      lat: 49.232830,
-      lng: 28.466553,
+      lat: 49.225617855222204,
+      lng: 28.44943960380496,
     }
     this.map = new google.maps.Map(document.getElementById('map')!,{
       center:location,
-      zoom:12,
+      zoom:14,
     })
     const mark1 = {
       lat: 49.225617855222204,
       lng: 28.44943960380496,
     }
-    const market = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: mark1,
       map: this.map,
-      cursor: "Umami Sushi",
-      title: "Umami Sushi",
     })
+    const infowindow = new google.maps.InfoWindow({
+      content: "Umami Sushi",
+
+    });
+    marker.addListener("mouseover", () => {
+      infowindow.open({
+        anchor: marker,
+        map: this.map,
+      });
+    });
+
+    marker.addListener("mouseout", () => {
+      infowindow.close();
+    });
   }
+
   resetTimer() {
     for(let i of this.imageSlider){
       setTimeout(() => this.goToNext(), 5000);
