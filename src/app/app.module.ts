@@ -28,6 +28,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { AgmCoreModule } from '@agm/core';
 import { ContactComponent } from './components/contact/contact.component';
+import {GoogleMapsModule} from "@angular/google-maps";
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -47,27 +48,28 @@ export function tokenGetter() {
     ErrorPageComponent,
     ContactComponent,
   ],
-  imports: [
-    SharedModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgHttpLoaderModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        allowedDomains: environments.tokenWhiteListedDomains
-      }
-    }),
-    FormsModule,
-    ReactiveFormsModule,
-    IvyCarouselModule,
-    ManagerMenuModule,
-    NgOptimizedImage,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAl6G985ANRdxocfm2QYQzzPeHYqYdxDk4'
-    }),
-  ],
+    imports: [
+        SharedModule,
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgHttpLoaderModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter,
+                allowedDomains: environments.tokenWhiteListedDomains
+            }
+        }),
+        FormsModule,
+        ReactiveFormsModule,
+        IvyCarouselModule,
+        ManagerMenuModule,
+        NgOptimizedImage,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAl6G985ANRdxocfm2QYQzzPeHYqYdxDk4'
+        }),
+        GoogleMapsModule,
+    ],
 
 providers: [{
     provide: AUTH_API_URL,

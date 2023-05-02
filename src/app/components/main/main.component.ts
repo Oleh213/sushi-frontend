@@ -3,6 +3,7 @@ import {ImagesSlider} from "../../models/imagesSlider";
 import {ShopService} from "../../services/shop.service";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
+import {Loader} from "@googlemaps/js-api-loader";
 
 @Component({
   selector: 'app-main',
@@ -14,8 +15,7 @@ export class MainComponent implements OnInit{
   public timeoutId: number = 0;
   public isShow = false;
   public imageSlider: Array<ImagesSlider> = [];
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  private map!: google.maps.Map
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService
@@ -30,6 +30,21 @@ export class MainComponent implements OnInit{
       this.errorService.handleError(error);
       })
     this.resetTimer();
+
+
+    let loader = new Loader({
+      apiKey: "AIzaSyBBhIaLrLd3nLbdIltlInuJ2HYg8wJatk8",
+    });
+    loader.load().then()
+
+    const location = {
+      lat: 49.232830,
+      lng: 28.466553,
+    }
+    this.map = new google.maps.Map(document.getElementById('map')!,{
+      center:location,
+      zoom:12,
+    })
   }
   resetTimer() {
     for(let i of this.imageSlider){
