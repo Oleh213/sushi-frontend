@@ -75,7 +75,7 @@
         .price{
           margin: 5px 0 ;
           display: flex;
-          justify-content: end;
+          justify-content: flex-end;
         }
         .delivery-payment-method{
           color: #7a7979;
@@ -95,7 +95,7 @@
         }
         .details-changeStatus{
           display: flex;
-          justify-content: end;
+          justify-content: flex-end;
           column-gap: 10px;
           .detailsButton{
             cursor: pointer;

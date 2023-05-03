@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "localCartItem.ts","order.ts"
+            ],
             "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ImagesSlider} from "../../models/imagesSlider";
 import {ShopService} from "../../services/shop.service";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
-import {Loader} from "@googlemaps/js-api-loader";
 
 @Component({
   selector: 'app-main',
@@ -30,11 +29,6 @@ export class MainComponent implements OnInit{
       this.errorService.handleError(error);
       })
     this.resetTimer();
-
-    let loader = new Loader({
-      apiKey: "AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys",
-    });
-    loader.load().then()
 
     this.marketFunction();
 
@@ -81,16 +75,14 @@ export class MainComponent implements OnInit{
 
   goToPrevious(): void {
     const isFirstSlide = this.currentIndex === 0;
-    const newIndex = isFirstSlide
+    this.currentIndex = isFirstSlide
       ? this.imageSlider.length - 1
       : this.currentIndex - 1;
-    this.currentIndex = newIndex;
   }
 
   goToNext(): void {
     const isLastSlide = this.currentIndex === this.imageSlider.length - 1;
-    const newIndex = isLastSlide ? 0 : this.currentIndex + 1;
-    this.currentIndex = newIndex;
+    this.currentIndex = isLastSlide ? 0 : this.currentIndex + 1;
   }
 
   getCurrentSlideUrl() {

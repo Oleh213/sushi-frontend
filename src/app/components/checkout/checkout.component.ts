@@ -1,15 +1,12 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DeliveryOption} from "../../models/deliveryOption";
 import {PaymentMethod} from "../../models/paymentMethod";
-import * as moment from 'moment';
 import {ShopService} from "../../services/shop.service";
 import {LocalCartItem} from "../../models/localCartItem";
 import {PromoCode} from "../../models/promoCode";
 import {ContactInfo} from "../../models/contactInfo";
-import {formatDate} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {ToastComponent} from "../../toast-notofication/toast/toast.component";
 import {ToastService} from "../../toast-notofication/toast.service";
 
 
@@ -64,18 +61,14 @@ export class CheckoutComponent implements OnInit{
 
   buildInitialHours() {
     let hourList: Date[] = [];
-    const data = moment();
+    const data = new Date();
     for (let count = 0; count < 48; count++) {
       let lastHour = hourList[hourList.length - 1];
       if (!lastHour) {
-        data.set({ hour: 0, minute: 0, seconds: 0 });
-        hourList.push(data.toDate());
+        hourList.push(data);
         continue;
       }
-      const newHour = lastHour.getMinutes() == 30 ? lastHour.getHours() + 1 : lastHour.getHours();
-      const newMinutes = lastHour.getMinutes() == 0 ? 30 : 0;
-      const obj = { hour: newHour, minutes: newMinutes, seconds: 0 };
-      lastHour = moment(lastHour).set(obj).toDate();
+      lastHour = new Date();
       hourList.push(lastHour);
     }
     let sort: Date[] = [];
@@ -182,12 +175,7 @@ export class CheckoutComponent implements OnInit{
           return false;
         }
         else {
-          if(this.paymentMethod.cardInStore || this.paymentMethod.cardOnline || this.paymentMethod.cash){
-            return true
-          }
-          else {
-            return false;
-          }
+          return this.paymentMethod.cardInStore || this.paymentMethod.cardOnline || this.paymentMethod.cash;
         }
       }
     }
@@ -195,7 +183,7 @@ export class CheckoutComponent implements OnInit{
   }
   makeOrder(){
     if(this.checkSubmit()){
-      this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(res=>{
+      this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(()=>{
         localStorage.removeItem('localCart');
         this.toastService.showToast('Вітаю!', 'Замовлення оформлено');
         setTimeout(() => {
@@ -206,10 +194,7 @@ export class CheckoutComponent implements OnInit{
   }
 
   isShow(): boolean{
-    if(this.cartItems){
-      return true;
-    }
-    else return false;
+    return this.cartItems != null;
   }
 
 
