@@ -15,6 +15,8 @@ export class MainComponent implements OnInit{
   public isShow = false;
   public imageSlider: Array<ImagesSlider> = [];
   private map!: google.maps.Map
+
+
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService
@@ -29,42 +31,25 @@ export class MainComponent implements OnInit{
       this.errorService.handleError(error);
       })
     this.resetTimer();
-
-    this.marketFunction();
-
   }
 
-  marketFunction(){
-    const location = {
-      lat: 49.225617855222204,
-      lng: 28.44943960380496,
-    }
-    this.map = new google.maps.Map(document.getElementById('map')!,{
-      center:location,
-      zoom:14,
-    })
+  choseLocation(event: any){
+
+
     const mark1 = {
-      lat: 49.225617855222204,
+      lat: 43.225617855222204,
       lng: 28.44943960380496,
     }
-    const marker = new google.maps.Marker({
-      position: mark1,
+
+    var newMarker = new google.maps.Marker({
+      draggable: true,
+      position: new google.maps.LatLng(mark1),
       map: this.map,
-    })
-    const infowindow = new google.maps.InfoWindow({
-      content: "Umami Sushi",
-
-    });
-    marker.addListener("mouseover", () => {
-      infowindow.open({
-        anchor: marker,
-        map: this.map,
-      });
+      title: "Your location"
     });
 
-    marker.addListener("mouseout", () => {
-      infowindow.close();
-    });
+    console.log(newMarker)
+
   }
 
   resetTimer() {

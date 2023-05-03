@@ -60,13 +60,14 @@ export function tokenGetter() {
                 allowedDomains: environments.tokenWhiteListedDomains
             }
         }),
+
         FormsModule,
         ReactiveFormsModule,
         IvyCarouselModule,
         ManagerMenuModule,
         NgOptimizedImage,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyAl6G985ANRdxocfm2QYQzzPeHYqYdxDk4'
+            apiKey: 'AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys'
         }),
         GoogleMapsModule,
     ],

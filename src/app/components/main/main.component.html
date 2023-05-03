@@ -12,8 +12,16 @@
   </div>
   <div class="contact">
     <div class="logo">Наші магазини</div>
-    <div class="map" id="map" >
-    </div>
+    <agm-map class="map"
+      [latitude]="49.225617855222204"
+      [longitude]="28.44943960380496"
+      [zoom]="14" >
+      <agm-marker
+        [latitude]="49.225617855222204"
+        [longitude]="28.44943960380496"
+        [markerDraggable]="true">
+      </agm-marker>
+    </agm-map>
   </div>
 </div>
 
