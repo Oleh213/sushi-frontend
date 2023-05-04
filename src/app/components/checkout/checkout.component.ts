@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {DeliveryOption} from "../../models/deliveryOption";
 import {PaymentMethod} from "../../models/paymentMethod";
 import {ShopService} from "../../services/shop.service";
@@ -8,6 +8,7 @@ import {ContactInfo} from "../../models/contactInfo";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ToastService} from "../../toast-notofication/toast.service";
+import {MapService} from "../../services/map.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {ToastService} from "../../toast-notofication/toast.service";
   styleUrls: ['./checkout.component.scss']
 })
 
-export class CheckoutComponent implements OnInit{
+export class CheckoutComponent implements OnInit, AfterViewInit{
   public deliveryOption = new DeliveryOption();
   public paymentMethod = new PaymentMethod();
   public initialHours: Date[] = [];
@@ -40,6 +41,7 @@ export class CheckoutComponent implements OnInit{
               private formBuilder: FormBuilder,
               private route: Router,
               private toastService: ToastService,
+              public mapService: MapService,
               ) {
   }
   ngOnInit(): void {
@@ -56,8 +58,11 @@ export class CheckoutComponent implements OnInit{
     else {
       this.route.navigate(['/menu']);
     }
-
   }
+  ngAfterViewInit(): void {
+    this.mapService.checkout();
+  }
+
 
   buildInitialHours() {
     let hourList: Date[] = [];
@@ -193,14 +198,8 @@ export class CheckoutComponent implements OnInit{
     }
   }
 
-  isShow(): boolean{
+  isShow(): boolean {
     return this.cartItems != null;
   }
-
-
-
-
-
-
 
 }

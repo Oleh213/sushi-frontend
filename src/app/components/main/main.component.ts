@@ -3,6 +3,8 @@ import {ImagesSlider} from "../../models/imagesSlider";
 import {ShopService} from "../../services/shop.service";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
+import {MapService} from "../../services/map.service";
+import {MapsAPILoader} from "@agm/core";
 
 @Component({
   selector: 'app-main',
@@ -14,13 +16,15 @@ export class MainComponent implements OnInit{
   public timeoutId: number = 0;
   public isShow = false;
   public imageSlider: Array<ImagesSlider> = [];
-  private map!: google.maps.Map
-
+  public zoom = 14;
+  bounds :any;
 
   constructor(private shop: ShopService,
               public router: Router,
-              private errorService: ErrorHandlerService
-  ) {
+              private errorService: ErrorHandlerService,
+              public mapService: MapService,
+) {
+
   }
   ngOnInit() {
     this.shop.getImagesSlider().subscribe(res=> {
@@ -31,26 +35,11 @@ export class MainComponent implements OnInit{
       this.errorService.handleError(error);
       })
     this.resetTimer();
+
+    this.mapService.mainPage();
   }
 
-  choseLocation(event: any){
 
-
-    const mark1 = {
-      lat: 43.225617855222204,
-      lng: 28.44943960380496,
-    }
-
-    var newMarker = new google.maps.Marker({
-      draggable: true,
-      position: new google.maps.LatLng(mark1),
-      map: this.map,
-      title: "Your location"
-    });
-
-    console.log(newMarker)
-
-  }
 
   resetTimer() {
     for(let i of this.imageSlider){

@@ -44,42 +44,7 @@
             <label class="text">Доставка</label>
           </div>
         <div class="deliveryInfo" *ngIf="deliveryOption.delivery">
-          <div class="street info">
-            <label class="input">
-              <input class="input__field" type="text" placeholder=" " [(ngModel)]="deliveryOption.street" />
-              <span class="input__label" >Вулиця</span>
-            </label>
-          </div>
-          <div class="house info">
-            <label class="input">
-              <input class="input__field" type="text" [(ngModel)]="deliveryOption.house" placeholder=" "  />
-              <span class="input__label">Дім</span>
-            </label>
-          </div>
-          <div class="flat info">
-            <label class="input">
-              <input class="input__field" type="text" [(ngModel)]="deliveryOption.flat" placeholder=" "  />
-              <span class="input__label">Квартира</span>
-            </label>
-          </div>
-          <div class="entrance info">
-            <label class="input">
-              <input class="input__field" type="text" [(ngModel)]="deliveryOption.entrance" placeholder=" "  />
-              <span class="input__label">Підʼїзд</span>
-            </label>
-          </div>
-          <div class="domofon info">
-            <label class="input">
-              <input class="input__field" type="text" [(ngModel)]="deliveryOption.domofon" placeholder=" "  />
-              <span class="input__label">Домофон</span>
-            </label>
-          </div>
-          <div class="flour info">
-            <label class="input">
-              <input class="input__field" type="text" [(ngModel)]="deliveryOption.flour" placeholder=" "  />
-              <span class="input__label">Поверх</span>
-            </label>
-          </div>
+          <div class="map" id="map"></div>
         </div>
       </div>
     </div>
@@ -151,5 +116,6 @@
     </div>
   </div>
 </div>
+
 <app-spinner></app-spinner>
 

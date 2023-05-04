@@ -4,6 +4,7 @@ import {CartItem} from "../../models/cartItem";
 import {ShopService} from "../../services/shop.service";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
+import {MapService} from "../../services/map.service";
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,8 @@ export class CartComponent implements OnInit{
   public cartItems: Array<CartItem> = [];
   public items: Array<LocalCartItem> = Array<LocalCartItem>();
   public show: boolean = false;
-  constructor(private shop: ShopService) {
+  constructor(private shop: ShopService,
+  ) {
   }
   ngOnInit(): void {
     let items = JSON.parse(localStorage.getItem('localCart')!)

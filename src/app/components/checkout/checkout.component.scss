@@ -40,10 +40,10 @@
         }
       }
       .deliveryInfo {
-        margin: 15px 0;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 20px;
+        .map{
+          height: 500px;
+          margin: 0 0 0 -10px;
+        }
       }
       .info {
         width: 80%;

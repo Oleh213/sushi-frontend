@@ -1,7 +1,7 @@
 
 export class DeliveryOption{
   public picUp: boolean = false;
-  public delivery: boolean = false;
+  public delivery: boolean = true;
   public street: string = '';
   public house: string = '';
   public flat: string = '';
