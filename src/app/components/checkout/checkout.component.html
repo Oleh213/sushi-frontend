@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isShow()">
+<div class="container" >
   <div class="left">
     <div class="title">Оформлення замовлення</div>
     <div class='userInfo-title-container edition'>
@@ -43,7 +43,7 @@
             <div class="border"><div class="dot" *ngIf="deliveryOption.delivery"></div></div>
             <label class="text">Доставка</label>
           </div>
-        <div class="deliveryInfo" *ngIf="deliveryOption.delivery">
+        <div class="deliveryInfo" [ngClass]="{delivery: !deliveryOption.delivery}">
           <div class="map" id="map"></div>
         </div>
       </div>

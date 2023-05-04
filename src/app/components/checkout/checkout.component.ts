@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DeliveryOption} from "../../models/deliveryOption";
 import {PaymentMethod} from "../../models/paymentMethod";
 import {ShopService} from "../../services/shop.service";
@@ -53,16 +53,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
           this.totalPrice = res.data
         }
       })
-      this.buildInitialHours();
     }
     else {
       this.route.navigate(['/menu']);
     }
-  }
-  ngAfterViewInit(): void {
     this.mapService.checkout();
-  }
 
+  }
 
   buildInitialHours() {
     let hourList: Date[] = [];
@@ -168,7 +165,11 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       else {
         this.promoCode.promoDiscount = 0;
       }
+      this.changer();
     }
+  }
+  changer(){
+    this.mapService.checkout();
   }
   checkSubmit(): boolean{
     if(this.contactInfo.name.length>1 && this.contactInfo.phoneNumber.length>6){
@@ -200,6 +201,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
 
   isShow(): boolean {
     return this.cartItems != null;
+  }
+
+  ngAfterViewInit(): void {
+    this.mapService.checkout();
   }
 
 }

@@ -80,7 +80,7 @@ export class MapService {
       strokeOpacity: 0.9,
       strokeWeight: 3,
       fillColor: "#4ec412",
-      fillOpacity: 0.2,
+      fillOpacity: 0.1,
     });
 
     bermudaTriangle.setMap(this.map);

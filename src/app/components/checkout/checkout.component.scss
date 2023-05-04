@@ -41,9 +41,13 @@
       }
       .deliveryInfo {
         .map{
+          display: flex;
           height: 500px;
           margin: 0 0 0 -10px;
         }
+      }
+      .delivery{
+        display: none;
       }
       .info {
         width: 80%;
