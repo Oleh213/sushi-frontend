@@ -1,0 +1,11 @@
+.address{
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0 -10px;
+  .addressInput{
+    padding: 0 3px 0 3px;
+    height: 30px;
+    width: 80%;
+    border-color: orange;
+  }
+}

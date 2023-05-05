@@ -1,0 +1,61 @@
+.backdrop{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  //background: rgba(0, 0, 0, 0.34);
+  overflow: scroll;
+  z-index: 1;
+}
+
+.container {
+  overflow: scroll;
+  position: absolute;
+  justify-self: center;
+  z-index: 1000;
+  width: 99%;
+  right: 10px;
+  top: 553px;
+  max-height: 680px;
+  background: #FFFFFF;
+  color: #435b52;
+  border-radius: 3px;
+  border: #8f5e06 solid 1.5px;
+  .products{
+    padding: 10px;
+    .product{
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      row-gap: 15px;
+      column-gap: 10px;
+      .image-container{
+        .image{
+          height: 70px;
+          width: 70px;
+          object-fit: scale-down;
+        }
+      }
+      .name{
+        width: 350px;
+        height: 25px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .price{
+        font-size: 17px;
+        font-weight: 550;
+        justify-self: end;
+        display: flex;
+        justify-content: end;
+      }
+      .sail{
+        color: #910d0d;
+      }
+    }
+  }
+}

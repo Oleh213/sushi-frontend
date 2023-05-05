@@ -1,4 +1,13 @@
-import {AfterContentInit, AfterViewInit, Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  DoCheck, EventEmitter, Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {DeliveryOption} from "../../models/deliveryOption";
 import {PaymentMethod} from "../../models/paymentMethod";
 import {ShopService} from "../../services/shop.service";
@@ -35,7 +44,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     flour: [null,]
   });
   private cartItems: Array<LocalCartItem> = [];
-  public model = false;
 
   constructor(private shop: ShopService,
               private formBuilder: FormBuilder,
@@ -58,7 +66,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.route.navigate(['/menu']);
     }
     this.mapService.checkout();
-
   }
 
   buildInitialHours() {

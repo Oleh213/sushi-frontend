@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="address">
+    <input [value]="mapService.selectedAddress"
+           [ngModel]="searchTerm"
+           (ngModelChange)="onSearchTermChange($event)"
+           type="text" class="addressInput" id="pac-input">
+  </div>
+  <app-chose-address
+    *ngIf='model '
+    (close)='model = false'
+    [addresses]="_options"
+  ></app-chose-address>
+</div>

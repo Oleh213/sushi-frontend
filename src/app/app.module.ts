@@ -29,6 +29,10 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { AgmCoreModule } from '@agm/core';
 import { ContactComponent } from './components/contact/contact.component';
 import {GoogleMapsModule} from "@angular/google-maps";
+import { ChoseAddressComponent } from './components/checkout/chose-address/chose-address.component';
+import { SearchDirective } from './derecrives/search.directive';
+import { SearchComponent } from './components/search/search.component';
+import { AddressPipe } from './pipes/address.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -47,6 +51,10 @@ export function tokenGetter() {
     HumburgerComponent,
     ErrorPageComponent,
     ContactComponent,
+    ChoseAddressComponent,
+    SearchDirective,
+    SearchComponent,
+    AddressPipe,
   ],
     imports: [
         SharedModule,

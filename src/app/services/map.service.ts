@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import {GoogleMap, MouseEvent} from "@agm/core/services/google-maps-types";
+import {Injectable, OnInit} from '@angular/core';
+import {GeocoderResult, GoogleMap, MouseEvent} from "@agm/core/services/google-maps-types";
 import {MapsAPILoader} from "@agm/core";
+import {observable, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +9,49 @@ import {MapsAPILoader} from "@agm/core";
 export class MapService {
 
   private map!: google.maps.Map
-  bounds: any;
-
-  constructor(private mapsAPILoader: MapsAPILoader) {
-    this.mapsAPILoader.load().then(() => {
-      this.bounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(51.130739, -0.868052), // SW
-        new google.maps.LatLng(51.891257, 0.559417) // NE
-      );
-      console.log(this.bounds);
+  public selectedAddress: string = '';
+  public position: { lat: number, lng: number} ={ lat: 49.225617855222204, lng: 28.44943960380496};
+  public geocoder = new google.maps.Geocoder();
+  private addresses:AddressDetails[] =[];
+  constructor() {
+  }
+  searchAddress(options: string) :  Observable<AddressDetails[]> {
+    this.addresses = [];
+    var geocoderRequest = { address: options};
+    this.geocoder.geocode(geocoderRequest, (results, status) => {
+      if(results){
+        for (let item of results){
+          if(this.checkCity(item)){
+            let addressDetails = new AddressDetails();
+            addressDetails.address = item.address_components;
+            addressDetails.coordinates = item.geometry;
+            this.addresses.push(addressDetails);
+          }
+        }
+        console.log(this.addresses);
+      }
     });
+    console.log(this.addresses);
+    let ob = Observable.create((observer: any)=> {
+      observer.next(this.addresses);
+    });
+    console.log(ob);
+    return ob ;
+  }
+
+  checkCity(items : google.maps.GeocoderResult): boolean{
+    for(let item of items.address_components) {
+      if (item.types.includes("administrative_area_level_1" || "political") && item.short_name.includes("Вінницька область")){
+        return true;
+      }
+    }
+    return false;
   }
 
 
   checkout() {
-    const location = {
-      lat: 49.225617855222204,
-      lng: 28.44943960380496,
-    }
     this.map = new google.maps.Map(document.getElementById('map')!, {
-      center: location,
+      center: this.position,
       zoom: 14,
     })
 
@@ -85,24 +109,32 @@ export class MapService {
 
     bermudaTriangle.setMap(this.map);
 
-    const mark1 = {
-      lat: 49.225617855222204,
-      lng: 28.44943960380496,
-    }
-
     const marker = new google.maps.Marker({
-      position: mark1,
+      position: this.position,
       map: this.map,
-      icon: "https://www.google.com/mapfiles/arrow.png",
+      icon: "http://maps.google.com/mapfiles/kml/paddle/grn-blank.png",
 
     })
 
     bermudaTriangle.addListener("click", (event: MouseEvent) => {
-      console.log(event.latLng);
+      console.log(event.latLng.toJSON());
       marker.setPosition(event.latLng.toJSON())
+      this.geocodeLatLng(event.latLng.toJSON())
     });
-
   }
+
+   geocodeLatLng(input: any) {
+     var geocoderRequest = { location: input };
+     console.log(geocoderRequest);
+     this.geocoder.geocode(geocoderRequest, (results, status) => {
+       if(results){
+         console.log(results[0])
+         let address = results[0].address_components
+         this.selectedAddress = address[1].long_name + ' '  + address[0].long_name + ' м. ' + address[2].long_name;
+       }
+     });
+     console.log(this.selectedAddress);
+   }
 
   mainPage() {
     const location = {
@@ -114,16 +146,10 @@ export class MapService {
       zoom: 14,
     })
 
-    const mark1 = {
-      lat: 49.225617855222204,
-      lng: 28.44943960380496,
-    }
-
     const marker = new google.maps.Marker({
-      position: mark1,
+      position: this.position,
       map: this.map,
     })
-
     const infowindow = new google.maps.InfoWindow({
       content: "Umami Sushi",
     });
@@ -133,9 +159,14 @@ export class MapService {
         map: this.map,
       });
     });
-
     marker.addListener("mouseout", () => {
       infowindow.close();
     });
   }
+
+
+}
+export class AddressDetails {
+  public address!: google.maps.GeocoderAddressComponent[];
+  public coordinates!: google.maps.GeocoderGeometry;
 }

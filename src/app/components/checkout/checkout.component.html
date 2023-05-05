@@ -44,7 +44,16 @@
             <label class="text">Доставка</label>
           </div>
         <div class="deliveryInfo" [ngClass]="{delivery: !deliveryOption.delivery}">
-          <div class="map" id="map"></div>
+          <div class="map" id="map">
+          </div>
+          <app-search
+            *appSearchDerective="let options = options; let onSearchChange = onSearchChange"
+            [options]="options"
+            (searchTermChange)="onSearchChange($event)">
+          </app-search>
+          <div class="confirmAddress">
+            <div class="button" >Підтвердити</div>
+          </div>
         </div>
       </div>
     </div>

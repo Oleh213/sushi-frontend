@@ -1,0 +1,10 @@
+<div class="backdrop" (click)="close.emit()"></div>
+<div class="container" >
+  <div class="products" >
+    <div class="product" *ngFor="let address of addresses" >
+      <div class="product">
+        <div class="name" (click)="changePosition(address.coordinates.location.lat(), address.coordinates.location.lng(), address.address)" >{{address.address | address}}</div>
+      </div>
+      </div>
+  </div>
+</div>
