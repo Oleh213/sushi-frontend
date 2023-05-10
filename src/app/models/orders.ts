@@ -1,4 +1,5 @@
 import {Guid} from "guid-typescript";
+import {DeliveryOption, DeliveryTimeOptions, DeliveryType} from "./deliveryOption";
 
 class OrderLists {
   public name: string ='';
@@ -23,18 +24,12 @@ export class Order{
   public orderLists = Array<OrderLists>();
 }
 export class DeliveryOptions{
-  public street: string = '';
-  public house: string = '';
-  public flat: string = '';
-  public entrance: string = '';
-  public domofon: string = '';
-  public flour: string = '';
+  public address: string = '';
+  public longitude: number = 0;
+  public latitude: number = 0;
+  public deliveryType =  DeliveryType.OnAddress;
+  public deliveryTimeOptions = DeliveryTimeOptions.Asap;
   public deliveryTime: string = '';
-  public picUp: boolean = false;
-  public delivery: boolean = false;
-  public asap: boolean = false;
-  public onTime: boolean = false;
-
 }
 
 export enum OrderStatus{
@@ -46,10 +41,16 @@ export enum OrderStatus{
   Declined,
   Refunded,
   Canceled,
+  AwaitingPayment,
 }
-
-
-
+export const DeliveryTypeValue = [
+  { key: DeliveryType.OnAddress, value: 'Доставка'},
+  { key: DeliveryType.PicUp, value: 'Самовиніс' },
+]
+export const DeliveryTimeOptionsValue = [
+  { key: DeliveryTimeOptions.Asap, value: 'Якнайбільше'},
+  { key: DeliveryTimeOptions.OnTime, value: 'На час'},
+]
 
 export const OrderStatusValues = [
   { key: OrderStatus.AwaitingConfirm, value: 'Очікує підтвердження'},
@@ -67,17 +68,9 @@ export enum PaymentMethod
   CardInStore,
   CardOnline,
 }
-export class CurrentFilter{
-  public all = false;
-  public awaitingConfirm = false;
-  public delivered = false;
-  public awaitingPicUp = false
-  public cooking = false;
-}
 
 export const PaymentMethodValues = [
   { key: PaymentMethod.Cash, value: 'Готівкую'},
   { key: PaymentMethod.CardInStore, value: 'Карткою в магазині'},
   { key: PaymentMethod.CardOnline, value: 'Онлайн оплата'},
-
 ]

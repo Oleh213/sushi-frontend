@@ -28,14 +28,11 @@ export class MapService {
             this.addresses.push(addressDetails);
           }
         }
-        console.log(this.addresses);
       }
     });
-    console.log(this.addresses);
     let ob = Observable.create((observer: any)=> {
       observer.next(this.addresses);
     });
-    console.log(ob);
     return ob ;
   }
 
@@ -113,36 +110,27 @@ export class MapService {
       position: this.position,
       map: this.map,
       icon: "http://maps.google.com/mapfiles/kml/paddle/grn-blank.png",
-
     })
 
     bermudaTriangle.addListener("click", (event: MouseEvent) => {
-      console.log(event.latLng.toJSON());
       marker.setPosition(event.latLng.toJSON())
       this.geocodeLatLng(event.latLng.toJSON())
     });
   }
 
    geocodeLatLng(input: any) {
-     var geocoderRequest = { location: input };
-     console.log(geocoderRequest);
+     let geocoderRequest = { location: input };
      this.geocoder.geocode(geocoderRequest, (results, status) => {
        if(results){
-         console.log(results[0])
          let address = results[0].address_components
          this.selectedAddress = address[1].long_name + ' '  + address[0].long_name + ' м. ' + address[2].long_name;
        }
      });
-     console.log(this.selectedAddress);
    }
 
   mainPage() {
-    const location = {
-      lat: 49.225617855222204,
-      lng: 28.44943960380496,
-    }
     this.map = new google.maps.Map(document.getElementById('map')!, {
-      center: location,
+      center: this.position,
       zoom: 14,
     })
 
@@ -162,6 +150,22 @@ export class MapService {
     marker.addListener("mouseout", () => {
       infowindow.close();
     });
+  }
+
+  orderInfo(lat: number, lng: number){
+    const location = {
+      lat: lat,
+      lng: lng,
+    }
+    this.map = new google.maps.Map(document.getElementById('map')!, {
+      center: location,
+      zoom: 14,
+    })
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+    })
+
   }
 
 

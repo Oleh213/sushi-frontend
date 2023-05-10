@@ -35,7 +35,7 @@ export class ChoseAddressComponent {
         city = item.short_name;
       }
     }
-    return street + '  ' + street_number + '  м. '+ city ;
+    return street + ' ' + street_number + ' м.'+ city ;
   }
 
 }

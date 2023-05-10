@@ -19,7 +19,7 @@
         </div>
         <div class="price">Загальна сумма: {{order.totalPrice}}</div>
         <div class="delivery-payment-method">
-          <div class="deliveryMethod">{{order.deliveryOptions.asap ? 'Самовивіз':'Доставка'}}</div>
+          <div class="deliveryMethod">{{ DeliveryTypeValue[order.deliveryOptions.deliveryType].value}}</div>
           <div class="paymentMethod">{{paymentMethodValues[order.paymentMethod].value}}</div>
         </div>
         <div class="underline"></div>
@@ -34,8 +34,8 @@
           <div class="detailsButton" (click)="getDetail(order)" >Деталі</div>
           <div class="confirm" *ngIf="order.orderStatus === statuses.AwaitingConfirm" (click)="changeStatus(order.orderId,statuses.Cooking)">Підтвердити</div>
           <div class="reject" *ngIf="order.orderStatus === statuses.AwaitingConfirm" (click)="changeStatus(order.orderId,statuses.Canceled)">Відхилити</div>
-          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.delivery" (click)="changeStatus(order.orderId,statuses.Delivered)">Відправленно</div>
-          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.picUp" (click)="changeStatus(order.orderId,statuses.AwaitingPicUp)">Готове до видачі</div>
+          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.deliveryType === DeliveryType.OnAddress" (click)="changeStatus(order.orderId,statuses.Delivered)">Відправленно</div>
+          <div class="button" *ngIf="order.orderStatus === statuses.Cooking && order.deliveryOptions.deliveryType === DeliveryType.PicUp" (click)="changeStatus(order.orderId,statuses.AwaitingPicUp)">Готове до видачі</div>
           <div class="complete" *ngIf="order.orderStatus === statuses.Delivered || order.orderStatus ===  statuses.AwaitingPicUp" (click)="changeStatus(order.orderId,statuses.Completed)">Завершити</div>
         </div>
 

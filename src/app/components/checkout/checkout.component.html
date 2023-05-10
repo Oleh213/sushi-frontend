@@ -36,14 +36,14 @@
     <div class="delivery-container">
       <div class="deliveryOptions">
           <div class="picUp-container deliveryOption" (click)="changeDeliveryOption('picUp')">
-            <div class="border"><div class="dot" *ngIf="deliveryOption.picUp"></div></div>
+            <div class="border"><div class="dot" *ngIf="deliveryOption.deliveryType === DeliveryType.PicUp"></div></div>
             <label class="text">Самовивіз</label>
           </div>
           <div class="deliveryOrder-container deliveryOption" (click)="changeDeliveryOption('delivery')">
-            <div class="border"><div class="dot" *ngIf="deliveryOption.delivery"></div></div>
+            <div class="border"><div class="dot" *ngIf="deliveryOption.deliveryType === DeliveryType.OnAddress"></div></div>
             <label class="text">Доставка</label>
           </div>
-        <div class="deliveryInfo" [ngClass]="{delivery: !deliveryOption.delivery}">
+        <div class="deliveryInfo" [ngClass]="{delivery: deliveryOption.deliveryType !== DeliveryType.OnAddress}">
           <div class="map" id="map">
           </div>
           <app-search
@@ -61,15 +61,15 @@
       <div class='items-title'><span class="number"><span>3</span></span>Умови доставки</div>
     </div>
     <div class="deliveryTime">
-      <div class="asap time" (click)="changeDeliveryTime('asap')">
-        <div class="border"><div class="dot" *ngIf="deliveryOption.asap"></div></div>
+      <div class="asap time" (click)="deliveryOption.deliveryTimeOptions = DeliveryTimeOptions.Asap">
+        <div class="border"><div class="dot" *ngIf="deliveryOption.deliveryTimeOptions === DeliveryTimeOptions.Asap"></div></div>
         <label class="text">Якомога швидше</label>
       </div>
-      <div class="choseTime time" (click)="changeDeliveryTime('onTime')">
-        <div class="border"><div class="dot" *ngIf="deliveryOption.onTime"></div></div>
+      <div class="choseTime time" (click)="deliveryOption.deliveryTimeOptions = DeliveryTimeOptions.OnTime">
+        <div class="border"><div class="dot" *ngIf="deliveryOption.deliveryTimeOptions === DeliveryTimeOptions.OnTime"></div></div>
         <label class="text">На певну годину</label>
       </div>
-      <div class="selectHour" *ngIf="deliveryOption.onTime">
+      <div class="selectHour" *ngIf="deliveryOption.deliveryTimeOptions === DeliveryTimeOptions.OnTime">
         <select class="selector" [(ngModel)]="deliveryOption.deliveryTime">
           <option  *ngFor="let category of initialHours" >
             {{category.toLocaleTimeString()}}
@@ -81,16 +81,16 @@
       <div class='items-title'><span class="number"><span>4</span></span>Метод оплати</div>
     </div>
     <div class="paymentMethod">
-      <div class="cash payment" (click)="changePaymentMethod('cash')">
-        <div class="border"><div class="dot" *ngIf="paymentMethod.cash"></div></div>
+      <div class="cash payment" (click)="paymentMethod = PaymentMethod.Cash">
+        <div class="border"><div class="dot" *ngIf="paymentMethod === PaymentMethod.Cash"></div></div>
         <label class="text">Готівкою</label>
       </div>
-      <div class="cardInStore payment" (click)="changePaymentMethod('cardInStore')">
-        <div class="border"><div class="dot" *ngIf="paymentMethod.cardInStore"></div></div>
+      <div class="cardInStore payment" (click)="paymentMethod = PaymentMethod.CardInStore">
+        <div class="border"><div class="dot" *ngIf="paymentMethod === PaymentMethod.CardInStore"></div></div>
         <label class="text">Картою при отримуванні </label>
       </div>
-      <div class="cardOnline payment" (click)="changePaymentMethod('cardOnline')">
-        <div class="border"><div class="dot" *ngIf="paymentMethod.cardOnline"></div></div>
+      <div class="cardOnline payment" (click)="paymentMethod = PaymentMethod.CardOnline">
+        <div class="border"><div class="dot" *ngIf="paymentMethod === PaymentMethod.CardOnline"></div></div>
         <label class="text">Картою онлайн</label>
       </div>
     </div>

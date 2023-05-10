@@ -1,10 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ShopService} from "../../../app/services/shop.service";
-import {Order, OrderStatus, OrderStatusValues, PaymentMethodValues} from "../../../app/models/orders";
+import {
+  DeliveryTypeValue,
+  Order,
+  OrderStatus,
+  OrderStatusValues,
+  PaymentMethodValues
+} from "../../../app/models/orders";
 import {Guid} from "guid-typescript";
 import {Subscription} from "rxjs";
 import {OrderService} from "../../../app/services/order.service";
 import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
+import {DeliveryType} from "../../../app/models/deliveryOption";
 
 @Component({
   selector: 'app-new-orders',
@@ -85,7 +92,7 @@ export class NewOrdersComponent implements OnInit{
         x.deliveryOptions = obj.deliveryOptions;
       }})
       this.ordersFilter = this.orders.filter(x=> x.orderStatus ===
-        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus || x.orderStatus !== this.statuses.Completed
+        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus
       )
       this.changeCategory(this.currentFilter);
     }
@@ -93,6 +100,7 @@ export class NewOrdersComponent implements OnInit{
       let newObj = {...obj};
       this.ordersFilter = this.orders.filter(x=> x.orderId !== obj.orderId)
       this.ordersFilter.push(newObj);
+      this.ordersFilter.sort((a, b) => new Date(a.orderTime).getTime() - new Date(b.orderTime).getTime());
       this.orders.push(newObj)
       this.changeCategory(this.currentFilter);
     }
@@ -112,4 +120,6 @@ export class NewOrdersComponent implements OnInit{
   }
 
 
+  protected readonly DeliveryType = DeliveryType;
+  protected readonly DeliveryTypeValue = DeliveryTypeValue;
 }

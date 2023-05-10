@@ -12,10 +12,9 @@ import {CartInfo} from "../models/cartInfo";
 import {ResponseModel} from "../models/ResponseModel";
 import {ContactInfo} from "../models/contactInfo";
 import {DeliveryOption} from "../models/deliveryOption";
-import {PaymentMethod} from "../models/paymentMethod";
 import {PromoCode} from "../models/promoCode";
 import {User, UserRole} from "../models/user";
-import {Order, OrderStatus} from "../models/orders";
+import {Order, OrderStatus, PaymentMethod} from "../models/orders";
 import {Guid} from "guid-typescript";
 import {ImagesSlider} from "../models/imagesSlider";
 

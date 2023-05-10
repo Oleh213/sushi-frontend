@@ -1,14 +1,20 @@
 
 export class DeliveryOption{
-  public picUp: boolean = false;
-  public delivery: boolean = true;
-  public street: string = '';
-  public house: string = '';
-  public flat: string = '';
-  public entrance: string = '';
-  public domofon: string = '';
-  public flour: string = '';
-  public asap: boolean = false
-  public onTime: boolean = false;
+  public deliveryType: DeliveryType = DeliveryType.OnAddress;
+  public address: string = '';
+  public longitude: string = '';
+  public latitude: string = '';
   public deliveryTime: string = '';
+  public deliveryTimeOptions: DeliveryTimeOptions = DeliveryTimeOptions.Asap;
+}
+export enum DeliveryType
+{
+  OnAddress,
+  PicUp,
+}
+
+export enum DeliveryTimeOptions
+{
+  Asap,
+  OnTime,
 }

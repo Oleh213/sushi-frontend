@@ -24,40 +24,39 @@
     <div class="deliveryType-time">
       <div class="deliveryType deliveryType-time-item">
         <label class="label">Спосіб доставки</label>
-        <span class="info">{{data.deliveryOptions.picUp ? 'Самовивіз':'Доставка'}}</span>
+        <span class="info">{{data.deliveryOptions.deliveryType ? 'Самовивіз':'Доставка'}}</span>
       </div>
       <div class="time deliveryType-time-item">
         <label class="label">Час доставки</label>
-        <span class="info" *ngIf="!data.deliveryOptions.asap">{{data.deliveryOptions.deliveryTime}}</span>
-        <span class="info" *ngIf="data.deliveryOptions.asap">Якнайшвидше</span>
+        <span class="info" *ngIf="data.deliveryOptions.deliveryTimeOptions === DeliveryTimeOptions.OnTime">{{data.deliveryOptions.deliveryTime}}</span>
+        <span class="info" *ngIf="data.deliveryOptions.deliveryTimeOptions === DeliveryTimeOptions.Asap">Якнайшвидше</span>
       </div>
     </div>
-    <div class="underline" *ngIf="data.deliveryOptions.delivery"></div>
-    <div class="deliveryInfo " *ngIf="data.deliveryOptions.delivery">
+    <div class="underline" *ngIf="data.deliveryOptions.deliveryType === DeliveryType.OnAddress"></div>
+    <div class="deliveryInfo " *ngIf="data.deliveryOptions.deliveryType === DeliveryType.OnAddress">
       <div class="street deliveryInfoItem">
         <label class="label">Вулиця</label>
-        <span class="info">{{data.deliveryOptions.street ? data.deliveryOptions.street  :'Не вказано'}}</span>
+        <span class="info">{{data.deliveryOptions.address}}</span>
       </div>
-      <div class="street deliveryInfoItem">
-        <label class="label">Будинок</label>
-        <span class="info">{{data.deliveryOptions.house ? data.deliveryOptions.house  :'Не вказано'}}</span>
+      <div class="map deliveryInfoItem">
+        <div class="map" id="map"></div>
       </div>
-      <div class="street deliveryInfoItem">
-        <label class="label">Підʼїзд</label>
-        <span class="info">{{data.deliveryOptions.entrance ? data.deliveryOptions.entrance  :'Не вказано'}}</span>
-      </div>
-      <div class="street deliveryInfoItem">
-        <label class="label">Квартира</label>
-        <span class="info">{{data.deliveryOptions.flat ? data.deliveryOptions.flat  :'Не вказано'}}</span>
-      </div>
-      <div class="street deliveryInfoItem">
-        <label class="label">Поверх</label>
-        <span class="info">{{data.deliveryOptions.flour ? data.deliveryOptions.flour  :'Не вказано'}}</span>
-      </div>
-      <div class="street deliveryInfoItem">
-        <label class="label">Домофон</label>
-        <span class="info">{{data.deliveryOptions.domofon ? data.deliveryOptions.domofon  :'Не вказано'}}</span>
-      </div>
+<!--      <div class="street deliveryInfoItem">-->
+<!--        <label class="label">Підʼїзд</label>-->
+<!--        <span class="info">{{data.deliveryOptions.entrance ? data.deliveryOptions.entrance  :'Не вказано'}}</span>-->
+<!--      </div>-->
+<!--      <div class="street deliveryInfoItem">-->
+<!--        <label class="label">Квартира</label>-->
+<!--        <span class="info">{{data.deliveryOptions.flat ? data.deliveryOptions.flat  :'Не вказано'}}</span>-->
+<!--      </div>-->
+<!--      <div class="street deliveryInfoItem">-->
+<!--        <label class="label">Поверх</label>-->
+<!--        <span class="info">{{data.deliveryOptions.flour ? data.deliveryOptions.flour  :'Не вказано'}}</span>-->
+<!--      </div>-->
+<!--      <div class="street deliveryInfoItem">-->
+<!--        <label class="label">Домофон</label>-->
+<!--        <span class="info">{{data.deliveryOptions.domofon ? data.deliveryOptions.domofon  :'Не вказано'}}</span>-->
+<!--      </div>-->
     </div>
     <div class="underline"></div>
     <div class="paymentMethod-promo">
