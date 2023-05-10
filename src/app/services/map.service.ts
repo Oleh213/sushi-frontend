@@ -115,6 +115,7 @@ export class MapService {
     bermudaTriangle.addListener("click", (event: MouseEvent) => {
       marker.setPosition(event.latLng.toJSON())
       this.geocodeLatLng(event.latLng.toJSON())
+      this.position = event.latLng.toJSON();
     });
   }
 
@@ -165,6 +166,7 @@ export class MapService {
       position: location,
       map: this.map,
     })
+    console.log(location);
 
   }
 

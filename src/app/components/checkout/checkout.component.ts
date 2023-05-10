@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       })
     }
     else {
-      this.route.navigate(['/menu']);
+      location.href = "/menu";
     }
     this.mapService.checkout();
     this.buildInitialHours();
