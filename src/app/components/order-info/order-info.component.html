@@ -6,8 +6,8 @@
       <span >#{{order.orderNumber}}</span>
     </div>
     <div class="orderDate date-numberItem">
-      <span >Дата замовлення</span><br>
-      <span >{{order.orderTime | dateFormat}}</span>
+      <span >Час замовлення</span><br>
+      <span >{{order.orderTime | orderDataFormat}}</span>
     </div>
   </div>
   <div class="orderItems">
@@ -33,6 +33,7 @@
       <div class="price">{{order.totalPrice}} грн</div>
     </div>
   </div>
+  <div class="underLine"></div>
   <div class="tracking">
     <div class="titleOrderStatus">Статус замовлення</div>
     <div class="row d-flex justify-content-center">
@@ -51,7 +52,7 @@
           <i class="fas fa-shopping-cart"></i>
         </div>
         <div class="text">
-          <p>Підтвердення</p>
+          <p>Підтвердження</p>
         </div>
       </div>
       <div class="step " [ngClass]="{'active': tracker.Cooking}">

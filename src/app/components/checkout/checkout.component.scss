@@ -46,24 +46,8 @@
           height: 500px;
           margin: 0 0 0 -10px;
         }
-        .confirmAddress{
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 20px 0 20px -10px;
-          .button{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            background: #e79130;
-            height: 30px;
-            width: 130px;
-            color: white;
-            padding: 3px;
-            font-weight: 600;
-            border-radius: 10px;
-          }
+        .inputAddress{
+          margin: 0px 0 20px 0 ;
         }
       }
       .delivery{

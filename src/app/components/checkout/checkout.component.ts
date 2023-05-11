@@ -6,7 +6,7 @@ import {PromoCode} from "../../models/promoCode";
 import {ContactInfo} from "../../models/contactInfo";
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
-import {ToastService} from "../../toast-notofication/toast.service";
+import {ToastService, ToastStatus} from "../../toast-notofication/toast.service";
 import {MapService} from "../../services/map.service";
 import {PaymentMethod} from "../../models/orders";
 import * as moment from "moment";
@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   constructor(private shop: ShopService,
               private formBuilder: FormBuilder,
               private route: Router,
-              private toastService: ToastService,
+              public toastService: ToastService,
               public mapService: MapService,
               ) {
   }
@@ -144,15 +144,19 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     this.mapService.checkout();
   }
   checkSubmit(): boolean{
-    if(this.contactInfo.name.length> 1 && this.contactInfo.phoneNumber.length >= 10){
-      if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5){
+    if(this.contactInfo.name.length> 3 && this.contactInfo.phoneNumber.length >= 10){
+      if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5 ){
+        this.toastService.showToast('Помилка','Ведіть адресу доставки!', ToastStatus.Fail)
        return false;
       }
       else{
         return !(this.deliveryOption.deliveryTimeOptions == DeliveryTimeOptions.OnTime && this.deliveryOption.deliveryTime.length < 1);
       }
     }
-    else return false;
+    else{
+      this.toastService.showToast('Помилка','Ведіть конкта данні!', ToastStatus.Fail)
+      return false;
+    }
   }
   makeOrder(){
     if(this.checkSubmit()){
@@ -161,7 +165,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.deliveryOption.address = this.mapService.selectedAddress;
       this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(res=>{
         localStorage.removeItem('localCart');
-        this.toastService.showToast('Вітаю!', 'Замовлення оформлено');
         location.href =`${res.data}`
       })
     }
@@ -178,4 +181,5 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   protected readonly DeliveryTimeOptions = DeliveryTimeOptions;
   protected readonly PaymentMethod = PaymentMethod;
   protected readonly DeliveryType = DeliveryType;
+  protected readonly ToastStatus = ToastStatus;
 }

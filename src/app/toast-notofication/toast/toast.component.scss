@@ -19,6 +19,11 @@
   height: 90px;
   z-index: 100;
 }
+@media (max-width: 650px) {
+  .toast {
+    right: 15px;
+  }
+}
 
 .toast.active {
   transform: translateX(0%);
@@ -40,6 +45,18 @@
   font-size: 20px;
   border-radius: 50%;
 }
+.toast-content .times {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  min-width: 35px;
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+}
+
 
 .toast-content .message {
   display: flex;
@@ -72,14 +89,12 @@
 .toast .close:hover {
   opacity: 1;
 }
-
 .toast .progress {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 3px;
   width: 100%;
-
 }
 
 .toast .progress:before {
@@ -91,7 +106,25 @@
   width: 100%;
   background-color: #38ad4a;
 }
-
+.toast .progressFail{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+}
+.toast .progressFail:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #ff0202;
+}
+.progressFail.active:before {
+  animation: progress 5s linear forwards;
+}
 .progress.active:before {
   animation: progress 5s linear forwards;
 }
@@ -102,22 +135,7 @@
   }
 }
 
-button {
-  padding: 12px 20px;
-  font-size: 20px;
-  outline: none;
-  border: none;
-  background-color: #2770ff;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: #2770ff;
-}
-
 .toast.active ~ button {
   pointer-events: none;
 }
+

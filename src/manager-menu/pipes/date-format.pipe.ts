@@ -15,7 +15,6 @@ export class DateFormatPipe  implements PipeTransform {
       else {
         timeFormat = `${newDate.getHours()}:0${newDate.getUTCMinutes()}`
       }
-
       let dateFormat = ` ${ Days[newDate.getUTCDay()-1].value}`;
       return timeFormat + dateFormat;
     }

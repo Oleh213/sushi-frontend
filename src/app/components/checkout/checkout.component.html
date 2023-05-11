@@ -46,13 +46,12 @@
         <div class="deliveryInfo" [ngClass]="{delivery: deliveryOption.deliveryType !== DeliveryType.OnAddress}">
           <div class="map" id="map">
           </div>
-          <app-search
-            *appSearchDerective="let options = options; let onSearchChange = onSearchChange"
-            [options]="options"
-            (searchTermChange)="onSearchChange($event)">
-          </app-search>
-          <div class="confirmAddress">
-            <div class="button" >Підтвердити</div>
+          <div class="inputAddress">
+            <app-search
+              *appSearchDerective="let options = options; let onSearchChange = onSearchChange"
+              [options]="options"
+              (searchTermChange)="onSearchChange($event)" >
+            </app-search>
           </div>
         </div>
       </div>
@@ -121,7 +120,7 @@
           </label>
         </div>
       </div>
-      <div class="submit" [ngClass]="{'go': checkSubmit()}" (click)="makeOrder()">ЗАМОВИТИ</div>
+      <div class="submit go" (click)="makeOrder()">ЗАМОВИТИ</div>
     </div>
   </div>
 </div>

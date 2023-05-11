@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 interface ToastMessage {
   title: string;
   message: string;
+  toastStatus: ToastStatus;
 }
 
 @Injectable({
@@ -14,11 +15,12 @@ export class ToastService {
   public isShown: boolean = false;
   constructor() { }
 
-  public showToast(title: string, message: string){
+  public showToast(title: string, message: string, toastStatus: ToastStatus){
     if(!this.isShown){
       this.onToastOpened$.next({
         title,
-        message
+        message,
+        toastStatus,
       });
       this.isShown = true;
       setTimeout(() => {
@@ -27,4 +29,8 @@ export class ToastService {
     }
   }
 
+}
+export enum ToastStatus {
+  Success,
+  Fail,
 }

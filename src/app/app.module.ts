@@ -35,6 +35,7 @@ import { SearchComponent } from './components/search/search.component';
 import { AddressPipe } from './pipes/address.pipe';
 import { OrderInfoComponent } from './components/order-info/order-info.component';
 import {NgbCarousel, NgbSlide, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { OrderDataFormatPipe } from './pipes/order-data-format.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -58,6 +59,7 @@ export function tokenGetter() {
     SearchComponent,
     AddressPipe,
     OrderInfoComponent,
+    OrderDataFormatPipe,
   ],
   imports: [
     SharedModule,

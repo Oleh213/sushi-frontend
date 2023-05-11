@@ -1,5 +1,5 @@
 import {Component, DoCheck, ElementRef, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import {ToastService} from "../toast.service";
+import {ToastService, ToastStatus} from "../toast.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -10,20 +10,30 @@ import {Subscription} from "rxjs";
 export class ToastComponent implements OnDestroy {
   public toastMessage: string = '';
   public toastTitle: string = '';
-  public isShow = false;
+  public isShowSuccess = false;
+  public isShowFail = false;
   public isShowProgress: boolean = false;
   private subscriptions = new Subscription();
-  constructor(private el: ElementRef, public toastService: ToastService) {
+  constructor(public toastService: ToastService) {
     this.subscriptions.add(
-      this.toastService.onToastOpened$.subscribe(({message, title}) => {
-        if (!this.isShow) {
+      this.toastService.onToastOpened$.subscribe(({message, title,toastStatus}) => {
+        if (!this.isShowSuccess && !this.isShowFail) {
           this.toastMessage = message;
           this.toastTitle = title;
-          this.isShow = true;
-          this.isShowProgress = true;
-          setTimeout(() => {
-            this.isShow = false;
-          }, 4500);
+          if (toastStatus === ToastStatus.Fail){
+            this.isShowFail = true;
+            this.isShowProgress = true;
+            setTimeout(() => {
+              this.isShowFail = false;
+            }, 4500);
+          }
+          else {
+            this.isShowSuccess = true;
+            this.isShowProgress = true;
+            setTimeout(() => {
+              this.isShowSuccess = false;
+            }, 4500);
+          }
           setTimeout(() => {
             this.isShowProgress = false;
           }, 5000);
@@ -32,7 +42,8 @@ export class ToastComponent implements OnDestroy {
     );
   }
   dismiss(): void {
-    this.isShow = false;
+    this.isShowFail = false;
+    this.isShowSuccess = false;
   }
 
   ngOnDestroy(): void {
