@@ -8,7 +8,14 @@ export class DateFormatPipe  implements PipeTransform {
   transform(date: Date): string {
     if (date){
       let newDate = new Date(date);
-      let timeFormat = `${newDate.getHours()}:${newDate.getUTCMinutes()}`
+      let timeFormat = '';
+      if (newDate.getUTCMinutes()>9){
+        timeFormat = `${newDate.getHours()}:${newDate.getUTCMinutes()}`
+      }
+      else {
+        timeFormat = `${newDate.getHours()}:0${newDate.getUTCMinutes()}`
+      }
+
       let dateFormat = ` ${ Days[newDate.getUTCDay()-1].value}`;
       return timeFormat + dateFormat;
     }

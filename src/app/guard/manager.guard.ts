@@ -7,12 +7,12 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class ManagerGuard implements CanActivate {
-  constructor(private auth: AuthService, private route:Router) {
+  constructor(private auth: AuthService) {
   }
 
   canActivate(): boolean {
     if (!this.auth.isAuthenticated()) {
-      this.route.navigate([''])
+      location.href = "";
     }
     return true
   }

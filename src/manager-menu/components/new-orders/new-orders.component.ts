@@ -42,7 +42,8 @@ export class NewOrdersComponent implements OnInit{
       error => {
       // this.errorService.handleError(error);
       });
-    this.subscriptions.push(this.orderService.retrieveMappedObject()
+    this.subscriptions.push(
+      this.orderService.retrieveMappedObject()
       .pipe()
       .subscribe( (receivedObj: Order) => { this.addToInbox(receivedObj);}));
   }

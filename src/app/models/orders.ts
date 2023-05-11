@@ -4,6 +4,7 @@ import {DeliveryOption, DeliveryTimeOptions, DeliveryType} from "./deliveryOptio
 class OrderLists {
   public name: string ='';
   public count: number = 0;
+  public price: number = 0;
 }
 
 
@@ -17,6 +18,7 @@ export class Order{
   public phoneNumber: string = '';
   public surName: string = '';
   public email: string = '';
+  public discount: number = 0;
   public orderNumber: number = 0;
   public paymentMethod = PaymentMethod.Cash;
   public orderStatus = OrderStatus.AwaitingConfirm;

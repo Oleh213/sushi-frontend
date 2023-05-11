@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
 import {MapService} from "../../services/map.service";
 import {MapsAPILoader} from "@agm/core";
+import {NgbCarouselConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-main',
@@ -18,13 +19,14 @@ export class MainComponent implements OnInit{
   public imageSlider: Array<ImagesSlider> = [];
   public zoom = 14;
   bounds :any;
-
+  showNavigationArrows = false;
+  showNavigationIndicators = false;
+  images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService,
               public mapService: MapService,
 ) {
-
   }
   ngOnInit() {
     this.shop.getImagesSlider().subscribe(res=> {

@@ -33,6 +33,8 @@ import { ChoseAddressComponent } from './components/checkout/chose-address/chose
 import { SearchDirective } from './derecrives/search.directive';
 import { SearchComponent } from './components/search/search.component';
 import { AddressPipe } from './pipes/address.pipe';
+import { OrderInfoComponent } from './components/order-info/order-info.component';
+import {NgbCarousel, NgbSlide, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -55,30 +57,34 @@ export function tokenGetter() {
     SearchDirective,
     SearchComponent,
     AddressPipe,
+    OrderInfoComponent,
   ],
-    imports: [
-        SharedModule,
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgHttpLoaderModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter,
-                allowedDomains: environments.tokenWhiteListedDomains
-            }
-        }),
+  imports: [
+    SharedModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgHttpLoaderModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environments.tokenWhiteListedDomains
+      }
+    }),
 
-        FormsModule,
-        ReactiveFormsModule,
-        IvyCarouselModule,
-        ManagerMenuModule,
-        NgOptimizedImage,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys'
-        }),
-        GoogleMapsModule,
-    ],
+    FormsModule,
+    ReactiveFormsModule,
+    IvyCarouselModule,
+    ManagerMenuModule,
+    NgOptimizedImage,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys'
+    }),
+    GoogleMapsModule,
+    NgbCarousel,
+    NgbSlide,
+    NgbModule,
+  ],
 
 providers: [{
     provide: AUTH_API_URL,

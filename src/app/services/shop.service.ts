@@ -62,8 +62,9 @@ export class ShopService {
   makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCode ): Observable<ResponseModel<string>>{
     return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderActions/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
   }
-
-
+  getOrder(orderId: string): Observable<Order> {
+    return this.auth.getRequest<Order>(`${this.baseApiUrl}OrderActions/GetOrderById?orderId=${orderId}`)
+  }
   addToCart(data: Product){
     let cartData = [];
     let localCart = localStorage.getItem('localCart');

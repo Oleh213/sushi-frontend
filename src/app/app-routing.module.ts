@@ -12,6 +12,7 @@ import {MainComponent} from "./components/main/main.component";
 import {AdminMenuComponent} from "../manager-menu/components/admin-menu/admin-menu.component";
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
 import {ContactComponent} from "./components/contact/contact.component";
+import {OrderInfoComponent} from "./components/order-info/order-info.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,9 @@ const routes: Routes = [
   },
   {
     path: '', component: MainComponent,
+  },
+  {
+    path: 'order-info/:orderId', component: OrderInfoComponent,
   },
   {
     path: '', component: MainComponent,

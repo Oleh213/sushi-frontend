@@ -28,7 +28,8 @@ import { AdminMenuComponent } from './components/admin-menu/admin-menu.component
     SharedModule,
     RouterLink,
   ],
-  exports:[
-  ]
+    exports: [
+        DateFormatPipe
+    ]
 })
 export class ManagerMenuModule { }

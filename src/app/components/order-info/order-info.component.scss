@@ -1,0 +1,265 @@
+$mainColor: #da8708;
+.card{
+  margin: 30px auto 0 auto;
+  width: 50%;
+  max-width:600px;
+  padding: 4vh 0;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-top: 3px solid $mainColor;
+  border-bottom: 3px solid $mainColor;
+  border-left: none;
+  border-right: none;
+  .title{
+    color: #16852e;
+    font-weight: 700;
+    padding: 0 8%;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+  }
+  .date-number{
+    display: flex;
+    margin: 20px 0 20px 0;
+    align-items: center;
+    justify-content: center;
+    .date-numberItem{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      column-gap: 5px;
+
+    }
+  }
+  .orderItems{
+    background-color: #ddd3;
+    min-height: 50px;
+    padding: 10px 30px;
+    .item{
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+      .name-count{
+        display: flex;
+        column-gap: 3px;
+        .count{
+          letter-spacing: 1px;
+          color: $mainColor;
+          font-weight: 800;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .priceInfo{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 30px;
+    margin: 10px 0 30px 0;
+    row-gap: 5px;
+    .similar{
+      display: flex;
+      justify-content: space-between;
+    }
+    .totalPrice{
+      font-weight: 600;
+      font-size: 18px;
+      .price{
+      }
+    }
+    .discount{
+      color: #cb233f;
+    }
+  }
+  .tracking{
+    .titleOrderStatus{
+      font-weight: 700;
+      padding: 0 8%;
+      font-size: 25px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+@media(max-width:938px){
+  .card{
+    width: 90%;
+  }
+}
+
+@media(max-width:540px){
+  .card{
+    .date-number{
+      flex-direction: column;
+      row-gap: 5px;
+      .date-numberItem{
+        width: 100%;
+      }
+    }
+    .orderItems{
+      padding: 10px 20px;
+    }
+    .priceInfo{
+      padding: 10px 20px;
+    }
+  }
+}
+
+
+.progress-bar {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin: 20px 0;
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 25%;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      margin-bottom: 10px;
+      font-size: 24px;
+      color: #ccc;
+    }
+
+    .text {
+      p {
+        font-size: 14px;
+        color: #555;
+        text-align: center;
+        row-gap: 1px;
+        line-height: 15px;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: #ccc;
+    }
+
+    &:first-child::before {
+      display: none;
+    }
+
+    &.active .icon {
+      border-color: $mainColor;
+      color: $mainColor;
+    }
+
+    &.active .text p {
+      color: #1d2228;
+      font-size: 12px;
+    }
+    &.active ~ .step::before {
+      background-color: $mainColor;
+    }
+  }
+}
+
+#progressbar {
+  padding: 0 10px;
+  margin: 30px 0 0 0;
+  overflow: hidden;
+  color: #fdfdfd;
+
+}
+
+#progressbar li {
+  list-style-type: none;
+  font-size: 13px;
+  width: 25%;
+  float: left;
+  position: relative;
+  font-weight: 400;
+}
+
+#progressbar .step0:before {
+  font-family: FontAwesome;
+  content: "\f10c";
+  background: #C5CAE9;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#progressbar li:before {
+  width: 30px;
+  height: 30px;
+  line-height: 45px;
+  display: block;
+  font-size: 20px;
+  background: #C5CAE9;
+  border-radius: 50%;
+  margin: auto;
+  padding: 0px;
+}
+
+/*ProgressBar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 5px;
+  background: #C5CAE9;
+  position: absolute;
+  left: 0;
+  top: 13px;
+  z-index: -1;
+}
+
+#progressbar li:last-child:after {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  left: -50%;
+}
+
+#progressbar li:nth-child(2):after, #progressbar li:nth-child(3):after {
+  left: -50%;
+}
+
+#progressbar li:first-child:after {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  left: 50%;
+}
+
+#progressbar li:last-child:after {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#progressbar li:first-child:after {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/*Color number of the step and the connector before it*/
+#progressbar li.active:before, #progressbar li.active:after {
+  background: #16852e;
+}
+#progressbar li.active:before {
+  font-family: FontAwesome;
+  content: "\f00c";
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}

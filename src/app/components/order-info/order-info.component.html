@@ -1,0 +1,85 @@
+<div class="card" *ngIf="order.orderLists.length > 0">
+  <div class="title">Дякую за замовлення!</div>
+  <div class="date-number">
+    <div class="orderNumber date-numberItem">
+      <span id="heading">Замовлення</span><br>
+      <span >#{{order.orderNumber}}</span>
+    </div>
+    <div class="orderDate date-numberItem">
+      <span >Дата замовлення</span><br>
+      <span >{{order.orderTime | dateFormat}}</span>
+    </div>
+  </div>
+  <div class="orderItems">
+    <div class="item" *ngFor="let item of order.orderLists">
+      <div class="name-count">
+        <div class="name">{{item.name}}</div>
+        <div class="count">x{{item.count}}</div>
+      </div>
+      <div class="price">{{item.price}} грн</div>
+    </div>
+  </div>
+  <div class="priceInfo">
+    <div class="subTotal similar " *ngIf="order.discount>0">
+      <span class="text" >Сума замовлення</span>
+      <div class="price">{{order.totalPrice + order.discount}} грн</div>
+    </div>
+    <div class="discount similar" *ngIf="order.discount>0">
+      <span class="text">Знижка</span>
+      <div class="price">{{order.discount}} грн</div>
+    </div>
+    <div class="totalPrice similar" >
+      <span class="text">Загальна сума </span>
+      <div class="price">{{order.totalPrice}} грн</div>
+    </div>
+  </div>
+  <div class="tracking">
+    <div class="titleOrderStatus">Статус замовлення</div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <ul id="progressbar" class="text-center">
+          <li class="step0 active" ></li>
+          <li class=" step0" [ngClass]="{'active': tracker.Cooking}"></li>
+          <li class=" step0" [ngClass]="{'active': tracker.AwatingPicup}"></li>
+          <li class="step0" [ngClass]="{'active': tracker.Finished}">></li>
+        </ul>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="step active">
+        <div class="icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="text">
+          <p>Підтвердення</p>
+        </div>
+      </div>
+      <div class="step " [ngClass]="{'active': tracker.Cooking}">
+        <div class="icon">
+          <i class="fas fa-warehouse"></i>
+        </div>
+        <div class="text">
+          <p>Готування</p>
+        </div>
+      </div>
+      <div class="step " [ngClass]="{'active': tracker.AwatingPicup}">
+        <div class="icon">
+          <i class="fas fa-truck"></i>
+        </div>
+        <div class="text">
+          <p>Очікує на самовиніс</p>
+        </div>
+      </div>
+      <div class="step" [ngClass]="{'active': tracker.Finished}">
+        <div class="icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="text">
+          <p>Завершенно</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-spinner></app-spinner>
