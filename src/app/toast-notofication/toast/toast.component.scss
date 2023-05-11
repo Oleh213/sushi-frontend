@@ -24,6 +24,12 @@
     right: 15px;
   }
 }
+@media (max-width: 400px) {
+  .toast {
+    right: 10px;
+    width: 330px;
+  }
+}
 
 .toast.active {
   transform: translateX(0%);

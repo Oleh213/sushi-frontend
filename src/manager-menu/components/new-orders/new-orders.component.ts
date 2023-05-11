@@ -92,9 +92,6 @@ export class NewOrdersComponent implements OnInit{
         x.orderStatus = obj.orderStatus;
         x.deliveryOptions = obj.deliveryOptions;
       }})
-      this.ordersFilter = this.orders.filter(x=> x.orderStatus ===
-        this.statuses.AwaitingConfirm || x.orderStatus === this.statuses.Cooking || x.orderStatus === this.statuses.Delivered || this.statuses.AwaitingPicUp === x.orderStatus
-      )
       this.changeCategory(this.currentFilter);
     }
     else {
@@ -104,6 +101,13 @@ export class NewOrdersComponent implements OnInit{
       this.ordersFilter.sort((a, b) => new Date(a.orderTime).getTime() - new Date(b.orderTime).getTime());
       this.orders.push(newObj)
       this.changeCategory(this.currentFilter);
+      this.ordersFilter = this.orders.filter(x=>
+        x.orderStatus === this.statuses.AwaitingConfirm ||
+        x.orderStatus === this.statuses.Cooking ||
+        x.orderStatus === this.statuses.Delivered ||
+        x.orderStatus === this.statuses.AwaitingPicUp ||
+        x.orderStatus !== this.statuses.AwaitingPayment
+      )
     }
   }
   changeFilter(status: number){

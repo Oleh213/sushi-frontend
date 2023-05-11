@@ -146,14 +146,16 @@ $mainColor: #da8708;
     .text {
       p {
         font-size: 14px;
-        color: #ddd3;
+        color: #ccc;
         text-align: center;
         row-gap: 1px;
         line-height: 15px;
+
       }
     }
 
     &::before {
+      color: #ddd3;
       position: absolute;
       top: 25px;
       left: 0;

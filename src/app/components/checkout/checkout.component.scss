@@ -143,8 +143,8 @@
       .submit{
         -webkit-user-select:none;
         margin: 30px 30px 20px 30px;
-        cursor: no-drop;
-        background: #d7d6d6;
+        background: rgba(95, 134, 118, 0.82);
+        cursor: pointer;
         color: white;
         border-radius: 5px;
         width: 80%;
@@ -157,8 +157,6 @@
         justify-content: center;
       }
       .go{
-        background: rgba(95, 134, 118, 0.82);
-        cursor: pointer;
       }
     }
   }
