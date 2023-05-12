@@ -1,12 +1,12 @@
-$mainColor: #da8708;
+
 .card{
   margin: 30px auto 0 auto;
   width: 50%;
   max-width:600px;
   padding: 4vh 0;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-top: 3px solid $mainColor;
-  border-bottom: 3px solid $mainColor;
+  border-top: 3px solid var(--main-color);
+  border-bottom: 3px solid var(--main-color);
   border-left: none;
   border-right: none;
   .title{
@@ -47,7 +47,7 @@ $mainColor: #da8708;
         column-gap: 3px;
         .count{
           letter-spacing: 1px;
-          color: $mainColor;
+          color: var(--main-color);
           font-weight: 800;
           font-size: 18px;
         }
@@ -58,7 +58,7 @@ $mainColor: #da8708;
     display: flex;
     flex-direction: column;
     padding: 0 30px;
-    margin: 5px 0 5px 0;
+    margin: 15px 0 15px 0;
     row-gap: 5px;
     .similar{
       display: flex;
@@ -71,8 +71,7 @@ $mainColor: #da8708;
       }
     }
     .discount{
-      margin: 10px 0;
-
+      margin: 1px 0;
       color: #cb233f;
     }
   }
@@ -97,25 +96,6 @@ $mainColor: #da8708;
   }
 }
 
-@media(max-width:540px){
-  .card{
-    .date-number{
-      flex-direction: column;
-      row-gap: 5px;
-      .date-numberItem{
-        width: 100%;
-      }
-    }
-    .orderItems{
-      padding: 10px 20px;
-    }
-    .priceInfo{
-      padding: 10px 20px;
-    }
-  }
-}
-
-
 .progress-bar {
   padding: 0 10px;
   display: flex;
@@ -128,7 +108,6 @@ $mainColor: #da8708;
     align-items: center;
     position: relative;
     width: 25%;
-
     .icon {
       display: flex;
       justify-content: center;
@@ -142,7 +121,6 @@ $mainColor: #da8708;
       font-size: 24px;
       color: #ccc;
     }
-
     .text {
       p {
         font-size: 14px;
@@ -150,7 +128,6 @@ $mainColor: #da8708;
         text-align: center;
         row-gap: 1px;
         line-height: 15px;
-
       }
     }
 
@@ -169,19 +146,50 @@ $mainColor: #da8708;
     }
 
     &.active .icon {
-      border-color: $mainColor;
-      color: $mainColor;
+      border-color: var(--main-color);
+      color: var(--main-color);
     }
 
     &.active .text p {
       color: #1d2228;
-      font-size: 12px;
+      font-size: 14px;
     }
     &.active ~ .step::before {
-      background-color: $mainColor;
+      background-color: var(--main-color);
     }
   }
 }
+
+@media(max-width:540px){
+  .card{
+    .date-number{
+      flex-direction: column;
+      row-gap: 5px;
+      .date-numberItem{
+        width: 100%;
+      }
+    }
+    .orderItems{
+      padding: 10px 20px;
+    }
+    .priceInfo{
+      padding: 10px 20px;
+    }
+  }
+  .progress-bar{
+    .step{
+      .text{
+        p{
+          font-size: 11px;
+        }
+      }
+      &.active .text p {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
 
 #progressbar {
   padding: 0 10px;

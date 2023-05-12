@@ -25,13 +25,9 @@ export class OrderInfoComponent implements OnInit{
     this.shop.getOrder(this.orderId).subscribe(res=> {
       this.order = res;
       this.checkOrderStatus(res.orderStatus)
-
     },error => {
+      location.href = '/error-page'
     }, )
-    // this.subscriptions.push(this.orderService.retrieveMappedObject()
-    //   .pipe(first())
-    //   .subscribe( () => {}
-    //   ));
     this.subscriptions.push(
       this.orderService.retrieveMappedObject()
         .pipe()

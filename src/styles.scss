@@ -17,12 +17,9 @@ body {height: 100%;
   line-height: 24px;
   cursor: default;
 }
-
 body.modal-open {
   overflow: hidden;
 }
-
-
 a {
   color: hwb(12 18% 75%);
 }
@@ -31,7 +28,6 @@ h1 {
   line-height: 1;
   margin: 0 0 50px 0;
   color: #2c3b37;
-
 }
 h2 {
   font-size: 30px;
@@ -42,3 +38,8 @@ ul {
   list-style: none;
 }
 ///---------///
+
+
+:root {
+  --main-color: #da8908;
+}

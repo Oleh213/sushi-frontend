@@ -1,7 +1,6 @@
-import {Injectable, OnInit} from '@angular/core';
-import {GeocoderResult, GoogleMap, MouseEvent} from "@agm/core/services/google-maps-types";
-import {MapsAPILoader} from "@agm/core";
-import {observable, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {MouseEvent} from "@agm/core/services/google-maps-types";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

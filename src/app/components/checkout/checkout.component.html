@@ -7,25 +7,25 @@
       <div class="userInfo">
         <div class="name block">
           <label class="input">
-            <input class="input__field" [(ngModel)]="contactInfo.name" type="text" placeholder=" "  />
+            <input class="input__field" [defaultValue]="userInfo.name"  [(ngModel)]="contactInfo.name" type="text" placeholder=" "  />
             <span class="input__label">Імʼя *</span>
           </label>
         </div>
         <div class="phoneNumber block">
           <label class="input">
-            <input class="input__field" [(ngModel)]="contactInfo.phoneNumber" type="text" placeholder=" " />
+            <input class="input__field"  [(ngModel)]="contactInfo.phoneNumber " type="text" placeholder=" " />
             <span class="input__label">Телефон *</span>
           </label>
         </div>
         <div class="surname block">
           <label class="input">
-            <input class="input__field" [(ngModel)]="contactInfo.surName" type="text" placeholder=" "  />
+            <input class="input__field"  [(ngModel)]="contactInfo.surName " type="text" placeholder=" "  />
             <span class="input__label">Прізвище</span>
           </label>
         </div>
         <div class="email block">
           <label class="input">
-            <input class="input__field" type="text" placeholder=" "  [(ngModel)]="contactInfo.email"/>
+            <input class="input__field" type="text" placeholder=" "  [(ngModel)]="contactInfo.email "/>
             <span class="input__label" >E-mail адреса </span>
           </label>
         </div>

@@ -1,3 +1,4 @@
+
 .container{
   display: flex;
   justify-content: space-between;
@@ -5,7 +6,7 @@
   height: 60px;
   .burger-logo{
     display: flex;
-    color: #b06c1b;
+    color: var(--main-color);
     margin: 0 0 0 20px;
     //cursor: pointer;
     letter-spacing: 5px;

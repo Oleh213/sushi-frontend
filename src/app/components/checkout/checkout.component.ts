@@ -27,8 +27,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   public totalPrice: number = 0;
   public contactInfo = new ContactInfo();
   public submit: boolean = false;
-
   private cartItems: Array<LocalCartItem> = [];
+  public userInfo = new ContactInfo();
 
   constructor(private shop: ShopService,
               private formBuilder: FormBuilder,
@@ -50,7 +50,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     else {
       location.href = "/menu";
     }
+    let info = JSON.parse(localStorage.getItem('userInfo')!)
+    if(info.length > 0){
+      this.userInfo = info
+    }
+
     this.mapService.checkout();
+
     this.buildInitialHours();
   }
 
@@ -159,6 +165,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     }
   }
   makeOrder(){
+    this.shop.addUserInfo(this.contactInfo);
     if(this.checkSubmit()){
       this.deliveryOption.longitude = this.mapService.position.lng.toString();
       this.deliveryOption.latitude = this.mapService.position.lat.toString();

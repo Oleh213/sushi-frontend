@@ -1,65 +1,65 @@
 .container {
   padding: 0 0 1000px 0;
-  .slider {
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    -webkit-tap-highlight-color: transparent;
-    height: 300px;
-    .image-container {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      align-items: flex-start;
-      transition:.5s linear;
-      .image {
-        max-height: 600px;
-        position: relative;
-        overflow: hidden;
-        object-fit: scale-down;
-        z-index: 1;
-      }
-    }
-    .directional{
-      margin: 0 auto;
-      max-width: 1439px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .leftArrow{
-        transform: translate(0, -50%);
-        left: 10px;
-        margin: auto;
-        position: absolute;
-      }
-      .rightArrow{
-        transform: translate(0, -50%);
-        margin: auto;
-        position: absolute;
-        right: 10px;
-      }
-      .arrow{
-        z-index: 1;
-        padding: 5px;
-        color: #5e5d5d;
-        width: 30px;
-        margin: 0 0 10px 0;
-        height: 30px;
-        font-size: 18px;
-        display: flex;
-        font-weight: 300;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border-radius: 50%;
-        background-color: rgba(248, 248, 248, 0.61);
-        &:hover{
-          background-color: rgba(236, 236, 236, 1);
-        }
-      }
-    }
-  }
+  //.slider {
+  //  justify-content: center;
+  //  align-items: center;
+  //  width: 100%;
+  //  -webkit-tap-highlight-color: transparent;
+  //  height: 300px;
+  //  .image-container {
+  //    display: flex;
+  //    width: 100%;
+  //    justify-content: center;
+  //    align-items: flex-start;
+  //    transition:.5s linear;
+  //    .image {
+  //      max-height: 600px;
+  //      position: relative;
+  //      overflow: hidden;
+  //      object-fit: scale-down;
+  //      z-index: 1;
+  //    }
+  //  }
+  //  .directional{
+  //    margin: 0 auto;
+  //    max-width: 1439px;
+  //    position: relative;
+  //    display: flex;
+  //    justify-content: center;
+  //    align-items: center;
+  //    .leftArrow{
+  //      transform: translate(0, -50%);
+  //      left: 10px;
+  //      margin: auto;
+  //      position: absolute;
+  //    }
+  //    .rightArrow{
+  //      transform: translate(0, -50%);
+  //      margin: auto;
+  //      position: absolute;
+  //      right: 10px;
+  //    }
+  //    .arrow{
+  //      z-index: 1;
+  //      padding: 5px;
+  //      color: #5e5d5d;
+  //      width: 30px;
+  //      margin: 0 0 10px 0;
+  //      height: 30px;
+  //      font-size: 18px;
+  //      display: flex;
+  //      font-weight: 300;
+  //      align-items: center;
+  //      justify-content: center;
+  //      cursor: pointer;
+  //      border-radius: 50%;
+  //      background-color: rgba(248, 248, 248, 0.61);
+  //      &:hover{
+  //        background-color: rgba(236, 236, 236, 1);
+  //      }
+  //    }
+  //  }
+  //}
   .contact{
     display: flex;
     justify-content: center;
@@ -68,7 +68,7 @@
     .logo{
       margin: 120px 0 0 0;
       font-size: 40px;
-      color: #af6f22;
+      color: var(--main-color);
       font-weight: 800;
     }
     .map{
@@ -79,3 +79,140 @@
   }
 }
 
+.d{overflow: hidden; max-width: 1500px}
+@keyframes slidy2 {
+  0% { left: 0%; }
+  50% { left: 0%; }
+  55% { left: -100%; }
+  100% { left: -100%; }
+}
+.slider2 { overflow: hidden; max-width: 1500px }
+.figure2 img { width: 33.33%; float: left; }
+.figure2 {
+  position: relative;
+  width: 200%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 10s slidy2 infinite;
+}
+
+@keyframes slidy3 {
+  0% { left: 0%; }
+  33.33% { left: 0%; }
+  38.33% { left: -100%; }
+  66.66% { left: -100%; }
+  71.66% { left: -200%; }
+  100% { left: -200%; }
+}
+.slider3 { overflow: hidden; max-width: 1500px }
+.figure3 img { width: 33.33%; float: left; }
+.figure3 {
+  position: relative;
+  width: 300%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 15s slidy3 infinite;
+}
+
+@keyframes slidy4 {
+  0% { left: 0%; }
+  25% { left: 0%; }
+  30% { left: -100%; }
+  50% { left: -100%; }
+  55% { left: -200%; }
+  75% { left: -200%; }
+  80% { left: -300%; }
+  100% { left: -300%; }
+}
+.slider4 { overflow: hidden; max-width: 1500px }
+.figure4 img { width: 25%; float: left; }
+.figure4 {
+  position: relative;
+  width: 400%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 20s slidy4 infinite;
+}
+
+@keyframes slidy5 {
+  0% { left: 0%; }
+  20% { left: 0%; }
+  25% { left: -100%; }
+  40% { left: -100%; }
+  45% { left: -200%; }
+  60% { left: -200%; }
+  65% { left: -300%; }
+  80% { left: -300%; }
+  85% { left: -400%; }
+  100% { left: -400%; }
+}
+.figure5 img { width: 20%; float: left; }
+.figure5 {
+  position: relative;
+  width: 500%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 25s slidy5 infinite;
+}
+
+@keyframes slidy6 {
+  0% { left: 0%; }
+  16.666% { left: 0%; }
+  20% { left: -100%; }
+  33.333% { left: -100%; }
+  36.666% { left: -200%; }
+  50% { left: -200%; }
+  53.333% { left: -300%; }
+  66.666% { left: -300%; }
+  70% { left: -400%; }
+  83.333% { left: -400%; }
+  87% { left: -500%; }
+  100% { left: -500%; }
+}
+.slider6 { overflow: hidden; max-width: 1500px }
+.figure6 img { width: 16.666%; float: left; }
+.figure6 {
+  position: relative;
+  width: 600%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 30s slidy6 infinite;
+}
+
+@keyframes slidy7 {
+  0% { left: 0%; }
+  14.285% { left: 0%; }
+  16.666% { left: -100%; }
+  28.571% { left: -100%; }
+  31.666% { left: -200%; }
+  42.857% { left: -200%; }
+  45% { left: -300%; }
+  57.142% { left: -300%; }
+  60% { left: -400%; }
+  71.428% { left: -400%; }
+  74.285% { left: -500%; }
+  85.714% { left: -500%; }
+  88.571% { left: -600%; }
+  100% { left: -600%; }
+}
+.slider7 { overflow: hidden; max-width: 1500px }
+.figure7 img { width: 14.285%; float: left; }
+.figure7 {
+  position: relative;
+  width: 700%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 35s slidy7 infinite;
+}

@@ -16,21 +16,21 @@
         <div class="name">{{item.name}}</div>
         <div class="count">x{{item.count}}</div>
       </div>
-      <div class="price">{{item.price}} грн</div>
+      <div class="price">{{item.price}} ₴</div>
     </div>
   </div>
   <div class="priceInfo">
     <div class="subTotal similar " *ngIf="order.discount>0">
       <span class="text" >Сума замовлення</span>
-      <div class="price">{{order.totalPrice + order.discount}} грн</div>
+      <div class="price">{{order.totalPrice + order.discount}} ₴</div>
     </div>
     <div class="discount similar" *ngIf="order.discount>0">
       <span class="text">Знижка</span>
-      <div class="price">{{order.discount}} грн</div>
+      <div class="price">{{order.discount}} ₴</div>
     </div>
     <div class="totalPrice similar" >
       <span class="text">Загальна сума </span>
-      <div class="price">{{order.totalPrice}} грн</div>
+      <div class="price">{{order.totalPrice}} ₴</div>
     </div>
   </div>
   <div class="underLine"></div>
@@ -49,7 +49,7 @@
     <div class="progress-bar">
       <div class="step active">
         <div class="icon">
-          <i class="fas fa-shopping-cart"></i>
+          <i class='fa fa-refresh'></i>
         </div>
         <div class="text">
           <p>Підтвердження</p>
@@ -57,7 +57,7 @@
       </div>
       <div class="step " [ngClass]="{'active': tracker.Cooking}">
         <div class="icon">
-          <i class="fas fa-warehouse"></i>
+          <i class='fas fa-utensils'></i>
         </div>
         <div class="text">
           <p>Готування</p>

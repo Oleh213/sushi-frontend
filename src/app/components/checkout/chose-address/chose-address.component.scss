@@ -11,7 +11,6 @@
   overflow: scroll;
   z-index: 1;
 }
-
 .container {
   overflow: scroll;
   position: absolute;
@@ -19,12 +18,12 @@
   z-index: 1000;
   width: 99%;
   right: 10px;
-  top: 553px;
+  top: 558px;
   max-height: 680px;
   background: #FFFFFF;
   color: #435b52;
   border-radius: 3px;
-  border: #8f5e06 solid 1.5px;
+  border: var(--main-color) solid 1.5px;
   .products{
     padding: 10px;
     .product{

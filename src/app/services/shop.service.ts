@@ -81,6 +81,18 @@ export class ShopService {
       localStorage.setItem('localCart',JSON.stringify(cartData))
     }
   }
+  addUserInfo(data: ContactInfo){
+    console.log(data)
+    let userInfo = localStorage.getItem('userInfo');
+    if(userInfo){
+      localStorage.removeItem('userInfo');
+      localStorage.setItem('userInfo',JSON.stringify(data))
+    }
+    else {
+      localStorage.setItem('userInfo',JSON.stringify(data))
+    }
+  }
+
 
   cartInfo(): CartInfo{
     let items = JSON.parse(localStorage.getItem('localCart')!)

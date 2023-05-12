@@ -60,6 +60,7 @@ export function tokenGetter() {
     AddressPipe,
     OrderInfoComponent,
     OrderDataFormatPipe,
+
   ],
   imports: [
     SharedModule,
