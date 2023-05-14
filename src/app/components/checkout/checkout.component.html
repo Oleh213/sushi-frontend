@@ -4,28 +4,28 @@
     <div class='userInfo-title-container edition'>
       <div class='items-title'><span class="number"><span>1</span></span>Контактна інформація</div>
     </div>
-      <div class="userInfo">
+      <div class="userInfo" >
         <div class="name block">
-          <label class="input">
-            <input class="input__field" [defaultValue]="userInfo.name"  [(ngModel)]="contactInfo.name" type="text" placeholder=" "  />
+          <label class="input" for="name">
+            <input class="input__field" [(ngModel)]="contactInfo.name" type="text" placeholder=" " id="name"  />
             <span class="input__label">Імʼя *</span>
           </label>
         </div>
         <div class="phoneNumber block">
-          <label class="input">
-            <input class="input__field"  [(ngModel)]="contactInfo.phoneNumber " type="text" placeholder=" " />
+          <label class="input" for="phone">
+            <input class="input__field"  [(ngModel)]="contactInfo.phoneNumber " type="text" placeholder=" " id="phone" />
             <span class="input__label">Телефон *</span>
           </label>
         </div>
         <div class="surname block">
-          <label class="input">
-            <input class="input__field"  [(ngModel)]="contactInfo.surName " type="text" placeholder=" "  />
+          <label class="input" for="surname">
+            <input class="input__field"  [(ngModel)]="contactInfo.surName " type="text" placeholder=" " id="surname" />
             <span class="input__label">Прізвище</span>
           </label>
         </div>
         <div class="email block">
-          <label class="input">
-            <input class="input__field" type="text" placeholder=" "  [(ngModel)]="contactInfo.email "/>
+          <label class="input" for="email">
+            <input class="input__field" type="text" placeholder=" "  [(ngModel)]="contactInfo.email " id="email"/>
             <span class="input__label" >E-mail адреса </span>
           </label>
         </div>
@@ -44,7 +44,7 @@
             <label class="text">Доставка</label>
           </div>
         <div class="deliveryInfo" [ngClass]="{delivery: deliveryOption.deliveryType !== DeliveryType.OnAddress}">
-          <div class="map" id="map">
+          <div #mapContainer class="map" id="map">
           </div>
           <div class="inputAddress">
             <app-search

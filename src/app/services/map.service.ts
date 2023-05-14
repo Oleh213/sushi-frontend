@@ -10,14 +10,14 @@ export class MapService {
   private map!: google.maps.Map
   public selectedAddress: string = '';
   public position: { lat: number, lng: number} ={ lat: 49.225617855222204, lng: 28.44943960380496};
-  public geocoder = new google.maps.Geocoder();
   private addresses:AddressDetails[] =[];
   constructor() {
   }
   searchAddress(options: string) :  Observable<AddressDetails[]> {
     this.addresses = [];
     var geocoderRequest = { address: options};
-    this.geocoder.geocode(geocoderRequest, (results, status) => {
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode(geocoderRequest, (results, status) => {
       if(results){
         for (let item of results){
           if(this.checkCity(item)){
@@ -118,15 +118,16 @@ export class MapService {
     });
   }
 
-   geocodeLatLng(input: any) {
-     let geocoderRequest = { location: input };
-     this.geocoder.geocode(geocoderRequest, (results, status) => {
-       if(results){
-         let address = results[0].address_components
-         this.selectedAddress = address[1].long_name + ' '  + address[0].long_name + ' м. ' + address[2].long_name;
-       }
-     });
-   }
+  geocodeLatLng(input: any) {
+    let geocoderRequest = { location: input };
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode(geocoderRequest, (results, status) => {
+      if(results){
+        let address = results[0].address_components
+        this.selectedAddress = address[1].long_name + ' '  + address[0].long_name + ' м. ' + address[2].long_name;
+      }
+    });
+  }
 
   mainPage() {
     this.map = new google.maps.Map(document.getElementById('map')!, {

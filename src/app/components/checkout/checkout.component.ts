@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DeliveryOption, DeliveryTimeOptions, DeliveryType} from "../../models/deliveryOption";
 import {ShopService} from "../../services/shop.service";
 import {LocalCartItem} from "../../models/localCartItem";
@@ -25,11 +25,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   public subTotalPrice: number =0;
   public promoCode = new PromoCode();
   public totalPrice: number = 0;
-  public contactInfo = new ContactInfo();
+  public contactInfo: ContactInfo = new ContactInfo();
   public submit: boolean = false;
   private cartItems: Array<LocalCartItem> = [];
-  public userInfo = new ContactInfo();
-
+  @ViewChild('mapContainer', {static: false}) gmap!: ElementRef;
   constructor(private shop: ShopService,
               private formBuilder: FormBuilder,
               private route: Router,
@@ -51,12 +50,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       location.href = "/menu";
     }
     let info = JSON.parse(localStorage.getItem('userInfo')!)
-    if(info.length > 0){
-      this.userInfo = info
+    if(info.name || info.phoneNumber )
+    {
+      this.contactInfo = info
     }
-
-    this.mapService.checkout();
-
     this.buildInitialHours();
   }
 
@@ -143,12 +140,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       else {
         this.promoCode.promoDiscount = 0;
       }
-      this.changer();
+      this.mapService.checkout();
     }
   }
-  changer(){
-    this.mapService.checkout();
-  }
+
   checkSubmit(): boolean{
     if(this.contactInfo.name.length> 3 && this.contactInfo.phoneNumber.length >= 10){
       if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5 ){
@@ -165,8 +160,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     }
   }
   makeOrder(){
-    this.shop.addUserInfo(this.contactInfo);
     if(this.checkSubmit()){
+      this.shop.addUserInfo(this.contactInfo);
       this.deliveryOption.longitude = this.mapService.position.lng.toString();
       this.deliveryOption.latitude = this.mapService.position.lat.toString();
       this.deliveryOption.address = this.mapService.selectedAddress;

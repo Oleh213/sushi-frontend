@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ImagesSlider} from "../../models/imagesSlider";
 import {ShopService} from "../../services/shop.service";
 import {Router} from "@angular/router";
@@ -11,9 +11,10 @@ import {MapService} from "../../services/map.service";
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit, AfterViewInit{
   public isShow = false;
   public imageSlider: Array<ImagesSlider> = [];
+  @ViewChild('mapContainer', {static: false}) gmap!: ElementRef;
 
   constructor(private shop: ShopService,
               public router: Router,
@@ -29,7 +30,11 @@ export class MainComponent implements OnInit{
       error => {
       this.errorService.handleError(error);
       })
-    this.mapService.mainPage()
+
+  }
+
+  ngAfterViewInit(): void {
+    this.mapService.mainPage();
   }
 
 }
