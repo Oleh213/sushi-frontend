@@ -82,21 +82,14 @@ export class ProductsComponent implements OnInit, OnDestroy{
       this.cart.totalPrice += product.price;
       this.userCart = JSON.parse(localStorage.getItem('localCart')!);
     }
-    else {
-    }
   }
 
   checkProductInCart(productId: Guid): boolean{
     if(this.userCart){
       let item = this.userCart.find(x=> x.productId === productId)
-      if(item){
-        return true;
-      }
-      else
-        return false;
+      return !!item;
     }
     else return false;
-
   }
 
   changeCategory(categoryName: string) {

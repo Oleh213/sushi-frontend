@@ -21,7 +21,7 @@ import * as moment from "moment";
 export class CheckoutComponent implements OnInit, AfterViewInit{
   public deliveryOption = new DeliveryOption();
   public paymentMethod: PaymentMethod = PaymentMethod.CardOnline;
-  public initialHours: Date[] = [];
+  public initialHours: string[] = [];
   public subTotalPrice: number =0;
   public promoCode = new PromoCode();
   public totalPrice: number = 0;
@@ -59,28 +59,20 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   }
 
   buildInitialHours() {
-    let hourList: Date[] = [];
-    const data = moment();
-    for (let count = 0; count < 48; count++) {
-      let lastHour = hourList[hourList.length - 1];
-      if (!lastHour) {
-        data.set({ hour: 0, minute: 0, seconds: 0 });
-        hourList.push(data.toDate());
-        continue;
+    const now = new Date();
+    const minutes = Math.ceil(now.getMinutes() / 15) * 15; // округлюємо хвилини до найближчої 15
+    let date = new Date();
+    date.setHours(22);
+    date.setMinutes(30);
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), minutes + 30, 0); // поточний час + 30 хвилин з округленими хвилинами
+    for (let i = 0; i < 42; i++) { // 22:00 - поточний час = 41 крок
+      const time = new Date(start.getTime() + i * 15 * 60 * 1000);
+      const hours = time.getHours().toString().padStart(2, '0'); // додаємо 0 перед годинами, якщо вони меньше 10
+      const minutes = time.getMinutes().toString().padStart(2, '0'); // додаємо 0 перед хвилинами, якщо вони меньше 10
+      const formattedTime = `${hours}:${minutes}`;
+      if (time < date) { // максимальний час 22:00
+        this.initialHours.push(formattedTime);
       }
-      const newHour = lastHour.getMinutes() == 30 ? lastHour.getHours() + 1 : lastHour.getHours();
-      const newMinutes = lastHour.getMinutes() == 0 ? 30 : 0;
-      const obj = { hour: newHour, minutes: newMinutes, seconds: 0 };
-      lastHour = moment(lastHour).set(obj).toDate();
-      hourList.push(lastHour);
-    }
-    let sort: Date[] = [];
-    let hours = new Date().getHours();
-    for (let time of hourList){
-      if(time.getHours() > hours && time.getHours() > 10 &&time.getHours() < 23){
-        sort.push(time);
-      }
-      this.initialHours = sort;
     }
   }
   confirmAddress(){

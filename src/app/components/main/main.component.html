@@ -1,29 +1,78 @@
 <div class="container">
-<!--  <div class="slider">-->
-<!--    <div class="image-container" (click)="router.navigate([imageSlider[currentIndex].description])" >-->
-<!--      <img class="image" src="{{getCurrentSlideUrl()}}" alt="">-->
-<!--    </div>-->
-<!--    <div class="slide_buttons">-->
-<!--    </div>-->
-<!--    <div class="directional" *ngIf="isShow">-->
-<!--      <div (click)="goToPrevious()" class="leftArrow arrow">❰</div>-->
-<!--      <div (click)="goToNext()" class="rightArrow arrow">❱</div>-->
-<!--    </div>-->
-<!--  </div>-->
-  <div class="d" *ngIf="isShow">
-    <div class="{{'slider' + imageSlider.length}}">
-      <figure class="{{'figure' + imageSlider.length}}">
-        <img *ngFor="let image of imageSlider" [src]="image.image" alt (click)="location.href=image.description">
-      </figure>
+  <div class="sliderContainer">
+    <div class="sliderView" *ngIf="isShow">
+      <div class="{{'slider' + imageSlider.length}}">
+        <figure class="{{'figure' + imageSlider.length}}">
+          <img *ngFor="let image of imageSlider" [src]="image.image" alt (click)="location.href=image.description">
+        </figure>
+      </div>
     </div>
   </div>
-  <div class="contact">
-    <div class="logo">Наші магазини</div>
-    <div #mapContainer class="map" id="map">
+  <div class="body" *ngIf="isShow">
+    <div class="label">Нові пропозиції</div>
+    <div class="products">
+      <div class="product" *ngFor="let product of newProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
+        <div class="product-image" >
+          <img class="image" src="{{product.image}}"/>
+        </div>
+        <div class="name-weight">
+          <div class="product-weight" *ngIf="product.weight>0">{{product.weight}}г</div>
+          <div class="products-name" data-hover="">{{product.productName.toUpperCase()}}</div>
+        </div>
+        <div class="product-buyBox">
+          <div class="product-price">
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
+            <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+          </div>
+          <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
+          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">ПЕРЕЙТИ В КОШИК</div>
+        </div>
+        <div class="new">Новинка</div>
+      </div>
+    </div>
+    <div class="label margin70">Акції</div>
+    <div class="products">
+      <div class="product" *ngFor="let product of actionsProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
+        <div class="product-image" >
+          <img class="image" src="{{product.image}}"/>
+        </div>
+        <div class="name-weight">
+          <div class="product-weight" *ngIf="product.weight>0">{{product.weight}}г</div>
+          <div class="products-name" data-hover="">{{product.productName.toUpperCase()}}</div>
+        </div>
+        <div class="product-buyBox">
+          <div class="product-price">
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
+            <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+          </div>
+          <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
+          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">ПЕРЕЙТИ В КОШИК</div>
+        </div>
+        <div class="new action">Акція</div>
+      </div>
+    </div>
+    <div class="label margin70">Популярні сети</div>
+    <div class="products">
+      <div class="product" *ngFor="let product of popularProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
+        <div class="product-image" >
+          <img class="image" src="{{product.image}}"/>
+        </div>
+        <div class="name-weight">
+          <div class="product-weight" *ngIf="product.weight>0">{{product.weight}}г</div>
+          <div class="products-name" data-hover="">{{product.productName.toUpperCase()}}</div>
+        </div>
+        <div class="product-buyBox">
+          <div class="product-price">
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
+            <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+          </div>
+          <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
+          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">ПЕРЕЙТИ В КОШИК</div>
+        </div>
+        <div class="new popular">Популярний сет</div>
+      </div>
     </div>
   </div>
-
-
 </div>
 
 

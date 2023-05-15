@@ -70,8 +70,8 @@
       </div>
       <div class="selectHour" *ngIf="deliveryOption.deliveryTimeOptions === DeliveryTimeOptions.OnTime">
         <select class="selector" [(ngModel)]="deliveryOption.deliveryTime">
-          <option  *ngFor="let category of initialHours" >
-            {{category.toLocaleTimeString()}}
+          <option *ngFor="let category of initialHours">
+            {{category}}
           </option>
         </select>
       </div>

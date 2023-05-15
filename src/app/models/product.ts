@@ -9,5 +9,10 @@ export class Product{
   public available: number = 0;
   public discount: number = 0;
   public image: string = '';
-  public  weight: number = 0;
+  public weight: number = 0;
+  public productOption: ProductOption;
+}
+
+export class ProductOption {
+  public name: string;
 }

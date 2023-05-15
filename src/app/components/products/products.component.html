@@ -25,6 +25,9 @@
         <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
         <div class="productCartActivated" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
       </div>
+      <div class="new action" *ngIf="product.productOption && product.productOption.name ==='Action'">Акція</div>
+      <div class="new" *ngIf="product.productOption && product.productOption.name ==='New'">Новинка</div>
+      <div class="new popular" *ngIf="product.productOption && product.productOption.name ==='Popular'">Популярний сет</div>
     </div>
   </div>
 

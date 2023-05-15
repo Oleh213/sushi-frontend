@@ -37,6 +37,16 @@
     .menu{
       font-weight: 500;
       cursor: pointer;
+      &:hover{
+        color: var(--main-color);
+        transition: 0.3s;
+        font-weight: 600;
+      }
+    }
+    .activated{
+      color: var(--main-color);
+      font-weight: 600;
+      font-size: 18px;
     }
   }
   .burger{

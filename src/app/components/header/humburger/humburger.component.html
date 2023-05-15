@@ -5,6 +5,7 @@
     <div class="selection">
       <div class="menu item" (click)="goToPage('menu')">Меню</div>
       <div class="underline" ></div>
+      <div class="item" (click)="goToPage('contact')">Контакти</div>
       <div class="profile item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/profile')">Профіль</div>
       <div class="newOrders item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/new-orders')">Нові замовлення</div>
       <div class="newOrders item" *ngIf="user === UserRole.Admin" (click)="goToPage('manager-menu/admin-menu')">Меню адміністратора</div>

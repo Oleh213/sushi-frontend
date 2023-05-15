@@ -4,6 +4,7 @@ import {CartInfo} from "../../models/cartInfo";
 import {User, UserRole} from "../../models/user";
 import {AuthService} from "../../services/auth.service";
 import {HumburgerComponent} from "./humburger/humburger.component";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit{
               private auth: AuthService,
               private el: ElementRef,
               private burger: HumburgerComponent,
+              public route: Router,
   ) {
   }
   ngOnInit(): void {
@@ -30,4 +32,5 @@ export class HeaderComponent implements OnInit{
   }
 
   protected readonly UserRole = UserRole;
+  protected readonly location = location;
 }

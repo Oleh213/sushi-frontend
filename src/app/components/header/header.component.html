@@ -9,7 +9,9 @@
   </div>
 
   <div class="context">
-    <div class="menu" routerLink="/menu">Меню</div>
+    <div class="menu" routerLink="" [ngClass]="{'activated': route.url !== '/menu' &&  route.url !== '/contact'}">Головна</div>
+    <div class="menu" routerLink="/menu"  [ngClass]="{'activated': route.url === '/menu'}">Меню</div>
+    <div class="menu" routerLink="/contact"  [ngClass]="{'activated': route.url === '/contact'}">Контакти</div>
     <div class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">
       <img src="https://img.icons8.com/ios/500/null/admin-settings-male.png" class="manager-menu" alt="">
     </div>

@@ -1,0 +1,107 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 80px;
+  .time-contact{
+    display: flex;
+    justify-content: center;
+    column-gap: 20%;
+    .timeContainer{
+      font-size: 18px;
+      .lable{
+        color: var(--main-color);
+        font-size: 40px;
+        font-weight: 700;
+        margin: 0 0 40px 0;
+      }
+      .time{
+        margin: 4px 0 0 0;
+      }
+    }
+    .contactContainer{
+      font-size: 18px;
+      .lable{
+        color: var(--main-color);
+        font-size: 40px;
+        font-weight: 700;
+        margin: 0 0 40px 0;
+      }
+      .option{
+        margin: 4px 0 0 0;
+      }
+    }
+  }
+  .label{
+    margin: 50px 0 0 0;
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .mapContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .map{
+      margin: 20px 0 0 0;
+      width: 80%;
+      height: 400px;
+    }
+  }
+}
+@media (max-width: 930px) {
+  .container{
+    padding: 40px;
+    .time-contact{
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      .timeContainer{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .contactContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 40px 0 0 0;
+        font-size: 18px;
+        .lable{
+          color: var(--main-color);
+          font-size: 40px;
+          font-weight: 700;
+          margin: 0 0 40px 0;
+        }
+        .option{
+          margin: 4px 0 0 0;
+        }
+      }
+    }
+    .mapContainer{
+      width: 100%;
+      .map{
+        width: 100%;
+      }
+    }
+  }
+}
+
+//<div class="container">
+//<div class="time-contact">
+//<div class="timeContainer">
+//<div class="lable">Графік роботи</div>
+//<div class="time">Пн - Пт     9:00 - 22:00</div>
+//<div class="time">Cб - Нд     10:00 - 21:00</div>
+//</div>
+//<div class="contactContainer">
+//<div class="lable">Контакти</div>
+//<div class="option">+380 (066) 663-8032</div>
+//<div class="option">olegantemenuk99@gmail.com</div>
+//</div>
+//</div>
+//<div class="logo">Наші магазини</div>
+//<div #mapContainer class="map" id="map">
+//</div>
+//</div>
