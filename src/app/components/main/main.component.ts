@@ -37,4 +37,5 @@ export class MainComponent implements OnInit, AfterViewInit{
     this.mapService.mainPage();
   }
 
+  protected readonly location = location;
 }

@@ -55,6 +55,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.contactInfo = info
     }
     this.buildInitialHours();
+    console.log(this.initialHours)
   }
 
   buildInitialHours() {
@@ -86,7 +87,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     if(this.mapService.selectedAddress.length >3){
     }
   }
-
   openClosePromoField(){
     if(this.promoCode.promoField){
       this.promoCode.promoField = false
@@ -143,7 +143,15 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.mapService.checkout();
     }
   }
-
+  checkTime():string{
+    const data = moment();
+    if(this.deliveryOption.deliveryType === DeliveryType.OnAddress){
+      return `${data.hour()} : ${data.minutes()}`
+    }
+    else {
+      return `${data.hour()} : ${data.minutes()}`
+    }
+  }
   checkSubmit(): boolean{
     if(this.contactInfo.name.length> 3 && this.contactInfo.phoneNumber.length >= 10){
       if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5 ){

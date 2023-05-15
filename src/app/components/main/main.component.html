@@ -13,7 +13,7 @@
   <div class="d" *ngIf="isShow">
     <div class="{{'slider' + imageSlider.length}}">
       <figure class="{{'figure' + imageSlider.length}}">
-        <img *ngFor="let image of imageSlider" [src]="image.image" alt>
+        <img *ngFor="let image of imageSlider" [src]="image.image" alt (click)="location.href=image.description">
       </figure>
     </div>
   </div>
