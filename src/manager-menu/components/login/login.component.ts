@@ -37,7 +37,7 @@ export class LoginComponent implements OnDestroy{
       .subscribe(res=> {
         location.href = 'manager-menu/new-orders'
       }, errorData => {
-        this.errorHandler.handleError(errorData);
+        // this.errorHandler.handleError(errorData);
       }))
   }
 

@@ -1,9 +1,10 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ShopService} from "../../services/shop.service";
-import {Order, OrderStatus} from "../../models/orders";
+import {DeliveryTypeValue, Order, OrderStatus} from "../../models/orders";
 import {OrderService} from "../../services/order.service";
 import {Subscription} from "rxjs";
+import {DeliveryType} from "../../models/deliveryOption";
 
 @Component({
   selector: 'app-order-info',
@@ -15,6 +16,7 @@ export class OrderInfoComponent implements OnInit{
   public order: Order = new Order();
   private subscriptions: Subscription[] = [];
   public tracker: TrackStage = new TrackStage();
+  public deliveryType = '';
   constructor(private activeRoute:ActivatedRoute,
               private shop: ShopService,
               private orderService: OrderService,
@@ -25,6 +27,7 @@ export class OrderInfoComponent implements OnInit{
     this.shop.getOrder(this.orderId).subscribe(res=> {
       this.order = res;
       this.checkOrderStatus(res.orderStatus)
+      this.checkDeliveryType(res);
     },error => {
       location.href = '/error-page'
     }, )
@@ -60,9 +63,19 @@ export class OrderInfoComponent implements OnInit{
     this.order.orderStatus = obj.orderStatus;
     this.checkOrderStatus(obj.orderStatus)
     console.log('Yes!');
-
   }
 
+  checkDeliveryType(order: Order){
+    if(order.deliveryOptions.deliveryType === DeliveryType.OnAddress){
+      this.deliveryType =  'Доставка замовлення'
+    }
+    else {
+      this.deliveryType =  'Очікує на самовиніс';
+    }
+  }
+
+  protected readonly DeliveryTypeValue = DeliveryTypeValue;
+  protected readonly DeliveryType = DeliveryType;
 }
 
 class TrackStage {

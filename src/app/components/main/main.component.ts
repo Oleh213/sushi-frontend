@@ -76,5 +76,6 @@ export class MainComponent implements OnInit{
       this.userCart = JSON.parse(localStorage.getItem('localCart')!);
     }
   }
+
   protected readonly location = location;
 }

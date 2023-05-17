@@ -69,7 +69,7 @@
         <label class="text">На певну годину</label>
       </div>
       <div class="selectHour" *ngIf="deliveryOption.deliveryTimeOptions === DeliveryTimeOptions.OnTime">
-        <select class="selector" [(ngModel)]="deliveryOption.deliveryTime">
+        <select class="selector" [(ngModel)]="deliveryOption.deliveryTime" (click)="buildInitialHours()">
           <option *ngFor="let category of initialHours">
             {{category}}
           </option>

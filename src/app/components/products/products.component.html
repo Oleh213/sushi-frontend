@@ -1,10 +1,10 @@
 <div class="container">
     <div class="categories">
-      <div class="category" *ngFor="let category of categories"  (click)="changeCategory(category.categoryName)">
+      <div class="category" *ngFor="let category of categories"  (click)="changeCategory(category.categoryName)" [ngClass]="{active2: selectedCategory === category.categoryName}">
         <div class="image-container">
           <img class="image" src="{{category.categoryImage}}"/>
         </div>
-        <div class="name" [ngClass]="{active: selectedCategory=== category.categoryName}">{{category.categoryName.toUpperCase()}}</div>
+        <div class="name" [ngClass]="{active: selectedCategory === category.categoryName}">{{category.categoryName.toUpperCase()}}</div>
       </div>
     </div>
 

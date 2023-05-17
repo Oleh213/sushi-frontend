@@ -50,12 +50,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       location.href = "/menu";
     }
     let info = JSON.parse(localStorage.getItem('userInfo')!)
-    if(info.name || info.phoneNumber )
+    if(info != null)
     {
       this.contactInfo = info
     }
-    this.buildInitialHours();
-    console.log(this.initialHours)
   }
 
   buildInitialHours() {
@@ -64,6 +62,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     let date = new Date();
     date.setHours(22);
     date.setMinutes(30);
+    this.initialHours = [];
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), minutes + 30, 0); // поточний час + 30 хвилин з округленими хвилинами
     for (let i = 0; i < 42; i++) { // 22:00 - поточний час = 41 крок
       const time = new Date(start.getTime() + i * 15 * 60 * 1000);
@@ -151,7 +150,14 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
        return false;
       }
       else{
-        return !(this.deliveryOption.deliveryTimeOptions == DeliveryTimeOptions.OnTime && this.deliveryOption.deliveryTime.length < 1);
+        if(this.deliveryOption.deliveryTimeOptions == DeliveryTimeOptions.OnTime && this.deliveryOption.deliveryTime.length < 1){
+          this.toastService.showToast('Помилка','Ведіть час доставки!', ToastStatus.Fail)
+
+          return false;
+        }
+        else {
+          return true;
+        }
       }
     }
     else{

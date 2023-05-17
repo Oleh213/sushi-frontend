@@ -13,7 +13,7 @@
     .label{
       display: flex;
       justify-content: center;
-      //color: var(--main-color);
+      color: var(--main-color);
       font-size: 40px;
       font-weight: 700;
     }
@@ -262,7 +262,7 @@
   87% { left: -500%; }
   100% { left: -500%; }
 }
-.slider6 { overflow: hidden; max-width: 1500px }
+.slider6 { overflow: hidden; max-width: 1500px; }
 .figure6 img { width: 16.666%; float: left; }
 .figure6 {
   position: relative;
