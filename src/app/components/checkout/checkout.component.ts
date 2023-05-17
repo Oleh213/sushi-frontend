@@ -144,7 +144,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     }
   }
   checkSubmit(): boolean{
-    if(this.contactInfo.name.length> 3 && this.contactInfo.phoneNumber.length >= 10){
+    if(this.contactInfo.name.length> 1 && this.contactInfo.phoneNumber.length >= 7){
       if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5 ){
         this.toastService.showToast('Помилка','Ведіть адресу доставки!', ToastStatus.Fail)
        return false;
@@ -161,7 +161,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       }
     }
     else{
-      this.toastService.showToast('Помилка','Ведіть конкта данні!', ToastStatus.Fail)
+      this.toastService.showToast('Помилка','Ведіть імʼя та телефон!', ToastStatus.Fail)
       return false;
     }
   }
