@@ -16,7 +16,8 @@ import {DeliveryType} from "../../../app/models/deliveryOption";
 @Component({
   selector: 'app-new-orders',
   templateUrl: './new-orders.component.html',
-  styleUrls: ['./new-orders.component.scss']
+  styleUrls: ['./new-orders.component.scss'],
+
 })
 export class NewOrdersComponent implements OnInit{
   public orders: Array<Order> = [];
@@ -29,6 +30,14 @@ export class NewOrdersComponent implements OnInit{
   public order: Order = new Order();
   private subscriptions: Subscription[] = [];
   public currentFilter: number = 10;
+  public allowedStatuses = [
+    OrderStatus.AwaitingConfirm,
+    OrderStatus.Cooking,
+    OrderStatus.Delivered,
+    OrderStatus.AwaitingPicUp,
+    OrderStatus.AwaitingPayment
+  ];
+
   constructor(private shop: ShopService,
               private orderService: OrderService,
               private errorService: ErrorHandlerService,
@@ -93,21 +102,19 @@ export class NewOrdersComponent implements OnInit{
         x.deliveryOptions = obj.deliveryOptions;
       }})
       this.changeCategory(this.currentFilter);
+      if (obj.orderStatus === OrderStatus.Declined || obj.orderStatus === OrderStatus.Canceled){
+        this.orders = this.ordersFilter.filter(x=> x.orderId !== obj.orderId);
+        this.ordersFilter = this.ordersFilter.filter(x=> x.orderId !== obj.orderId);
+      }
     }
     else {
       let newObj = {...obj};
       this.ordersFilter = this.orders.filter(x=> x.orderId !== obj.orderId)
       this.ordersFilter.push(newObj);
-      this.ordersFilter.sort((a, b) => new Date(a.orderTime).getTime() - new Date(b.orderTime).getTime());
       this.orders.push(newObj)
+      this.ordersFilter = this.ordersFilter.sort((a, b) => b.orderNumber - a.orderNumber);
       this.changeCategory(this.currentFilter);
-      this.ordersFilter = this.orders.filter(x=>
-        x.orderStatus === this.statuses.AwaitingConfirm ||
-        x.orderStatus === this.statuses.Cooking ||
-        x.orderStatus === this.statuses.Delivered ||
-        x.orderStatus === this.statuses.AwaitingPicUp ||
-        x.orderStatus !== this.statuses.AwaitingPayment
-      )
+      this.ordersFilter = this.ordersFilter.filter(order => this.allowedStatuses.includes(order.orderStatus));
     }
   }
   changeFilter(status: number){

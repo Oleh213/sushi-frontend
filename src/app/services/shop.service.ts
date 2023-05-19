@@ -115,6 +115,17 @@ export class ShopService {
       localStorage.setItem('orders',JSON.stringify(cartData))
     }
   }
+  checkOrders(){
+    let orders =  JSON.parse(localStorage.getItem('orders')!);
+    if(orders !== null){
+      this.getUserOrders(orders).subscribe(res=> {
+      },
+        error => {
+        localStorage.removeItem('orders')
+        })
+    }
+    localStorage.removeItem('orders')
+  }
 
   ordersInCartInfo(): OrderInCart[] {
     return JSON.parse(localStorage.getItem('orders')!);

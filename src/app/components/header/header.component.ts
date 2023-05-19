@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit{
         this.user = res)
     }
     this.orders = this.shop.ordersInCartInfo();
+    this.shop.checkOrders();
   }
   open(){
     this.burger.onOpen();
