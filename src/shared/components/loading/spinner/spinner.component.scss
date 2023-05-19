@@ -15,7 +15,7 @@
   height: 48px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 4px solid rgba(167, 218, 196, 0.9);
+  border-top: 4px solid var(--main-color);
   border-right: 4px solid transparent;
   box-sizing: border-box;
   position: relative;
@@ -30,7 +30,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-bottom: 4px solid #435b52;
+  border-bottom: 4px solid #e0b26b;
   border-left: 4px solid transparent;
 }
 @keyframes rotation {

@@ -1,4 +1,3 @@
-
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {STORE_API_URL} from "../models/app-injections-tokens";
@@ -13,10 +12,11 @@ import {ResponseModel} from "../models/ResponseModel";
 import {ContactInfo} from "../models/contactInfo";
 import {DeliveryOption} from "../models/deliveryOption";
 import {PromoCode} from "../models/promoCode";
-import {User, UserRole} from "../models/user";
+import {UserRole} from "../models/user";
 import {Order, OrderStatus, PaymentMethod} from "../models/orders";
 import {Guid} from "guid-typescript";
 import {ImagesSlider} from "../models/imagesSlider";
+import {OrderResponsModel} from "../models/orderResponsModel";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,11 @@ export class ShopService {
   getNewOrders(): Observable<Order[]>{
     return this.auth.getRequest<Order[]>(`${this.apiUrl}OrderActions/GetNewOrders`)
   }
+  getUserOrders(orders: string[]): Observable<Order[]>{
+    console.log(orders)
+    return this.auth.patchRequest<Order[]>(`${this.apiUrl}OrderActions/GetUserOrders`,orders)
+  }
+
   changeOrderStatus(orderId: Guid, orderStatus: OrderStatus) : Observable<ResponseModel<string>>{
     return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderActions/ChangeOrderStatus`, {
       orderId: orderId,
@@ -57,10 +62,12 @@ export class ShopService {
     return this.auth.patchRequest<ResponseModel<number>>(`${this.apiUrl}OrderActions/GetTotalPrice`,products)
   }
   getPromoDiscount(code: string): Observable<ResponseModel<number>>{
-    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromocodeActions/UsePromocode`,{code:code})
+    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromocodeActions/UsePromocode`,{
+      code:code
+    })
   }
-  makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCode ): Observable<ResponseModel<string>>{
-    return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderActions/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
+  makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCode ): Observable<ResponseModel<OrderResponsModel>>{
+    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}OrderActions/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
   }
   getOrder(orderId: string): Observable<Order> {
     return this.auth.getRequest<Order>(`${this.baseApiUrl}OrderActions/GetOrderById?orderId=${orderId}`)
@@ -93,6 +100,25 @@ export class ShopService {
     }
   }
 
+  addOrderInfo(orderId: string){
+    let cartData = [];
+    let localCart = localStorage.getItem('orders');
+    let order =  new OrderInCart();
+    order.orderId = orderId;
+    if(!localCart){
+      localStorage.setItem('orders',JSON.stringify([order]))
+    }
+    else {
+      cartData = JSON.parse(localCart);
+      console.log(cartData);
+      cartData.push(order);
+      localStorage.setItem('orders',JSON.stringify(cartData))
+    }
+  }
+
+  ordersInCartInfo(): OrderInCart[] {
+    return JSON.parse(localStorage.getItem('orders')!);
+  }
 
   cartInfo(): CartInfo{
     let items = JSON.parse(localStorage.getItem('localCart')!)
@@ -110,8 +136,9 @@ export class ShopService {
       cartIfNull.totalPrice = 0;
       return cartIfNull;
     }
-
   }
+}
 
-
+export class OrderInCart{
+  public orderId: string = '';
 }

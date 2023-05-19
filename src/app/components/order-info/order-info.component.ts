@@ -1,10 +1,10 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ShopService} from "../../services/shop.service";
 import {DeliveryTypeValue, Order, OrderStatus} from "../../models/orders";
 import {OrderService} from "../../services/order.service";
 import {Subscription} from "rxjs";
-import {DeliveryType} from "../../models/deliveryOption";
+import {DeliveryTimeOptions, DeliveryType} from "../../models/deliveryOption";
 
 @Component({
   selector: 'app-order-info',
@@ -71,6 +71,15 @@ export class OrderInfoComponent implements OnInit{
     }
     else {
       this.deliveryType =  'Очікує на самовиніс';
+    }
+  }
+
+  checkDeliveryTime(order: Order):string{
+    if (order.deliveryOptions.deliveryTimeOptions === DeliveryTimeOptions.Asap){
+      return 'Якнайшвидше';
+    }
+    else {
+      return order.deliveryOptions.deliveryTime;
     }
   }
 

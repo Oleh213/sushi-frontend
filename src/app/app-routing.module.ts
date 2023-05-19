@@ -41,9 +41,6 @@ const routes: Routes = [
     path: 'order-info/:orderId', component: OrderInfoComponent,
   },
   {
-    path: '', component: MainComponent,
-  },
-  {
     path: 'manager-menu',
     component: ManagerMenuComponent,
     canActivate: [ManagerGuard],

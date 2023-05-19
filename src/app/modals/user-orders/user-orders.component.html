@@ -1,0 +1,29 @@
+<div class="backdrop"(click)="closeModal()" ></div>
+<div class="container">
+  <div class="orders">
+    <div class="order" *ngFor="let order of orders">
+      <div class="header">
+        <div class="order-number">
+          <div class="lable">Номер: </div>
+          <div class="value">{{order.orderNumber}}</div>
+        </div>
+        <div class="orderTime">
+          {{order.orderTime | orderDataFormat}}</div>
+      </div>
+      <div class="body">
+        <div class="orderStatus">
+          <div class="lable">Статус: </div>
+          <div class="value">{{OrderStatusValues[order.orderStatus].value}}</div>
+        </div>
+        <div class="orderStatus">
+          <div class="lable">Загальна ціна: </div>
+          <div class="value">{{order.totalPrice}}</div>
+        </div>
+      </div>
+      <div class="footer" (click)="goToPage(order.orderId)">Деталі</div>
+<!--      <div class="underline" *ngIf="orders.length > 0"></div>-->
+    </div>
+  </div>
+</div>
+<app-spinner>
+</app-spinner>

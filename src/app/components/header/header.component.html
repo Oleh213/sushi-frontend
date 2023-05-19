@@ -6,18 +6,33 @@
     <div class="logo" >
       <span class="text"  routerLink="">UMAMI</span>
     </div>
+    <div class="orders-mobile">
+      <img *ngIf="orders" (click)="modelMobile = true" class="order-button" width="100" height="100" src="https://img.icons8.com/cotton/1080/000000/purchase-order.png" alt="purchase-order"/>
+      <app-user-orders class="order"
+                       *ngIf='modelMobile'
+                       (close)="modelMobile = false"
+      >
+      </app-user-orders>
+    </div>
   </div>
 
   <div class="context">
-    <div class="menu" routerLink="" [ngClass]="{'activated': route.url !== '/menu' &&  route.url !== '/contact'}">Головна</div>
-    <div class="menu" routerLink="/menu"  [ngClass]="{'activated': route.url === '/menu'}">Меню</div>
-    <div class="menu" routerLink="/contact"  [ngClass]="{'activated': route.url === '/contact'}">Контакти</div>
-    <div class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">
-      <img src="https://img.icons8.com/ios/500/null/admin-settings-male.png" class="manager-menu" alt="">
+    <div class="orders">
+      <div class="order-lable" *ngIf="orders" (click)="model = true" >Мої замовленя</div>
+      <app-user-orders class="order"
+        *ngIf='model'
+        (close)="model = false"
+      >
+      </app-user-orders>
     </div>
+    <a class="menu" routerLink="" [ngClass]="{'activated': route.url === ''}">Головна</a>
+    <a class="menu" routerLink="/menu"  [ngClass]="{'activated': route.url === '/menu'}">Меню</a>
+    <a class="menu" routerLink="/contact"  [ngClass]="{'activated': route.url === '/contact'}">Контакти</a>
+    <a class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">
+      <img src="https://img.icons8.com/ios/500/null/admin-settings-male.png" class="manager-menu" alt="">
+    </a>
   </div>
 
 </div>
 <app-humburger>
-
 </app-humburger>

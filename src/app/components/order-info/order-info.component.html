@@ -81,6 +81,34 @@
       </div>
     </div>
   </div>
+  <div class="underLine margin10"></div>
+  <div class="contact-lable">Контактна інформація</div>
+  <div class="contact-info">
+    <div class="name-phone">
+      <div class="name module">
+        <div class="lable">Ім'я:</div>
+        <div class="value">{{order.name}}</div>
+      </div>
+      <div class="phone module">
+        <div class="lable">Телефон:</div>
+        <div class="value">{{order.phoneNumber}}</div>
+      </div>
+    </div>
+    <div class="delivery-info">
+      <div class="delivery-type module">
+        <div class="lable">Спосіб доставки:</div>
+        <div class="value">{{DeliveryTypeValue[order.deliveryOptions.deliveryType].value}}</div>
+      </div>
+      <div class="delivery-time module">
+        <div class="lable">Час:</div>
+        <div class="value">{{checkDeliveryTime(order)}}</div>
+      </div>
+      <div class="delivery-address module" *ngIf="order.deliveryOptions.deliveryType === DeliveryType.OnAddress">
+        <div class="lable">Адресса:</div>
+        <div class="value">{{order.deliveryOptions.address}}</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-spinner></app-spinner>

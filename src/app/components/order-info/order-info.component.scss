@@ -89,6 +89,51 @@
       margin: 20px 0 0 0;
     }
   }
+  .contact-lable{
+    font-weight: 700;
+    padding: 0 8%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0 0;
+  }
+  .contact-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    .name-phone{
+      display: flex;
+      column-gap: 50px;
+      margin: 20px 0 0 0;
+    }
+    .delivery-info{
+      display: flex;
+      column-gap: 30px;
+      margin: 8px 0 0 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 4px;
+    }
+    .module{
+      display: flex;
+      column-gap: 7px;
+      justify-content: center;
+      .value{
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+
+      }
+    }
+  }
+
+  .margin10{
+    margin: 10px 0;
+  }
+
 }
 @media(max-width:938px){
   .card{
@@ -162,6 +207,11 @@
 
 @media(max-width:540px){
   .card{
+    .title{
+      padding: 0;
+      font-size: 23px;
+
+    }
     .date-number{
       flex-direction: column;
       row-gap: 5px;
@@ -186,6 +236,12 @@
       &.active .text p {
         font-size: 11px;
       }
+    }
+  }
+
+  .contact-info{
+    .name-phone{
+      flex-direction: column;
     }
   }
 }

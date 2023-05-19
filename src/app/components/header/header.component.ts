@@ -1,5 +1,5 @@
 import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
-import {ShopService} from "../../services/shop.service";
+import {OrderInCart, ShopService} from "../../services/shop.service";
 import {CartInfo} from "../../models/cartInfo";
 import {User, UserRole} from "../../models/user";
 import {AuthService} from "../../services/auth.service";
@@ -13,6 +13,9 @@ import {Route, Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit{
   public user: UserRole = 1;
+  public orders: OrderInCart[] = [];
+  public model: boolean = false;
+  public modelMobile: boolean = false;
   constructor(private shop: ShopService,
               private auth: AuthService,
               private el: ElementRef,
@@ -23,9 +26,9 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     if(this.auth.isAuthenticated()) {
       this.shop.getUser().subscribe(res=>
-        this.user = res
-      )
+        this.user = res)
     }
+    this.orders = this.shop.ordersInCartInfo();
   }
   open(){
     this.burger.onOpen();

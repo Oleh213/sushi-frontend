@@ -28,6 +28,8 @@
     "@ng-bootstrap/ng-bootstrap": "^14.1.1",
     "@popperjs/core": "^2.11.7",
     "@types/googlemaps": "^3.43.3",
+    "ag-grid": "^18.1.2",
+    "ag-grid-community": "^29.3.5",
     "angular-responsive-carousel": "^2.1.2",
     "bootstrap": "^5.2.3",
     "guid": "^0.0.12",

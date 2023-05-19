@@ -48,6 +48,9 @@ export class HumburgerComponent implements OnInit{
     location.href = '';
     this.onClose();
   }
+  checkOrders(){
+
+  }
 
   onClose() {
     const bodyList = document.getElementsByTagName('body');
