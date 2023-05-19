@@ -18,7 +18,7 @@
 
   <div class="context">
     <div class="orders">
-      <div class="order-lable" *ngIf="orders" (click)="model = true" >Мої замовленя</div>
+      <div class="order-lable" *ngIf="orders.length > 0" (click)="model = true" >Мої замовленя</div>
       <app-user-orders class="order"
         *ngIf='model'
         (close)="model = false"

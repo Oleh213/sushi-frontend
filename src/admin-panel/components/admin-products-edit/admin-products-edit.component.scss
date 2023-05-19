@@ -1,0 +1,78 @@
+.container{
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  .products{
+    overflow: scroll;
+    max-width: fit-content;
+    .header{
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      align-items: center;
+      column-gap: 10px;
+      .productId{
+        width: 120px;
+        display: flex;
+        justify-content: center;
+      }
+      .productName{
+        width: 150px;
+        display: flex;
+        justify-content: center;
+      }
+      .price{
+        width: 70px;
+        display: flex;
+        justify-content: center;
+      }
+      .discount{
+        width: 70px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .product{
+      margin: 10px 0 0 0;
+      display: flex;
+      column-gap: 10px;
+      min-height: 40px;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+      width: fit-content;
+      .productId{
+        width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &:active{
+          overflow: visible;
+          white-space: normal;
+        }
+      }
+      .productName{
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &:active{
+          overflow: visible;
+          white-space: normal;
+        }
+      }
+      .price{
+        width: 70px;
+      }
+      .discount{
+        width: 70px;
+      }
+    }
+  }
+}
+.grey-bg{
+  background: rgba(213, 213, 213, 0.51);
+  border-radius: 5px;
+
+}

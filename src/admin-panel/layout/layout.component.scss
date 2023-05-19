@@ -1,0 +1,26 @@
+.content{
+  .navbar{
+    margin: 30px 0 0;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    color: #b7b7b7;
+    font-weight: 500;
+    overflow: scroll;
+    .item{
+      font-size: 18px;
+      color: #b7b7b7;
+      &:hover{
+        cursor: pointer;
+        transition: 0.5s;
+        color: #181818;
+      }
+      .underline{
+        border: rgba(190, 190, 190, 0.82) 1px solid;
+      }
+    }
+  }
+}
+.activated{
+  color: #181818;
+}

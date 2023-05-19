@@ -1,0 +1,24 @@
+<div class="content" *ngIf="adminPanel">
+  <div class="navbarContainer">
+    <ul class="navbar">
+      <li class="statistic item"  (click)="location.href = '/admin-panel' ">
+        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel'}">Статитстика</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel'"></div>
+      </li>
+      <li class="products item activated"  (click)="location.href = '/admin-panel/products-edit'" >
+        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/products-edit'}">Продукти</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel/products-edit'"></div>
+      </li>
+      <li class="orders item">
+        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/orders'}">Замовлення</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel/orders'"></div>
+      </li>
+    </ul>
+  </div>
+  <div class="context">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-spinner>
+
+</app-spinner>

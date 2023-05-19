@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit{
         this.user = res)
     }
     this.orders = this.shop.ordersInCartInfo();
+    console.log(this.orders.length)
     this.shop.checkOrders();
   }
   open(){

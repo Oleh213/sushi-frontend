@@ -9,7 +9,6 @@ import {AppModule} from "../app/app.module";
 import {SpinnerComponent} from "../shared/components/loading/spinner/spinner.component";
 import {SharedModule} from "../shared/shared.module";
 import {DateFormatPipe} from "./pipes/date-format.pipe";
-import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 
 
 
@@ -20,7 +19,6 @@ import { AdminMenuComponent } from './components/admin-menu/admin-menu.component
     NewOrdersComponent,
     OrderDetailsComponent,
     DateFormatPipe,
-    AdminMenuComponent,
   ],
   imports: [
     CommonModule,

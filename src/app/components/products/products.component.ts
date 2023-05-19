@@ -33,8 +33,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.subscriptions.push(this.shop.getProducts()
       .pipe(first())
       .subscribe(res => {
-        this.products = res
-        this.filterCategory = res
+        this.products = res.filter(x=> x.available > 0)
+        this.filterCategory = res.filter(x=> x.available > 0)
         this.changeCategory('Сети')
       },
         error => {

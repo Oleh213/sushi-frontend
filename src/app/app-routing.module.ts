@@ -9,10 +9,13 @@ import {ManagerGuard} from "./guard/manager.guard";
 import {ProfileComponent} from "../manager-menu/components/profile/profile.component";
 import {NewOrdersComponent} from "../manager-menu/components/new-orders/new-orders.component";
 import {MainComponent} from "./components/main/main.component";
-import {AdminMenuComponent} from "../manager-menu/components/admin-menu/admin-menu.component";
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
 import {ContactComponent} from "./components/contact/contact.component";
 import {OrderInfoComponent} from "./components/order-info/order-info.component";
+import {AdminPanelModule} from "../admin-panel/admin-panel.module";
+import {AdminStatisticComponent} from "../admin-panel/components/admin-statistic/admin-statistic.component";
+import {AdminProductsEditComponent} from "../admin-panel/components/admin-products-edit/admin-products-edit.component";
+import {LayoutComponent} from "../admin-panel/layout/layout.component";
 
 
 const routes: Routes = [
@@ -41,6 +44,19 @@ const routes: Routes = [
     path: 'order-info/:orderId', component: OrderInfoComponent,
   },
   {
+    path: 'admin-panel', component: LayoutComponent,
+    children:[
+      {
+        path: 'products-edit',
+        component: AdminProductsEditComponent
+      },
+      {
+        path: '',
+        component: AdminStatisticComponent
+      },
+    ]
+  },
+  {
     path: 'manager-menu',
     component: ManagerMenuComponent,
     canActivate: [ManagerGuard],
@@ -48,10 +64,6 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
-      },
-      {
-        path: 'admin-menu',
-        component: AdminMenuComponent
       },
       {
         path: 'new-orders',

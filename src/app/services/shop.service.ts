@@ -22,7 +22,7 @@ import {OrderResponsModel} from "../models/orderResponsModel";
   providedIn: 'root'
 })
 export class ShopService {
-  admin: boolean = false;
+  public admin: boolean = false;
   private baseApiUrl = `${this.apiUrl}`
   constructor(private auth: AuthService,
               @Inject(STORE_API_URL) private apiUrl: string,
@@ -116,15 +116,18 @@ export class ShopService {
     }
   }
   checkOrders(){
-    let orders =  JSON.parse(localStorage.getItem('orders')!);
-    if(orders !== null){
-      this.getUserOrders(orders).subscribe(res=> {
+    let items: OrderInCart[] = JSON.parse(localStorage.getItem('orders')!)
+    let convert = items.map(o=> o.orderId)
+    if(convert !== null){
+      this.getUserOrders(convert).subscribe(res=> {
+        if (res.length <1){
+          localStorage.removeItem('orders')
+        }
       },
         error => {
-        localStorage.removeItem('orders')
+          localStorage.removeItem('orders')
         })
     }
-    localStorage.removeItem('orders')
   }
 
   ordersInCartInfo(): OrderInCart[] {

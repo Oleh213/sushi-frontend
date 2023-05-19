@@ -36,7 +36,7 @@ export class MainComponent implements OnInit{
       })
 
     this.shop.getProducts().subscribe(res=> {
-      for (let product of res){
+      for (let product of res.filter(x=> x.available > 0)){
         if (product.productOption && product.productOption.name === 'Popular'){
           this.popularProducts.push(product);
         }

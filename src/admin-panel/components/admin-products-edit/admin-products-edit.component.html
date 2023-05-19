@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="products">
+    <div class="header">
+      <div class="productId">ID</div>
+      <div class="productName">Ім'я</div>
+      <div class="price">Ціна</div>
+      <div class="discount">Знижка</div>
+      <div class="discount">Опція</div>
+      <div class="discount">Категорія</div>
+      <div class="discount">Доступно</div>
+    </div>
+    <div class="product" *ngFor="let product of products; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
+      <div class="productId">{{product.productId}}</div>
+      <div class="productName">{{product.productName}}</div>
+      <div class="price">{{product.price}}</div>
+      <div class="discount">{{product.discount}}</div>
+      <div class="discount">{{product?.productOption?.name ?? ''}}</div>
+      <div class="discount">{{product.categoryName}}</div>
+      <div class="discount">{{product.available}}</div>
+      <img width="30" height="30" src="https://img.icons8.com/external-febrian-hidayat-gradient-febrian-hidayat/512/external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat"/>
+    </div>
+  </div>
+</div>

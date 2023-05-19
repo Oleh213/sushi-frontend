@@ -22,7 +22,8 @@ export class UserOrdersComponent implements OnInit{
   ngOnInit(): void {
     this.ordersInCart = this.shopService.ordersInCartInfo();
     let items: OrderInCart[] = JSON.parse(localStorage.getItem('orders')!)
-    this.shopService.getUserOrders(items.map(o => o.orderId)).subscribe(
+    let convert = items.map(o=> o.orderId)
+    this.shopService.getUserOrders(convert).subscribe(
       res=> {
         this.orders = res
       }
