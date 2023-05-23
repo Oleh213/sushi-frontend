@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit{
         this.user = res)
     }
     this.orders = this.shop.ordersInCartInfo();
-    console.log(this.orders.length)
     this.shop.checkOrders();
   }
   open(){
@@ -38,4 +37,9 @@ export class HeaderComponent implements OnInit{
 
   protected readonly UserRole = UserRole;
   protected readonly location = location;
+
+  checkOrders():boolean {
+    let orders = this.shop.ordersInCartInfo()
+    return !(orders === null || orders.length < 0);
+  }
 }

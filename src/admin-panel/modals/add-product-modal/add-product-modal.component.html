@@ -1,0 +1,69 @@
+<div class='backdrop' (click)='close.emit()'></div>
+<div class="container">
+  <div class="productInfo" >
+    <div class="name-container item">
+      <label class="input" for="name">
+        <input class="input__field" [(ngModel)]="newProduct.productName" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="name"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Назва</span>
+      </label>
+    </div>
+    <div class="category-container item">
+      <div class="label">Категорія</div>
+      <div class="category selectdiv">
+        <select  [(ngModel)]="newProduct.categoryName" required>
+          <option *ngFor="let category of categories" >
+            {{category?.categoryName ?? 'error'}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="price-container item">
+      <label class="input" for="price">
+        <input class="input__field" [(ngModel)]="newProduct.price" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="number" placeholder=" " id="price"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Ціна</span>
+      </label>
+    </div>
+    <div class="available-container item">
+      <label class="input" for="available">
+        <input class="input__field" [(ngModel)]="newProduct.available"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="number" placeholder=" " id="available"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Доступно</span>
+      </label>
+    </div>
+    <div class="weight-container item">
+      <label class="input" for="weight">
+        <input class="input__field" [(ngModel)]="newProduct.weight"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="number" placeholder=" " id="weight"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Вага</span>
+      </label>
+    </div>
+    <div class="productOption-container item">
+      <div class="lable">Опція</div>
+      <div class="productOption selectdiv">
+        <select  [(ngModel)]="newProduct.productOptionName">
+          <option >
+            {{'Не вказано'}}
+          </option>
+          <option *ngFor="let options of productOptions" >
+            {{options?.productOptionsName ?? 'error'}}
+          </option>
+
+        </select>
+      </div>
+    </div>
+    <div class="image-container item">
+      <div class="lable">Картинка</div>
+      <div class="image">
+        <input type='file' style="display: none" (change)="readURL($event);" #values/>
+        <div class="addPicture" (click)="values.click()">
+          <div class="label">Вибрати файл</div>
+          <img style="color: white" width="24" height="24" src="https://img.icons8.com/material-sharp/240/000000/attach.png" alt="attach"/>        </div>
+        <div class="image-preview-container">
+          <img class="image-preview" [src]="imageSrc" alt="your image"/>
+        </div>
+      </div>
+    </div>
+    <div class="submit-container">
+      <div class="submit" (click)="submit(values!.files![0])">Підтвердити</div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

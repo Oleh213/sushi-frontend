@@ -5,8 +5,11 @@
   min-height: 100%;
 }
 .header{
-    width: 100%;
-    border-bottom: rgba(169, 169, 169, 0.66) 0.8px solid;
+  width: 100%;
+  border-bottom: rgba(169, 169, 169, 0.66) 0.8px solid;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   }
   .footer{
     margin: 100px 0 0 0;

@@ -1,0 +1,21 @@
+<div class='backdrop' (click)='close.emit()'></div>
+<div class="container">
+  <div class="productInfo" >
+    <div class="id-container item">Id: {{product.productId}}</div>
+    <div class="id-container item name">{{product.productName}}</div>
+
+    <div class="discount-container item">
+      <label class="input" for="discount">
+        <input class="input__field" [(ngModel)]="product.discount" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="discount"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Знижка</span>
+      </label>
+    </div>
+    <div class="submit-container">
+      <div class="submit" (click)="applyDiscount()">Застосувати </div>
+    </div>
+    <div class="submit-container">
+      <div class="submit clear" (click)="clearDiscount()">Видалити знижку </div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

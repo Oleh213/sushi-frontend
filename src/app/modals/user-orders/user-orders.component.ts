@@ -23,11 +23,14 @@ export class UserOrdersComponent implements OnInit{
     this.ordersInCart = this.shopService.ordersInCartInfo();
     let items: OrderInCart[] = JSON.parse(localStorage.getItem('orders')!)
     let convert = items.map(o=> o.orderId)
-    this.shopService.getUserOrders(convert).subscribe(
-      res=> {
-        this.orders = res
-      }
-    );
+    if(convert !== null)
+    {
+      this.shopService.getUserOrders(convert).subscribe(
+        res=> {
+          this.orders = res
+        }
+      );
+    }
   }
   goToPage(orderId: Guid){
     location.href = `/order-info/${orderId}`

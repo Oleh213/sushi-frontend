@@ -246,6 +246,7 @@
 .input {
   cursor: initial;
   position: relative;
+
   &__label {
     position: absolute;
     left: 0;
@@ -256,13 +257,14 @@
     white-space: nowrap;
     color: #929292;
     font-weight: 500;
-    transform: translate(0, 0);
+    //transform: translate(0, 0);
     transform-origin: 0 0;
-    transition: transform 120ms ease-in;
+    transition: top 120ms ease-in;
     line-height: 1.2;
     cursor: initial;
     border-radius: 20px;
   }
+
   &__field {
     display: flex;
     height: 50px;
@@ -277,37 +279,30 @@
     font-weight: 500;
     outline: none !important;
     font-size: 18px;
-    &:hover{
+
+    &:hover {
       border: 2px solid #a8a7a7;
     }
+
     &:focus,
     &:not(:placeholder-shown) {
       & + .input__label {
-        transform: translate(.25rem, -65%) scale(.8);
+        top: -24px;
         color: #5e5d5d;
         font-weight: 550;
       }
     }
   }
-  &__field2{
-    height: 100%;
-    width: 83%;
-    border: none;
-    outline: none !important;
-  }
-  .button{
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    width: 15%;
-    height: 90%;
-    background: #5b5556;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
+}
+.safariLabel{
+  top:-50px;
+}
+.safariField{
+  &:focus,
+  &:not(:placeholder-shown) {
+    & + .input__label {
+      top:-75px;
+    }
   }
 }
 
@@ -336,4 +331,3 @@
     }
   }
 }
-

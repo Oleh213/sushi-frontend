@@ -5,6 +5,11 @@
   align-items: center;
   height: 60px;
   padding: 0 0 0 30px;
+  position: relative;
+  width: 100%;
+  white-space: nowrap; /* Prevent content from wrapping */
+  z-index: 2;
+  background: white;
   .burger-logo{
     display: flex;
     //color: var(--main-color);

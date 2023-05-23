@@ -1,11 +1,44 @@
+.search-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 5px ;
+  column-gap: 10px;
+  .search{
+    border: 1.5px var(--main-color) solid;
+    width: 65%;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 0 0 10px;
+    font-weight: 600;
+  }
+  .addProduct{
+    height: 32px;
+    width: 118px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1ec261;
+    font-weight: 600;
+    &:hover{
+      background: #047a36;
+    }
+  }
+}
 .container{
   margin: 20px 0 0 0;
   display: flex;
   justify-content: center;
   overflow: scroll;
+  align-items: center;
+  flex-direction: column;
   .products{
     overflow: scroll;
     max-width: fit-content;
+    margin: 0 20px;
+
     .header{
       display: flex;
       justify-content: center;
@@ -22,16 +55,15 @@
         display: flex;
         justify-content: center;
       }
-      .price{
+      .label1{
         width: 70px;
         display: flex;
         justify-content: center;
       }
-      .discount{
-        width: 70px;
-        display: flex;
-        justify-content: center;
+      .available{
+        margin: 0 0 0 10px;
       }
+
     }
     .product{
       margin: 10px 0 0 0;
@@ -40,13 +72,13 @@
       min-height: 40px;
       justify-content: center;
       align-items: center;
-      padding: 0 10px;
       width: fit-content;
       .productId{
         width: 120px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding: 0 0 0 5px;
         &:active{
           overflow: visible;
           white-space: normal;
@@ -57,16 +89,28 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        display: flex;
+        justify-content: center;
         &:active{
           overflow: visible;
           white-space: normal;
         }
       }
-      .price{
+      .item1{
         width: 70px;
+        display: flex;
+        justify-content: center;
       }
-      .discount{
-        width: 70px;
+      .image{
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        &:hover{
+          opacity: 70%;
+        }
+      }
+      .available{
+        margin: 0 0 0 10px;
       }
     }
   }
@@ -75,4 +119,10 @@
   background: rgba(213, 213, 213, 0.51);
   border-radius: 5px;
 
+}
+
+@media (max-width: 800px) {
+  .container{
+    align-items: normal;
+  }
 }

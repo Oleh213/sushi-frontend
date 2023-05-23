@@ -8,6 +8,7 @@
   left: 0;
   width: 100%;
   background: rgba(0, 0, 0, 0.34);
+  z-index: 4;
 }
 .imgContainer{
   display: flex;
@@ -23,7 +24,7 @@
   justify-self: center;
   top: 5%;
   left: 20%;
-  z-index: 1050;
+  z-index: 4;
   width: 60%;
   //min-height: 680px;
   height: 90%;

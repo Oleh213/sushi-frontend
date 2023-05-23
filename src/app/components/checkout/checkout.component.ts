@@ -30,8 +30,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   private cartItems: Array<LocalCartItem> = [];
   @ViewChild('mapContainer', {static: false}) gmap!: ElementRef;
   constructor(private shop: ShopService,
-              private formBuilder: FormBuilder,
-              private route: Router,
               public toastService: ToastService,
               public mapService: MapService,
               ) {
@@ -54,8 +52,12 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     {
       this.contactInfo = info
     }
+    console.log(this.detectBrowserName())
   }
 
+  detectBrowserName(): string {
+    return this.shop.detectBrowserName()
+  }
   buildInitialHours() {
     const now = new Date();
     const minutes = Math.ceil(now.getMinutes() / 15) * 15; // округлюємо хвилини до найближчої 15

@@ -14,8 +14,9 @@ import {ContactComponent} from "./components/contact/contact.component";
 import {OrderInfoComponent} from "./components/order-info/order-info.component";
 import {AdminPanelModule} from "../admin-panel/admin-panel.module";
 import {AdminStatisticComponent} from "../admin-panel/components/admin-statistic/admin-statistic.component";
-import {AdminProductsEditComponent} from "../admin-panel/components/admin-products-edit/admin-products-edit.component";
+import {AdminProductsComponent} from "../admin-panel/components/admin-products/admin-products.component";
 import {LayoutComponent} from "../admin-panel/layout/layout.component";
+import {AdminShopSettingComponent} from "../admin-panel/components/admin-shop-setting/admin-shop-setting.component";
 
 
 const routes: Routes = [
@@ -48,11 +49,15 @@ const routes: Routes = [
     children:[
       {
         path: 'products-edit',
-        component: AdminProductsEditComponent
+        component: AdminProductsComponent
       },
       {
         path: '',
         component: AdminStatisticComponent
+      },
+      {
+        path: 'shop-setting',
+        component: AdminShopSettingComponent,
       },
     ]
   },

@@ -123,7 +123,6 @@ export class NewOrdersComponent implements OnInit{
 
   closeModal(){
     this.model = false;
-
     const bodyList = document.getElementsByTagName('body');
     if (bodyList && bodyList.length > 0) {
       const body = bodyList[0];

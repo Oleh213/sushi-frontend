@@ -9,6 +9,10 @@
         <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/products-edit'}">Продукти</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/products-edit'"></div>
       </li>
+      <li class="settings item" (click)="location.href = '/admin-panel/shop-setting'">
+        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/shop-setting'}">Налаштування</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel/shop-setting'"></div>
+      </li>
       <li class="orders item">
         <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/orders'}">Замовлення</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/orders'"></div>

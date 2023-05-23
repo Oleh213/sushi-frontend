@@ -7,7 +7,7 @@
       <span class="text"  routerLink="">UMAMI</span>
     </div>
     <div class="orders-mobile">
-      <img *ngIf="orders" (click)="modelMobile = true" class="order-button" width="100" height="100" src="https://img.icons8.com/cotton/1080/000000/purchase-order.png" alt="purchase-order"/>
+      <img *ngIf="checkOrders()" (click)="modelMobile = true; checkOrders()" class="order-button" width="100" height="100" src="https://img.icons8.com/cotton/1080/000000/purchase-order.png" alt="purchase-order"/>
       <app-user-orders class="order"
                        *ngIf='modelMobile'
                        (close)="modelMobile = false"
@@ -18,7 +18,7 @@
 
   <div class="context">
     <div class="orders">
-      <div class="order-lable" *ngIf="orders.length > 0" (click)="model = true" >Мої замовленя</div>
+      <div class="order-lable" *ngIf="checkOrders()" (click)="model = true; checkOrders()" >Мої замовленя</div>
       <app-user-orders class="order"
         *ngIf='model'
         (close)="model = false"
