@@ -55,8 +55,8 @@
         <input type='file' style="display: none" (change)="readURL($event);" #values/>
         <div class="addPicture" (click)="values.click()">
           <div class="label">Вибрати файл</div>
-          <img style="color: white" width="24" height="24" src="https://img.icons8.com/material-sharp/240/000000/attach.png" alt="attach"/>        </div>
-        <div class="image-preview-container">
+          <img  style="color: white" width="24" height="24" src="https://img.icons8.com/material-sharp/240/000000/attach.png" alt="attach"/>        </div>
+        <div class="image-preview-container" (click)="values.click()">
           <img class="image-preview" [src]="imageSrc" alt="your image"/>
         </div>
       </div>
