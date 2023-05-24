@@ -111,4 +111,5 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   protected readonly style = style;
+  protected readonly location = location;
 }

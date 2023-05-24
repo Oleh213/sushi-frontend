@@ -7,6 +7,7 @@ import {MapService} from "../../services/map.service";
 import {Product} from "../../models/product";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
+import {CartInfo} from "../../models/cartInfo";
 
 
 @Component({
@@ -21,6 +22,8 @@ export class MainComponent implements OnInit{
   public actionsProducts: Product[] = [];
   public popularProducts: Product[] = [];
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
+  public cart = new CartInfo();
+
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService,
@@ -34,6 +37,8 @@ export class MainComponent implements OnInit{
       error => {
       this.errorService.handleError(error);
       })
+
+    this.cart = this.shop.cartInfo();
 
     this.shop.getProducts().subscribe(res=> {
       for (let product of res.filter(x=> x.available > 0)){
@@ -75,6 +80,8 @@ export class MainComponent implements OnInit{
       }
       this.userCart = JSON.parse(localStorage.getItem('localCart')!);
     }
+    this.cart.count++;
+    this.cart.totalPrice += product.price;
   }
 
   protected readonly location = location;

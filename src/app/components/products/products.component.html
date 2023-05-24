@@ -23,7 +23,7 @@
           <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
         </div>
         <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
-        <div class="productCartActivated" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
+        <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
       </div>
       <div class="new action" *ngIf="product.productOption && product.productOption.name ==='Action'">Акція</div>
       <div class="new" *ngIf="product.productOption && product.productOption.name ==='New'">Новинка</div>
@@ -40,6 +40,7 @@
   </div>
   <span class="price" *ngIf="cart.count>0">{{cart.totalPrice}} ₴</span>
 </div>
+
 
 <app-spinner></app-spinner>
 
