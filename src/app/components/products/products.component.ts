@@ -8,6 +8,7 @@ import {CartInfo} from "../../models/cartInfo";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
+import {style} from "@angular/animations";
 
 @Component({
   selector: 'app-products',
@@ -23,6 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   public cart = new CartInfo();
   public cartItems = Array<LocalCartItem>();
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
+  public show = false;
   constructor(private shop: ShopService,
               private el: ElementRef,
               private header: HeaderComponent,
@@ -103,4 +105,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
       })
   }
 
+  test(){
+   this.show = true;
+
+  }
+
+  protected readonly style = style;
 }
