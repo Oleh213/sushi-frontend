@@ -36,24 +36,28 @@ export class AddProductModalComponent {
 
   checkSubmit(): boolean{
 
-    if(this.newProduct.productName.length < 1){
+    if(this.newProduct.productName === undefined || this.newProduct.productName.length < 1){
       this.toastService.showToast("Помилка", "Ведіть ім'я", ToastStatus.Fail)
       return false;
     }
-    if(this.newProduct.categoryName.length < 1){
+    if(this.newProduct.categoryName === undefined || this.newProduct.categoryName.length < 1){
       this.toastService.showToast("Помилка", "Ведіть категорію", ToastStatus.Fail)
       return false;
     }
-    if(this.newProduct.weight === null){
-      this.toastService.showToast("Помилка", "Ведіть вагу", ToastStatus.Fail)
+    if(this.newProduct.price === null || this.newProduct.price === undefined){
+      this.toastService.showToast("Помилка", "Ведіть ціну", ToastStatus.Fail)
       return false;
     }
-    if(this.newProduct.available === null){
+    if(this.newProduct.available === null || this.newProduct.available === undefined){
       this.toastService.showToast("Помилка", "Ведіть доступку кількість", ToastStatus.Fail)
       return false;
     }
-    if(this.newProduct.price === null){
-      this.toastService.showToast("Помилка", "Ведіть ціну", ToastStatus.Fail)
+    if(this.newProduct.weight === null || this.newProduct.weight === undefined){
+      this.toastService.showToast("Помилка", "Ведіть вагу", ToastStatus.Fail)
+      return false;
+    }
+    if(this.uploadedImage === null || this.uploadedImage === undefined){
+      this.toastService.showToast("Помилка", "Загузіть картинку", ToastStatus.Fail)
       return false;
     }
     else {
@@ -61,10 +65,10 @@ export class AddProductModalComponent {
     }
   }
 
-  submit(file: File){
+  submit(){
     if(this.checkSubmit()){
       const formData = new FormData();
-      formData.append('file', file)
+      formData.append('file', this.uploadedImage)
       formData.append('price',this.newProduct.price.toString());
       formData.append('productName',this.newProduct.productName);
       formData.append('description','None');
@@ -85,7 +89,6 @@ export class AddProductModalComponent {
     this.uploadedImage = event.target.files[0];
     if (event!.target!.files && event.target.files[0]) {
       const file = event.target.files[0];
-
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
       reader.readAsDataURL(file);

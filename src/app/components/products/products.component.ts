@@ -9,11 +9,12 @@ import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
 import {style} from "@angular/animations";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit, OnDestroy{
   public products: Array<Product> = new Array<Product>();

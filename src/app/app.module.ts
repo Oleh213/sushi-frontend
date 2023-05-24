@@ -78,7 +78,7 @@ export function tokenGetter() {
         allowedDomains: environments.tokenWhiteListedDomains
       }
     }),
-
+    NgOptimizedImage,
     FormsModule,
     ReactiveFormsModule,
     IvyCarouselModule,

@@ -16,7 +16,7 @@ export class OrderService {
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
-  readonly POST_URL = `${this.apiUrl}OrderActions/Buy`
+  readonly POST_URL = `${this.apiUrl}OrderController/Buy`
   private receivedMessageObject: Order = new Order();
   private sharedObj = new Subject<Order>();
   constructor(private http: HttpClient,

@@ -34,68 +34,68 @@ export class ShopService {
 
   getProducts(): Observable<Product[]>
   {
-    return this.auth.getRequest<Product[]>(`${this.baseApiUrl}ProductActions/ShowProducts`)
+    return this.auth.getRequest<Product[]>(`${this.baseApiUrl}ProductController/ShowProducts`)
   }
   getProductOptions(): Observable<ProductOption[]>
   {
-    return this.auth.getRequest<ProductOption[]>(`${this.baseApiUrl}ProductActions/GetProductOptions`)
+    return this.auth.getRequest<ProductOption[]>(`${this.baseApiUrl}ProductController/GetProductOptions`)
   }
   getCategory(): Observable<Category[]>{
-    return this.auth.getRequest<Category[]>(`${this.apiUrl}CategoryActions/GetAllCategories`)
+    return this.auth.getRequest<Category[]>(`${this.apiUrl}CategoryController/GetAllCategories`)
   }
   updateProduct(data: any): Observable<ResponseModel<string>>{
-    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}ProductActions/UpdateProduct`,data)
+    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}ProductController/UpdateProduct`,data)
   }
   applyDiscount(productId: string, discount: number): Observable<ResponseModel<string>>{
-    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}DiscountActions/AddDiscount`,{
+    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}DiscountController/AddDiscount`,{
       productId: productId,
       discount: discount,
     })
   }
   clearDiscount(productId: string): Observable<ResponseModel<string>>{
-    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}DiscountActions/ClearDiscount`,{
+    return this.auth.patchRequest<ResponseModel<string>>(`${this.apiUrl}DiscountController/ClearDiscount`,{
       productId: productId,
     })
   }
   addNewProduct(addNewProduct: any): Observable<ResponseModel<OrderResponsModel>>{
-    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}ProductActions/AddProduct`,addNewProduct)
+    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}ProductController/AddProduct`,addNewProduct)
   }
   getImagesSlider(): Observable<ImagesSlider[]>{
     return this.auth.getRequest<ImagesSlider[]>(`${this.apiUrl}ImagesSliderController/GetImagesSlider`)
   }
   getNewOrders(): Observable<Order[]>{
-    return this.auth.getRequest<Order[]>(`${this.apiUrl}OrderActions/GetNewOrders`)
+    return this.auth.getRequest<Order[]>(`${this.apiUrl}OrderController/GetNewOrders`)
   }
   getUserOrders(orders: string[]): Observable<Order[]>{
     console.log(orders)
-    return this.auth.patchRequest<Order[]>(`${this.apiUrl}OrderActions/GetUserOrders`,orders)
+    return this.auth.patchRequest<Order[]>(`${this.apiUrl}OrderController/GetUserOrders`,orders)
   }
 
   changeOrderStatus(orderId: Guid, orderStatus: OrderStatus) : Observable<ResponseModel<string>>{
-    return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderActions/ChangeOrderStatus`, {
+    return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderController/ChangeOrderStatus`, {
       orderId: orderId,
       orderStatus: orderStatus,
     })
   }
   getUser(): Observable<UserRole>{
-    return this.auth.getRequest<UserRole>(`${this.apiUrl}UserActions/GetUser`)
+    return this.auth.getRequest<UserRole>(`${this.apiUrl}UserController/GetUser`)
   }
   getCartItems(products: Array<LocalCartItem>): Observable<CartItem[]>{
-    return this.auth.patchRequest<CartItem[]>(`${this.apiUrl}CartItemActions/ShowCart`,products)
+    return this.auth.patchRequest<CartItem[]>(`${this.apiUrl}CartItemController/ShowCart`,products)
   }
   getTotalPrice(products: Array<LocalCartItem>): Observable<ResponseModel<number>>{
-    return this.auth.patchRequest<ResponseModel<number>>(`${this.apiUrl}OrderActions/GetTotalPrice`,products)
+    return this.auth.patchRequest<ResponseModel<number>>(`${this.apiUrl}OrderController/GetTotalPrice`,products)
   }
   getPromoDiscount(code: string): Observable<ResponseModel<number>>{
-    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromocodeActions/UsePromocode`,{
+    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromoCodeController/UsePromocode`,{
       code:code
     })
   }
   makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCode ): Observable<ResponseModel<OrderResponsModel>>{
-    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}OrderActions/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
+    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}OrderController/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
   }
   getOrder(orderId: string): Observable<Order> {
-    return this.auth.getRequest<Order>(`${this.baseApiUrl}OrderActions/GetOrderById?orderId=${orderId}`)
+    return this.auth.getRequest<Order>(`${this.baseApiUrl}OrderController/GetOrderById?orderId=${orderId}`)
   }
 
   addToCart(data: Product){

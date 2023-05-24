@@ -87,21 +87,8 @@
     }
   }
 }
-
-//<div class="container">
-//<div class="time-contact">
-//<div class="timeContainer">
-//<div class="lable">Графік роботи</div>
-//<div class="time">Пн - Пт     9:00 - 22:00</div>
-//<div class="time">Cб - Нд     10:00 - 21:00</div>
-//</div>
-//<div class="contactContainer">
-//<div class="lable">Контакти</div>
-//<div class="option">+380 (066) 663-8032</div>
-//<div class="option">olegantemenuk99@gmail.com</div>
-//</div>
-//</div>
-//<div class="logo">Наші магазини</div>
-//<div #mapContainer class="map" id="map">
-//</div>
-//</div>
+@media (max-width: 500px) {
+  .container {
+    padding:30px 15px 0 15px;
+  }
+}

@@ -1,10 +1,10 @@
 
 export class AddNewProduct{
   public productName: string = '';
-  public categoryName: string = '';
-  public price: number = 0;
+  public categoryName: string = 'Сети';
+  public price: number ;
   public description: string = '';
-  public available: number = 0;
-  public weight: number = 0;
+  public available: number ;
+  public weight: number ;
   public productOptionName: string = '';
 }

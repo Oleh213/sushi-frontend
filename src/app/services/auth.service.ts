@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(name: string, password: string): Observable<Tokens> {
-    return this.http.post<Tokens>(`${this.apiUrl}LogInActions/LogIn`, {
+    return this.http.post<Tokens>(`${this.apiUrl}LogInController/LogIn`, {
       name, password
     }).pipe(
       tap(tok => {
