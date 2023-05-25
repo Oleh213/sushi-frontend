@@ -126,11 +126,12 @@ export class ShopService {
     }
   }
 
-  addOrderInfo(orderId: string){
+  addOrderInfo(orderId: string, paymentLink: string | null =''){
     let cartData = [];
     let localCart = localStorage.getItem('orders');
     let order =  new OrderInCart();
     order.orderId = orderId;
+    order.paymentLink = paymentLink;
     if(!localCart){
       localStorage.setItem('orders',JSON.stringify([order]))
     }
@@ -222,4 +223,5 @@ export class ShopService {
 
 export class OrderInCart{
   public orderId: string = '';
+  public paymentLink: string | null = '';
 }

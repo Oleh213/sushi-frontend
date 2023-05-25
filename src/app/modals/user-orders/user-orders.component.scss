@@ -19,6 +19,7 @@
   }
 }
 .container {
+  cursor: default;
   position: absolute;
   justify-self: center;
   top: 40px;
@@ -66,6 +67,7 @@
         justify-content: center;
         align-self: flex-end;
         color: var(--main-color);
+        cursor: pointer;
       }
       .body{
         margin: 5px 0 ;

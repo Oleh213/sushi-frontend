@@ -88,6 +88,30 @@
       justify-content: center;
       margin: 20px 0 0 0;
     }
+    .pay-button-container{
+      margin: 15px 0 0 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .pay-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:35px;
+        width: 110px;
+        font-weight: 600;
+        font-size: 20px;
+        color: white;
+        background: #0ac742;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover{
+          opacity: 80%;
+        }
+      }
+    }
+
   }
   .contact-lable{
     font-weight: 700;

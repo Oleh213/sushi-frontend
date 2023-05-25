@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
 import {RouterOutlet} from "@angular/router";
 import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
@@ -32,6 +32,7 @@ import { AddProductModalComponent } from './modals/add-product-modal/add-product
     AgGridModule,
     ReactiveFormsModule,
     FormsModule,
+    NgOptimizedImage,
   ]
 })
 export class AdminPanelModule { }

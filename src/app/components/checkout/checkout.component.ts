@@ -176,7 +176,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(res=>{
         if(res.data){
           localStorage.removeItem('localCart');
-          this.shop.addOrderInfo(res.data?.orderId.toString());
+          this.shop.addOrderInfo(res.data?.orderId.toString(), res.data.href);
           location.href =`${res.data?.href}`
         }
       })

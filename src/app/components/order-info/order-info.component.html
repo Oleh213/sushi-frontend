@@ -52,7 +52,7 @@
           <i class='fa fa-refresh'></i>
         </div>
         <div class="text">
-          <p>Підтвердження</p>
+          <p>{{orderStatus(order)}}</p>
         </div>
       </div>
       <div class="step " [ngClass]="{'active': tracker.Cooking}">
@@ -79,6 +79,9 @@
           <p>Завершенно</p>
         </div>
       </div>
+    </div>
+    <div class="pay-button-container" *ngIf="order.orderStatus === OrderStatus.AwaitingPayment">
+      <div class="pay-button" (click)="goToPayment()">Оплатити</div>
     </div>
   </div>
   <div class="underLine margin10"></div>

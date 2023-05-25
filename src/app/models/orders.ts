@@ -63,6 +63,7 @@ export const OrderStatusValues = [
   { key: OrderStatus.Refunded, value: 'Refunded' },
   { key: OrderStatus.Declined, value: 'Відхилений' },
   { key: OrderStatus.Canceled, value: 'Скасований' },
+  { key: OrderStatus.AwaitingPayment, value: 'Очікує оплати'},
 ]
 export enum PaymentMethod
 {

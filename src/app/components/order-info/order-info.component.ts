@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ShopService} from "../../services/shop.service";
+import {OrderInCart, ShopService} from "../../services/shop.service";
 import {DeliveryTypeValue, Order, OrderStatus} from "../../models/orders";
 import {OrderService} from "../../services/order.service";
 import {Subscription} from "rxjs";
@@ -85,6 +85,27 @@ export class OrderInfoComponent implements OnInit{
 
   protected readonly DeliveryTypeValue = DeliveryTypeValue;
   protected readonly DeliveryType = DeliveryType;
+
+  orderStatus(order: Order):string {
+    if(order.orderStatus === OrderStatus.AwaitingPayment){
+      return 'Очікує оплати'
+    }
+    else {
+      return 'Підтвердження'
+    }
+  }
+  goToPayment(){
+    if(this.order.orderStatus === OrderStatus.AwaitingPayment){
+      let items: OrderInCart[] = JSON.parse(localStorage.getItem('orders')!)
+      let paymentLink;
+      if(items !== null && items !== undefined){
+        paymentLink = items.find(x=> x.orderId === this.order.orderId.toString())!.paymentLink
+      }
+      if (paymentLink !== null && paymentLink !== undefined){
+        location.href = paymentLink;
+      }
+    }
+  }
 }
 
 class TrackStage {
