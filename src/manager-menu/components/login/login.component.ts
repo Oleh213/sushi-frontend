@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {ShopService} from "../../../app/services/shop.service";
 import {Title} from "@angular/platform-browser";
 import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
+import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
 
 @Component({
   selector: 'app-login',
@@ -25,20 +26,26 @@ export class LoginComponent implements OnDestroy{
               public shop: ShopService,
               public titleService:Title,
               private errorHandler: ErrorHandlerService,
+              private toastService: ToastService
   ) {
     this.titleService.setTitle("Login");
   }
   ngOnDestroy() {
     this.subscriptions.forEach((x: Subscription) => x.unsubscribe());
   }
-  login(name: string, password: string) {
-    this.subscriptions.push(this.auth.login(name,password)
-      .pipe(first())
-      .subscribe(res=> {
-        location.href = 'manager-menu/new-orders'
-      }, errorData => {
-        // this.errorHandler.handleError(errorData);
-      }))
+  login() {
+    if(this.loginForm.value.name && this.loginForm.value.password){
+      let name: string = this.loginForm.value.name;
+      let password: string =this.loginForm.value.password;
+      this.subscriptions.push(this.auth.login(name,password)
+        .pipe(first())
+        .subscribe(res=> {
+          location.href = 'manager-menu/new-orders'
+        }, errorData => {
+          this.toastService.showToast('Помилка!','Некоректні дані!', ToastStatus.Fail)
+        }))
+    }
+
   }
 
   isLogin():boolean{

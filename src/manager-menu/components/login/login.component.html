@@ -3,9 +3,9 @@
     <div class="form-container">
       <form [formGroup]="loginForm" autocomplete="off" novalidate class="form">
         <h1 class="logo">Sign in</h1>
-        <input type="text"  formControlName="username" class="form-control" placeholder="Username"  #name />
-        <input type="password" id="password" formControlName="password" class="form-control"  placeholder="Password"   #password />
-        <button type="submit" class="submit"  (click)='login(name.value, password.value)'>Sign In</button>
+        <input type="text"  formControlName="name" class="form-control" placeholder="Username"/>
+        <input type="password" id="password" formControlName="password" class="form-control"  placeholder="Password"  />
+        <button type="submit" class="submit"  (click)='login()'>Sign In</button>
       </form>
     </div>
   </div>

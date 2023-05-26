@@ -13,6 +13,7 @@
     font-weight: 600;
   }
   .addProduct{
+    cursor: pointer;
     height: 32px;
     width: 118px;
     border-radius: 5px;
@@ -44,6 +45,9 @@
       width: fit-content;
       align-items: center;
       column-gap: 10px;
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      user-select:none;
       .productId{
         width: 120px;
         display: flex;
@@ -62,7 +66,6 @@
       .available{
         margin: 0 0 0 10px;
       }
-
     }
     .product{
       margin: 10px 0 0 0;
@@ -101,6 +104,7 @@
         justify-content: center;
       }
       .image{
+
         height: 30px;
         width: 30px;
         cursor: pointer;

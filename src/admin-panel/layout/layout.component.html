@@ -2,19 +2,23 @@
   <div class="navbarContainer">
     <ul class="navbar">
       <li class="statistic item"  (click)="location.href = '/admin-panel' ">
-        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel'}">Статитстика</div>
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel'}">Статитстика</div>
         <div class="underline" *ngIf="router.url === '/admin-panel'"></div>
       </li>
       <li class="products item activated"  (click)="location.href = '/admin-panel/products-edit'" >
-        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/products-edit'}">Продукти</div>
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel/products-edit'}">Продукти</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/products-edit'"></div>
       </li>
+      <li class="workTime item" (click)="location.href = '/admin-panel/work-time'">
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel/work-time'}">Робочий час</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel/work-time'"></div>
+      </li>
       <li class="settings item" (click)="location.href = '/admin-panel/shop-setting'">
-        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/shop-setting'}">Налаштування</div>
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel/shop-setting'}">Налаштування</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/shop-setting'"></div>
       </li>
       <li class="orders item">
-        <div class="lable" [ngClass]="{activated: router.url === '/admin-panel/orders'}">Замовлення</div>
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel/orders'}">Замовлення</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/orders'"></div>
       </li>
     </ul>

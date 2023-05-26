@@ -15,7 +15,7 @@ export class DateFormatPipe  implements PipeTransform {
       else {
         timeFormat = `${newDate.getHours()}:0${newDate.getUTCMinutes()}`
       }
-      let dateFormat = ` ${ Days[newDate.getUTCDay()-1].value}`;
+      let dateFormat = ` ${ Days.find(x=> x.key === newDate.getUTCDay())!.value}`;
       return timeFormat + dateFormat;
     }
     else return '';
@@ -29,5 +29,5 @@ export const Days = [
   { key: 4, value: 'Чт.'},
   { key: 5, value: 'Пт.' },
   { key: 6, value: 'Сб.' },
-  { key: 7, value: 'Нд.' },
+  { key: 0, value: 'Нд.' },
 ]

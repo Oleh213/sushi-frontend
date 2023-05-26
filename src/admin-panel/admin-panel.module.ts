@@ -12,6 +12,8 @@ import { ProductEditModalComponent } from './modals/product-edit-modal/product-e
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AddDiscountModalComponent} from "./modals/add-discount-modal/add-discount-modal.component";
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
+import { AdminWorkTimeComponent } from './components/admin-work-time/admin-work-time.component';
+import { WorkTimeEditModalComponent } from './modals/work-time-edit-modal/work-time-edit-modal.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { AddProductModalComponent } from './modals/add-product-modal/add-product
     ProductEditModalComponent,
     AddDiscountModalComponent,
     AddProductModalComponent,
+    AdminWorkTimeComponent,
+    WorkTimeEditModalComponent,
   ],
   imports: [
     CommonModule,

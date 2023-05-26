@@ -22,7 +22,6 @@ export class LayoutComponent implements OnInit{
         this.adminPanel = true;
       }
     })
-    console.log(this.router.url)
   }
 
   logout()

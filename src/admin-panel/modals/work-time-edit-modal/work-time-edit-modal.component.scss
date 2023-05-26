@@ -1,0 +1,315 @@
+.backdrop{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.34);
+  z-index: 4;
+}
+.imgContainer{
+  display: flex;
+  height: 30px;
+  width: 30px;
+  margin: 2% 0 0 91% ;
+  .img{
+    position: relative;
+  }
+}
+.container {
+  position: fixed;
+  justify-self: center;
+  top: 30px;
+  left: 25%;
+  z-index: 5;
+  width: 50%;
+  height: 90%;
+  //min-height: 680px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-shadow: 3px 3px 15px rgb(143, 143, 143);
+  padding: 0 20px 20px 20px;
+  overflow-x: hidden;
+  .productInfo{
+    display: flex;
+    flex-direction: column;
+    .id-container{
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      color: #818181;
+    }
+    .item{
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0 0 0;
+      font-weight: 550;
+      color: #5e5d5d;
+    }
+    .shopStatus-container {
+      .shopStatus {
+        margin: 7px 0 0 0;
+        background: #d9d9d9;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px;
+        height: 50px;
+
+        .curtain {
+        }
+      }
+    }
+    .priority-container{
+      margin: 25px 0 0 0;
+    }
+    .note-container{
+      margin: 25px 0 0 0;
+    }
+    .submit-container{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .submit{
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 40px;
+        color: white;
+        background: #1ec261;
+        border-radius: 10px;
+        font-weight: 600;
+        margin: 30px 0 0 0;
+        &:hover{
+          background: #047a36;
+        }
+      }
+    }
+  }
+}
+
+.form__input-group {
+  margin: 15px 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.input {
+  cursor: initial;
+  position: relative;
+
+  &__label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: calc(.5rem * 0.75) calc(.5rem * .5);
+    margin: calc(.5rem * 0.75 + 3px) calc(.5rem * .5);
+    background: white;
+    white-space: nowrap;
+    color: #929292;
+    font-weight: 500;
+    //transform: translate(0, 0);
+    transform-origin: 0 0;
+    transition: top 120ms ease-in;
+    line-height: 1.2;
+    cursor: initial;
+    border-radius: 20px;
+  }
+
+  &__field {
+    display: flex;
+    height: 50px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
+    border: 1.5px solid #dadada;
+    padding: 5px 5px 5px 10px;
+    cursor: initial;
+    color: black;
+    border-radius: .5rem;
+    font-weight: 500;
+    outline: none !important;
+    font-size: 18px;
+
+    &:hover {
+      border: 2px solid #a8a7a7;
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + .input__label {
+        top: -24px;
+        color: #5e5d5d;
+        font-weight: 550;
+      }
+    }
+  }
+}
+.safariLabel{
+  top:-50px;
+}
+.safariField{
+  &:focus,
+  &:not(:placeholder-shown) {
+    & + .input__label {
+      top:-75px;
+    }
+  }
+}
+.selectdiv {
+  position: relative;
+  /*Don't really need this just for demo styling*/
+  float: left;
+  min-width: 200px;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv:after {
+  content: '<>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+  /*Adjust for position however you want*/
+
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  /*left line */
+
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  border-radius: 5px;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+
+
+input {
+  color: #fff;
+  font: 1em "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.toggle, .toggle:before, .slot__label, .curtain {
+  transition-property: background-color, transform, visibility;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in, cubic-bezier(0.6,0.2,0.4,1.5), linear;
+}
+.toggle:before, .slot, .slot__label {
+  display: block;
+}
+.toggle:before, .curtain {
+  position: absolute;
+}
+.toggle:checked, .curtain {
+  background: #2b7f3a;
+}
+.open{
+  border: 3px solid #2b7f3a;
+}
+.close{
+  border: 3px solid #8f1c2f;
+}
+
+.toggle:focus {
+  outline: transparent;
+}
+.toggle {
+  border-radius: 0.75em;
+  box-shadow: 0 0 0 0.1em inset;
+  cursor: pointer;
+  position: relative;
+  margin-right: 0.25em;
+  width: 3em;
+  height: 1.5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.toggle:before {
+  background: currentColor;
+  border-radius: 50%;
+  content: "";
+  top: 0.2em;
+  left: 0.2em;
+  width: 1.1em;
+  height: 1.1em;
+}
+.toggle:checked:before {
+  transform: translateX(1.5em);
+}
+.toggle:checked ~ .slot .slot__label, .slot__label:nth-child(2) {
+  transform: translateY(-50%) scaleY(0);
+}
+.toggle:checked ~ .slot .slot__label:nth-child(2) {
+  transform: translateY(-100%) scaleY(1);
+}
+.toggle:checked ~ .curtain {
+  transform: scaleX(1);
+}
+.slot {
+  color: transparent;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  overflow: hidden;
+  height: 1em;
+  text-indent: -0.9em;
+  -webkit-text-stroke: 0.05em #fff;
+}
+.slot__label {
+  transform-origin: 50% 0;
+}
+.slot__label:nth-child(2) {
+  transform-origin: 50% 100%;
+}
+.red{
+  border:red;
+}
+@media (max-width: 800px) {
+  .container {
+    left: 5%;
+    width: 90%;
+  }
+}
+

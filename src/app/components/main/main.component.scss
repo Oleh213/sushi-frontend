@@ -10,12 +10,31 @@
   .body{
     padding: 0 30px;
     margin: 60px 0 0 0;
-    .label{
+    .label-container{
       display: flex;
-      justify-content: center;
-      color: var(--main-color);
-      font-size: 40px;
-      font-weight: 700;
+      .label{
+        justify-self: center;
+        display: flex;
+        justify-content: center;
+        color: var(--main-color);
+        font-size: 30px;
+        font-weight: 700;
+        width: 100%;
+        margin: 0 0 0 47px;
+      }
+      .menu{
+        width: 47px;
+        display: flex;
+        justify-content: flex-end;
+        justify-self: end;
+        font-weight: 600;
+        font-size: 17px;
+        color: #d00c2c;
+        &:hover{
+          cursor: pointer;
+          opacity: 60%;
+        }
+      }
     }
     .products{
       margin: 40px 0 0 0 ;

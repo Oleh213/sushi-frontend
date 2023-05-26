@@ -62,7 +62,6 @@ export class OrderInfoComponent implements OnInit{
   addToInbox(obj: Order) {
     this.order.orderStatus = obj.orderStatus;
     this.checkOrderStatus(obj.orderStatus)
-    console.log('Yes!');
   }
 
   checkDeliveryType(order: Order){

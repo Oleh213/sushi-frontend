@@ -70,7 +70,6 @@ export class AdminProductsComponent implements OnInit{
   }
   search(event:any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
-    console.log(this.searchTerm);
     if (this.searchTerm.length>0){
       this.products =  this.mainProduct.filter(x=> x.productName.toLowerCase().includes(this.searchTerm.toLowerCase()))
     }

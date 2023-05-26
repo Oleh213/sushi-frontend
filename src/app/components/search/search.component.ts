@@ -11,7 +11,7 @@ export class SearchComponent implements OnInit{
   @Output() searchTermChange: EventEmitter<string> = new EventEmitter();
   @Input()
   set options(options: AddressDetails[]) {
-    this.model = this.searchTerm.length > 4;
+    this.model = this.searchTerm.length > 2;
     this._options = options;
   }
   public model = false;

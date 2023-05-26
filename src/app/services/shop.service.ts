@@ -21,6 +21,7 @@ import {day} from "ag-grid-enterprise/dist/lib/util/time";
 import {ProductOption} from "../../admin-panel/models/productOption";
 import {EditProduct} from "../../admin-panel/models/editProduct";
 import {AddNewProduct} from "../../admin-panel/models/addNewProduct";
+import {TimeLine} from "../../admin-panel/models/timeLine";
 
 @Injectable({
   providedIn: 'root'
@@ -66,16 +67,33 @@ export class ShopService {
   getNewOrders(): Observable<Order[]>{
     return this.auth.getRequest<Order[]>(`${this.apiUrl}OrderController/GetNewOrders`)
   }
+  getShopStatus(): Observable<boolean>{
+    return this.auth.getRequest<boolean>(`${this.apiUrl}TimeLineController/CheckShopStatus`)
+  }
   getUserOrders(orders: string[]): Observable<Order[]>{
-    console.log(orders)
     return this.auth.patchRequest<Order[]>(`${this.apiUrl}OrderController/GetUserOrders`,orders)
   }
 
+  editTimeInterval(timeLine: TimeLine): Observable<boolean>{
+    return this.auth.patchRequest<boolean>(`${this.apiUrl}TimeLineController/EditTimeLine`,timeLine)
+  }
+  deleteTimeInterval(timeLineId: Guid):Observable<boolean>{
+    return this.auth.delRequest<boolean>(`${this.apiUrl}TimeLineController/DeleteTimeLine?timeLineId=${timeLineId}`)
+  }
+  addTimeInterval(timeLine: TimeLine): Observable<boolean>{
+    return this.auth.postRequest<boolean>(`${this.apiUrl}TimeLineController/AddTimeLine`,timeLine)
+  }
   changeOrderStatus(orderId: Guid, orderStatus: OrderStatus) : Observable<ResponseModel<string>>{
     return this.auth.postRequest<ResponseModel<string>>(`${this.apiUrl}OrderController/ChangeOrderStatus`, {
       orderId: orderId,
       orderStatus: orderStatus,
     })
+  }
+  closeShop(): Observable<boolean>{
+    return this.auth.postRequest<boolean>(`${this.apiUrl}TimeLineController/CloseShopTillToday`)
+  }
+  getTimeLines(): Observable<TimeLine[]>{
+    return this.auth.getRequest<TimeLine[]>(`${this.apiUrl}TimeLineController/GetTimeLines`)
   }
   getUser(): Observable<UserRole>{
     return this.auth.getRequest<UserRole>(`${this.apiUrl}UserController/GetUser`)
@@ -115,7 +133,6 @@ export class ShopService {
     }
   }
   addUserInfo(data: ContactInfo){
-    console.log(data)
     let userInfo = localStorage.getItem('userInfo');
     if(userInfo){
       localStorage.removeItem('userInfo');
@@ -137,7 +154,6 @@ export class ShopService {
     }
     else {
       cartData = JSON.parse(localCart);
-      console.log(cartData);
       cartData.push(order);
       localStorage.setItem('orders',JSON.stringify(cartData))
     }
@@ -219,6 +235,8 @@ export class ShopService {
 
     return editProduct;
   }
+
+
 }
 
 export class OrderInCart{

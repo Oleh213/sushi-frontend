@@ -52,7 +52,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     {
       this.contactInfo = info
     }
-    console.log(this.detectBrowserName())
   }
 
   detectBrowserName(): string {
@@ -173,13 +172,25 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.deliveryOption.longitude = this.mapService.position.lng.toString();
       this.deliveryOption.latitude = this.mapService.position.lat.toString();
       this.deliveryOption.address = this.mapService.selectedAddress;
-      this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(res=>{
-        if(res.data){
-          localStorage.removeItem('localCart');
-          this.shop.addOrderInfo(res.data?.orderId.toString(), res.data.href);
-          location.href =`${res.data?.href}`
-        }
-      })
+      if(this.mapService.checkIfMarker()){
+        this.shop.getShopStatus().subscribe(res=> {
+          if(res){
+            this.shop.makeOrder(this.cartItems, this.contactInfo,this.deliveryOption,this.paymentMethod, this.promoCode).subscribe(res=>{
+              if(res.data){
+                localStorage.removeItem('localCart');
+                this.shop.addOrderInfo(res.data?.orderId.toString(), res.data.href);
+                location.href =`${res.data?.href}`
+              }
+            })
+          }
+          else {
+            this.toastService.showToast('Вибачте','Ми зараз не працюємо', ToastStatus.Fail)
+          }
+        })
+      }
+      else {
+        this.toastService.showToast('Помилка!','Недоступна адреса доставки', ToastStatus.Fail)
+      }
     }
   }
 

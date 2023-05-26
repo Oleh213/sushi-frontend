@@ -41,10 +41,7 @@ export class ProductEditModalComponent implements OnInit{
   detectBrowserName(): string {
     return this.shop.detectBrowserName()
   }
-
   checkSubmit(): boolean{
-    console.log(this.productOptions)
-    console.log(this.product)
     if(this.product.productName.length < 1){
       this.toastService.showToast("Помилка", "Ведіть ім'я", ToastStatus.Fail)
       return false;
@@ -70,7 +67,6 @@ export class ProductEditModalComponent implements OnInit{
       return false;
     }
     else {
-      console.log('Ok')
       return true;
     }
   }

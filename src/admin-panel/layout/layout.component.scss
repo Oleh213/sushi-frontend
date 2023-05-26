@@ -17,6 +17,10 @@
     .item{
       font-size: 18px;
       color: #b7b7b7;
+      width: max-content;
+      .label{
+        width: max-content;
+      }
       &:hover{
         cursor: pointer;
         transition: 0.5s;
@@ -30,6 +34,8 @@
 }
 .activated{
   color: #181818;
+  width: max-content;
+
 }
 @media (max-width: 500px) {
   .content{

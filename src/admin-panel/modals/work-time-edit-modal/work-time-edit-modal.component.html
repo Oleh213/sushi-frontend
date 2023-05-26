@@ -1,0 +1,55 @@
+<div class='backdrop' (click)='close.emit()'></div>
+<div class="container" [ngClass]="{open:timeLine.isOpen, close: !timeLine.isOpen}">
+  <div class="productInfo" >
+    <div class="id-container item" *ngIf="timeLineModalOptions === TimeLineModalOption.EditTimeLine">Id: {{timeLine.timeLineId}}</div>
+    <div class="name-container item">
+      <label class="input" for="date1">
+        <input class="input__field" [(ngModel)]="timeLine.from"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="datetime-local" placeholder=" " id="date1"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Початок</span>
+      </label>
+    </div>
+    <div class="name-container item">
+      <label class="input" for="date2">
+        <input class="input__field" [(ngModel)]="timeLine.to"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="datetime-local" placeholder=" " id="date2"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Кінець</span>
+      </label>
+    </div>
+    <div class="category-container item">
+      <div class="label">Категорія</div>
+      <div class="category selectdiv">
+        <select [(ngModel)]="selectedCategory">
+          <option  *ngFor="let item of timeConfig" [defaultSelected]="defaultSelect() === item.value" >
+            {{item.value}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="shopStatus-container item">
+      <div class="label">Статус магазина</div>
+      <div class="shopStatus" [ngClass]="{open:timeLine.isOpen, close: !timeLine.isOpen}">
+        <input id="toggle" class="toggle" [checked]="timeLine.isOpen" (change)="timeLine.isOpen = !timeLine.isOpen" type="checkbox" role="switch" name="toggle" >
+        <label for="toggle" class="slot">
+          <span class="slot__label red">OOFF</span>
+          <span class="slot__label">OON</span>
+        </label>
+        <div class="curtain"></div>
+      </div>
+    </div>
+    <div class="priority-container item">
+      <label class="input" for="priority">
+        <input class="input__field" [(ngModel)]="timeLine.priority"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="number" placeholder=" " id="priority"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Приорітет</span>
+      </label>
+    </div>
+    <div class="note-container item">
+      <label class="input" for="note">
+        <input class="input__field" [(ngModel)]="timeLine.note"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="note"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Нотатки</span>
+      </label>
+    </div>
+    <div class="submit-container">
+      <div class="submit" (click)="submit()" >Підтвердити</div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

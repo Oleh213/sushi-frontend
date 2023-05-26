@@ -1,0 +1,23 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .shop-status{
+    margin: 30px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px ;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.open{
+  color: #f30000;
+  font-size: 28px;
+}
+.close{
+  color: #358d09;
+  font-size: 28px;
+}

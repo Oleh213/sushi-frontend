@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="addTimeLine-container">
+    <div class="addTimeLine" (click)="openModalAdd()">Додати графік</div>
+  </div>
+  <div class="time-line-container">
+    <div class="header">
+      <div class="start label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.from, 'cursor-down': sorterTimeLineStorage.from}"  (click)="sortedBy(SorterTimeLine.From)">Початок</div>
+      <div class="end label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.to, 'cursor-down': sorterTimeLineStorage.to}"  (click)="sortedBy(SorterTimeLine.To)" >Кінець</div>
+      <div class="priority label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.priority, 'cursor-down': sorterTimeLineStorage.priority}"  (click)="sortedBy(SorterTimeLine.Priority)">Пріорітет</div>
+      <div class="config label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.timeConfig, 'cursor-down': sorterTimeLineStorage.timeConfig}" (click)="sortedBy(SorterTimeLine.TimeConfig)" >Повтори</div>
+      <div class="status label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.isOpen, 'cursor-down': sorterTimeLineStorage.isOpen}" (click)="sortedBy(SorterTimeLine.IsOpen)" >Статус</div>
+      <div class="notes label">Нотатки</div>
+    </div>
+    <div class="time-line" *ngFor="let timeLine of timeLines; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
+      <div class="start item">{{checkTime(timeLine.from, timeLine)}}</div>
+      <div class="end item">{{checkTime(timeLine.to, timeLine)}}</div>
+      <div class="priority item">{{timeLine.priority}}</div>
+      <div class="config item">{{TimeConfigValue[timeLine.timeConfig].value}}</div>
+      <div class="status item">{{timeLine.isOpen ?'Відкритий': 'Закритий'}}</div>
+      <div class="notes item">{{timeLine.note}}</div>
+      <img (click)="openModalEdit(timeLine)" class="image" src="https://img.icons8.com/external-febrian-hidayat-gradient-febrian-hidayat/512/external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat"/>
+      <img (click)="deleteTimeLine(timeLine)" class="image" src="https://img.icons8.com/color/480/cancel--v1.png" alt="cancel--v1"/>
+    </div>
+  </div>
+</div>
+
+<app-work-time-edit-modal
+  *ngIf="modalShow"
+  (close)="modalShow = false"
+  [timeLine]="selectedTimeLine"
+  (updateTimeLine)="getTimeLines()"
+  [timeLineModalOptions]="timeLineModalOption"
+></app-work-time-edit-modal>

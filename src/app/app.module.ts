@@ -85,7 +85,7 @@ export function tokenGetter() {
     ManagerMenuModule,
     NgOptimizedImage,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD8P7aI-oFKaTrztM6Mm4yqB6a0DiyWFys'
+      apiKey: 'AIzaSyDHUEW0CyHkIUG0C5-dCqms-_utGzMuwMQ'
     }),
     GoogleMapsModule,
     NgbCarousel,

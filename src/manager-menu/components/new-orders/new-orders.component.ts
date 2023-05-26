@@ -112,9 +112,9 @@ export class NewOrdersComponent implements OnInit{
       this.ordersFilter = this.orders.filter(x=> x.orderId !== obj.orderId)
       this.ordersFilter.push(newObj);
       this.orders.push(newObj)
-      this.ordersFilter = this.ordersFilter.sort((a, b) => b.orderNumber - a.orderNumber);
       this.changeCategory(this.currentFilter);
       this.ordersFilter = this.ordersFilter.filter(order => this.allowedStatuses.includes(order.orderStatus));
+      this.ordersFilter = this.ordersFilter.sort((a, b) => b.orderNumber - a.orderNumber);
     }
   }
   changeFilter(status: number){

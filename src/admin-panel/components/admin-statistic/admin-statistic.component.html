@@ -1,1 +1,6 @@
-<p>admin-statistic works!</p>
+<div class="container">
+  <div class="shop-status">
+    <div class="lable">Статус магазину: </div>
+    <div class="value" [ngClass]="{open: !shopStatus, close: shopStatus}">{{shopStatus? 'Відкритий' : 'Закритий'}}</div>
+  </div>
+</div>

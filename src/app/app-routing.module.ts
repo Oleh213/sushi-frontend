@@ -17,6 +17,7 @@ import {AdminStatisticComponent} from "../admin-panel/components/admin-statistic
 import {AdminProductsComponent} from "../admin-panel/components/admin-products/admin-products.component";
 import {LayoutComponent} from "../admin-panel/layout/layout.component";
 import {AdminShopSettingComponent} from "../admin-panel/components/admin-shop-setting/admin-shop-setting.component";
+import {AdminWorkTimeComponent} from "../admin-panel/components/admin-work-time/admin-work-time.component";
 
 
 const routes: Routes = [
@@ -46,14 +47,19 @@ const routes: Routes = [
   },
   {
     path: 'admin-panel', component: LayoutComponent,
+    canActivate: [ManagerGuard],
     children:[
+      {
+        path: '',
+        component: AdminStatisticComponent
+      },
       {
         path: 'products-edit',
         component: AdminProductsComponent
       },
       {
-        path: '',
-        component: AdminStatisticComponent
+        path: 'work-time',
+        component: AdminWorkTimeComponent
       },
       {
         path: 'shop-setting',
