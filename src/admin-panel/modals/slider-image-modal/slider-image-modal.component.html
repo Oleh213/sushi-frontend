@@ -1,0 +1,24 @@
+<div class='backdrop' (click)='close.emit()'></div>
+<div class="container">
+  <div class="image-container item">
+    <div class="image">
+      <div class="image-preview-container" *ngIf="sliderType !== SliderModal.Add">
+        <img class="image-preview" [src]="slider.image" alt="your image"/>
+      </div>
+      <input type='file' style="display: none" (change)="readURL($event);" #values/>
+      <div class="image-preview-container" (click)="values.click()">
+        <img class="image-preview" [src]="imageSrc" alt="your image"/>
+      </div>
+      <div class="addPicture" (click)="values.click()">
+        <div class="label">Вибрати файл</div>
+        <img style="color: white" width="24" height="24" src="https://img.icons8.com/material-sharp/240/000000/attach.png" alt="attach"/>
+      </div>
+    </div>
+  </div>
+  <div class="submit-container">
+    <div class="submit" (click)="submit()">Підтвердити</div>
+  </div>
+  <div class="submit-container" *ngIf="sliderType !== SliderModal.Add">
+    <div class="submit clear" (click)="deleteImageSlider()">Видалити слайд </div>
+  </div>
+</div>

@@ -71,11 +71,11 @@ export class ProductEditModalComponent implements OnInit{
     }
   }
 
-  submit(file: File){
+  submit(){
     if(this.checkSubmit()){
       this.editProduct = this.shop.transferProductData(this.product);
       const formData = new FormData();
-      formData.append('file', file)
+      formData.append('file', this.uploadedImage)
       formData.append('price',this.editProduct.price.toString());
       formData.append('productId',this.editProduct.productId.toString());
       formData.append('productName',this.editProduct.productName);
@@ -97,7 +97,6 @@ export class ProductEditModalComponent implements OnInit{
     this.uploadedImage = event.target.files[0];
     if (event!.target!.files && event.target.files[0]) {
       const file = event.target.files[0];
-
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
       reader.readAsDataURL(file);

@@ -17,6 +17,7 @@ export class OrderInfoComponent implements OnInit{
   private subscriptions: Subscription[] = [];
   public tracker: TrackStage = new TrackStage();
   public deliveryType = '';
+  public orderCanceled: boolean = false;
   constructor(private activeRoute:ActivatedRoute,
               private shop: ShopService,
               private orderService: OrderService,
@@ -26,6 +27,9 @@ export class OrderInfoComponent implements OnInit{
     this.orderId = this.activeRoute.snapshot.paramMap.get('orderId');
     this.shop.getOrder(this.orderId).subscribe(res=> {
       this.order = res;
+      if(res.orderStatus === OrderStatus.Canceled || res.orderStatus === OrderStatus.Declined){
+        this.orderCanceled = true;
+      }
       this.checkOrderStatus(res.orderStatus)
       this.checkDeliveryType(res);
     },error => {

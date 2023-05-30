@@ -18,6 +18,7 @@ import {AdminProductsComponent} from "../admin-panel/components/admin-products/a
 import {LayoutComponent} from "../admin-panel/layout/layout.component";
 import {AdminShopSettingComponent} from "../admin-panel/components/admin-shop-setting/admin-shop-setting.component";
 import {AdminWorkTimeComponent} from "../admin-panel/components/admin-work-time/admin-work-time.component";
+import {AdminSlidersComponent} from "../admin-panel/components/admin-sliders/admin-sliders.component";
 
 
 const routes: Routes = [
@@ -65,6 +66,10 @@ const routes: Routes = [
         path: 'shop-setting',
         component: AdminShopSettingComponent,
       },
+      {
+        path: 'slider',
+        component: AdminSlidersComponent,
+      }
     ]
   },
   {

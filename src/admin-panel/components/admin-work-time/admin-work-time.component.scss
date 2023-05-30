@@ -47,7 +47,9 @@
         align-items: center;
         justify-content: center;
       }
-
+      .image{
+        width: 60px;
+      }
       .cursor-up:hover{
         cursor: pointer;
         &::after{

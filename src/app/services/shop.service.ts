@@ -73,7 +73,15 @@ export class ShopService {
   getUserOrders(orders: string[]): Observable<Order[]>{
     return this.auth.patchRequest<Order[]>(`${this.apiUrl}OrderController/GetUserOrders`,orders)
   }
-
+  editImageSlide(file: any): Observable<boolean>{
+    return this.auth.patchRequest<boolean>(`${this.apiUrl}ImagesSliderController/UpdateImageSlider`,file)
+  }
+  deleteImageSlide(imageNumber: number): Observable<boolean>{
+    return this.auth.delRequest<boolean>(`${this.apiUrl}ImagesSliderController/DeleteImageSlide?ImageNumber=${imageNumber}`,)
+  }
+  addImageSlide(file: any): Observable<boolean>{
+    return this.auth.postRequest<boolean>(`${this.apiUrl}ImagesSliderController/AddNewSlide`,file)
+  }
   editTimeInterval(timeLine: TimeLine): Observable<boolean>{
     return this.auth.patchRequest<boolean>(`${this.apiUrl}TimeLineController/EditTimeLine`,timeLine)
   }

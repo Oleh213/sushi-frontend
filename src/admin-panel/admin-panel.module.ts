@@ -14,6 +14,9 @@ import {AddDiscountModalComponent} from "./modals/add-discount-modal/add-discoun
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
 import { AdminWorkTimeComponent } from './components/admin-work-time/admin-work-time.component';
 import { WorkTimeEditModalComponent } from './modals/work-time-edit-modal/work-time-edit-modal.component';
+import { AdminSlidersComponent } from './components/admin-sliders/admin-sliders.component';
+import { AdminPromocodesComponent } from './components/admin-promocodes/admin-promocodes.component';
+import { SliderImageModalComponent } from './modals/slider-image-modal/slider-image-modal.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import { WorkTimeEditModalComponent } from './modals/work-time-edit-modal/work-t
     AddProductModalComponent,
     AdminWorkTimeComponent,
     WorkTimeEditModalComponent,
+    AdminSlidersComponent,
+    AdminPromocodesComponent,
+    SliderImageModalComponent,
   ],
   imports: [
     CommonModule,

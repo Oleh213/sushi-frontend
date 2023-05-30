@@ -10,6 +10,7 @@
       <div class="config label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.timeConfig, 'cursor-down': sorterTimeLineStorage.timeConfig}" (click)="sortedBy(SorterTimeLine.TimeConfig)" >Повтори</div>
       <div class="status label" [ngClass]="{'cursor-up': !sorterTimeLineStorage.isOpen, 'cursor-down': sorterTimeLineStorage.isOpen}" (click)="sortedBy(SorterTimeLine.IsOpen)" >Статус</div>
       <div class="notes label">Нотатки</div>
+      <div class="image"></div>
     </div>
     <div class="time-line" *ngFor="let timeLine of timeLines; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
       <div class="start item">{{checkTime(timeLine.from, timeLine)}}</div>

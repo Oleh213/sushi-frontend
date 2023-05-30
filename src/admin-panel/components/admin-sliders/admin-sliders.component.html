@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="addProduct" (click)="openModalAdd()">Додати слайд</div>
+  <div class="sliders">
+    <div class="slider" *ngFor="let slide of sliders">
+      <div class="image-container" (click)="openModalUpdate(slide)">
+        <img src="{{slide.image}}" alt="" class="image" >
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-slider-image-modal
+  *ngIf="modalShow"
+  (close)="modalShow = false"
+  [slider]="selectedImage"
+  [sliderType]="modalType"
+  (update)="sliderRequest()"
+></app-slider-image-modal>

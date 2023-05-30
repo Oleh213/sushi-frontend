@@ -1,4 +1,4 @@
-<div class="card" *ngIf="order.orderLists.length > 0">
+<div class="card" *ngIf="order.orderLists.length > 0" [ngClass]="{'order-canceled-border': order.orderStatus === OrderStatus.Canceled || order.orderStatus === OrderStatus.Declined}">
   <div class="title">Дякую за замовлення!</div>
   <div class="date-number">
     <div class="orderNumber date-numberItem">
@@ -34,7 +34,10 @@
     </div>
   </div>
   <div class="underLine"></div>
-  <div class="tracking">
+  <div class="order-canceled-container" *ngIf="order.orderStatus === OrderStatus.Canceled || order.orderStatus === OrderStatus.Declined">
+    <div class="order-canceled" >Замовлення скасовано!</div>
+  </div>
+  <div class="tracking" *ngIf="order.orderStatus !== OrderStatus.Canceled && order.orderStatus !== OrderStatus.Declined">
     <div class="titleOrderStatus">Статус замовлення</div>
     <div class="row d-flex justify-content-center">
       <div class="col-12">

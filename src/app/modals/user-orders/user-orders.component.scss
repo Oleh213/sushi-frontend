@@ -23,15 +23,15 @@
   position: absolute;
   justify-self: center;
   top: 40px;
-  right: 10px;
-  z-index: 1050;
-  width: 350px;
+  right: 5px;
+  z-index: 10;
+  width: 340px;
   height: 150px;
   overflow-y: scroll;
   border-radius: 5px;
   background: #FFFFFF;
   border: var(--main-color) 2px solid;
-  padding: 0 20px 20px 20px;
+  padding: 0 10px 10px 10px;
   overflow-x: hidden;
   .orders{
     margin: 3px 0;
