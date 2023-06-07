@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ShopService} from "../../../app/services/shop.service";
 import {ImagesSlider} from "../../../app/models/imagesSlider";
 import {SliderModal} from "../../modals/slider-image-modal/slider-image-modal.component";
+import {Subscription} from "rxjs";
+import {ToastStatus} from "../../../app/toast-notofication/toast.service";
+import {ConfirmationService} from "../../../app/confirmation/confirmation.service";
 
 @Component({
   selector: 'app-admin-sliders',
@@ -13,7 +16,10 @@ export class AdminSlidersComponent implements OnInit{
   public modalShow: boolean = false;
   public selectedImage: ImagesSlider = new ImagesSlider();
   public modalType: SliderModal;
-  constructor(private shopService: ShopService) {
+  private subscriptions: Subscription[]=[];
+
+  constructor(private shopService: ShopService,
+              ) {
   }
   ngOnInit(): void {
     this.sliderRequest();
@@ -29,8 +35,11 @@ export class AdminSlidersComponent implements OnInit{
     this.modalType = SliderModal.Update;
   }
   sliderRequest(){
-    this.shopService.getImagesSlider().subscribe(res=>{
+    this.subscriptions.push(this.shopService.getImagesSlider().subscribe(res=>{
       this.sliders = res
-    })
+    }));
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(x=> x.unsubscribe());
   }
 }

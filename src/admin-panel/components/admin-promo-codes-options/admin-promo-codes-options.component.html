@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="addTimeLine-container">
+    <div class="addTimeLine" (click)="openModalAdd()">Додати промокод</div>
+  </div>
+  <div class="time-line-container">
+    <div class="header">
+      <div class="code label">Код</div>
+      <div class="code label" [ngClass]="{'cursor-up': !selectedPromo.discount, 'cursor-down': sorterPromoCode.discount}" (click)="sortedBy(SorterPromoCodeType.Discount)" >Знижка</div>
+      <div class="count label" [ngClass]="{'cursor-up': !selectedPromo.count, 'cursor-down': sorterPromoCode.count}" (click)="sortedBy(SorterPromoCodeType.Count)"> Калькість</div>
+      <div class="image"></div>
+    </div>
+    <div class="time-line" *ngFor="let promo of promoCodes; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
+      <div class="code item">{{promo.code}}</div>
+      <div class="code item">{{promo.discount}}</div>
+      <div class="count item">{{promo.count}}</div>
+      <img (click)="openModalEdit(promo)" class="image" src="https://img.icons8.com/external-febrian-hidayat-gradient-febrian-hidayat/512/external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat.png" alt="edit"/>
+      <img (click)="deletePromo(promo)"  class="image" src="https://img.icons8.com/color/480/cancel--v1.png" alt="delete"/>
+    </div>
+  </div>
+</div>
+
+<div class="modal" >
+  <app-add-promo-code-modal
+    *ngIf="modalShow"
+    (close)="modalShow = false"
+    (updatePromoCodes)="getPromoCodes()"
+    [promoCode]="selectedPromo"
+    [promoCodeModalOptions]="promoCodeModal"
+  ></app-add-promo-code-modal>
+</div>

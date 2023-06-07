@@ -28,6 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^14.1.1",
     "@popperjs/core": "^2.11.7",
     "@types/googlemaps": "^3.43.3",
+    "@vercel/analytics": "^1.0.1",
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^29.3.5",
     "ag-grid-community": "^29.3.5",

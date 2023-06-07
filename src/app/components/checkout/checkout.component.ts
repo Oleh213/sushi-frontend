@@ -2,10 +2,9 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {DeliveryOption, DeliveryTimeOptions, DeliveryType} from "../../models/deliveryOption";
 import {ShopService} from "../../services/shop.service";
 import {LocalCartItem} from "../../models/localCartItem";
-import {PromoCode} from "../../models/promoCode";
+import {PromoCodeModel} from "../../models/promoCodeModel";
 import {ContactInfo} from "../../models/contactInfo";
-import {FormBuilder} from "@angular/forms";
-import {Router} from "@angular/router";
+
 import {ToastService, ToastStatus} from "../../toast-notofication/toast.service";
 import {MapService} from "../../services/map.service";
 import {PaymentMethod} from "../../models/orders";
@@ -23,7 +22,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   public paymentMethod: PaymentMethod = PaymentMethod.CardOnline;
   public initialHours: string[] = [];
   public subTotalPrice: number =0;
-  public promoCode = new PromoCode();
+  public promoCode = new PromoCodeModel();
   public totalPrice: number = 0;
   public contactInfo: ContactInfo = new ContactInfo();
   public submit: boolean = false;
@@ -100,6 +99,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
         this.promoCode.promoDiscount2 = res.data;
         this.promoCode.promoUsed = true;
       }
+    },error => {
+      this.toastService.showToast('Помилка',error.errorMessage, ToastStatus.Fail)
     })
   }
   clearPromo(){
@@ -110,6 +111,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       this.promoCode.promoDiscount = 0;
       this.promoCode.promoDiscount2 = 0;
     }
+    this.promoCode.usedPromoCode = '';
   }
   changeDeliveryOption(method: string){
     if(method === 'picUp'){

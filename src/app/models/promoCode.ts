@@ -1,8 +1,8 @@
-export class PromoCode{
-  public promoField: boolean = false;
-  public usedPromoCode: string ='';
-  public promoUsed: boolean = false;
-  public promoDiscount: number = 0;
-  public promoDiscount2: number = 0;
+import {Guid} from "guid-typescript";
 
+export class PromoCode{
+  public promocodetId: Guid = Guid.createEmpty();
+  public code: string = '';
+  public discount: number ;
+  public count: number ;
 }

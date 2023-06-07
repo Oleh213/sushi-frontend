@@ -1,25 +1,40 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Product} from "../../../app/models/product";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ImagesSlider} from "../../../app/models/imagesSlider";
 import {ShopService} from "../../../app/services/shop.service";
+import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
+import {Subscription} from "rxjs";
+import {ConfirmationService} from "../../../app/confirmation/confirmation.service";
 
 @Component({
   selector: 'app-slider-image-modal',
   templateUrl: './slider-image-modal.component.html',
   styleUrls: ['./slider-image-modal.component.scss']
 })
-export class SliderImageModalComponent implements OnInit{
+export class SliderImageModalComponent implements OnInit, OnDestroy{
   @Output() close = new EventEmitter<void>()
   @Output() update = new EventEmitter<void>()
   @Input() slider: ImagesSlider = new ImagesSlider();
   public imageSrc: string | ArrayBuffer | null = '';
   public uploadedImage: File;
   @Input() sliderType: SliderModal;
-  constructor(private shopService: ShopService) {
+  private subscriptions: Subscription[]= [];
+  constructor(private shopService: ShopService,
+              private confirmService: ConfirmationService,
+              private toastService: ToastService,
+              ) {
   }
   ngOnInit(): void {
     this.imageSrc = this.slider.image;
     console.log(this.imageSrc);
+    this.subscriptions.push(this.confirmService.getResult().subscribe(result => {
+      if(result){
+        this.shopService.deleteImageSlide(this.slider.imageNumber).subscribe(res=> {
+          this.close.emit();
+          this.update.emit();
+          this.toastService.showToast('Успішно!','Слайд видалено!', ToastStatus.Success)
+        })
+      }
+    }));
   }
   readURL(event: any): void {
     this.uploadedImage = event.target.files[0];
@@ -60,13 +75,14 @@ export class SliderImageModalComponent implements OnInit{
     }
   }
   deleteImageSlider() {
-    this.shopService.deleteImageSlide(this.slider.imageNumber).subscribe(res=> {
-      this.close.emit();
-      this.update.emit();
-    })
+    this.confirmService.openModal('Видалити даний сайд');
   }
 
   protected readonly SliderModal = SliderModal;
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(x=> x.unsubscribe());
+  }
 }
 
 export enum SliderModal {

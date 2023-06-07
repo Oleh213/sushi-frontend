@@ -1,36 +1,18 @@
 <div class="container">
   <ul class="navbar">
     <li routerLink="/manager-menu/profile" class="navbarItem personalInfo" >
-<!--      <div class="imgContainer">-->
-<!--        <img src="https://img.icons8.com/ios/500/737373/administrator-male&#45;&#45;v1.png" alt="" class="img">-->
-<!--      </div>-->
       <a class="navbarLink accountLink" [ngClass]="{ isActive: router.url === '/manager-menu/profile' }">Профіль</a>
     </li>
-
     <div class="underline"></div>
-
     <li routerLink="/manager-menu/new-orders" class="navbarItem newOrders" [ngClass]="{ isActive: router.url === '/manager-menu/new-orders' }" >
-<!--      <div class="imgContainer">-->
-<!--        <img src="https://img.icons8.com/ios/500/737373/order-history.png" alt="" class="img">-->
-<!--      </div>-->
       <a class="navbarLink newOrdersLink" [ngClass]="{ isActive: router.url === '/manager-menu/new-orders' }">Нові замовлення</a>
     </li>
-
     <div class="underline"></div>
-
     <li routerLink="/admin-panel/" class="navbarItem newOrders" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }" *ngIf="user === UserRole.Admin">
-<!--      <div class="imgContainer">-->
-<!--        <img src="https://img.icons8.com/external-icongeek26-outline-icongeek26/64/null/external-admin-project-work-icongeek26-outline-icongeek26.png" alt="" class="img">-->
-<!--      </div>-->
-      <a class="navbarLink newOrdersLink" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }">Меню адманістратора</a>
+      <a class="navbarLink newOrdersLink" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }">Меню адміністратора</a>
     </li>
-
     <div class="underline"></div>
-
     <li class="navbarItem logout" (click)="logout()">
-<!--      <div class="imgContainer">-->
-<!--        <img src="https://img.icons8.com/ios/500/737373/exit&#45;&#45;v1.png" alt="" class="img">-->
-<!--      </div>-->
       <div class="navbarLink logoutClick" >Вийти</div>
     </li>
   </ul>
@@ -38,5 +20,4 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<!--<app-spinner></app-spinner>-->
 

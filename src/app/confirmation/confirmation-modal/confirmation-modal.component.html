@@ -1,0 +1,32 @@
+<!--<div class="confirm-modal" *ngIf="modalOptions.isOpen">-->
+<!--  <div class="confirm-modal-content">-->
+<!--&lt;!&ndash;    <h2 class="confirm-modal-title">{{ title }}</h2>&ndash;&gt;-->
+<!--    <p class="confirm-modal-message">{{ modalOptions.message }}</p>-->
+<!--    <div class="confirm-modal-actions">-->
+<!--      <button class="confirm-modal-button" (click)="confirm()">Confirm</button>-->
+<!--      <button class="confirm-modal-button" (click)="cancel()">Cancel</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class='backdrop' *ngIf="modalOptions.isOpen" (click)="cancel()"></div>
+<div id="myModal" class="modal fade" *ngIf="modalOptions.isOpen">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons fas fa-solid fa-times times"></i>
+        </div>
+        <h4 class="modal-title w-100">Ви впевнені?</h4>
+<!--        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+        <i class="fa-solid fa-xmark close" (click)="cancel()"></i>
+      </div>
+      <div class="modal-body">
+        <p>{{modalOptions.message}}</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"(click)="cancel()" >Скасувати</button>
+        <button type="button" class="btn btn-danger" (click)="confirm()">Підтвердити</button>
+      </div>
+    </div>
+  </div>
+</div>

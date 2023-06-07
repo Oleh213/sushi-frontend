@@ -13,7 +13,7 @@
         </div>
         <div class="phoneNumber block">
           <label class="input" for="phone">
-            <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"   [(ngModel)]="contactInfo.phoneNumber " type="text" placeholder=" " id="phone" />
+            <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"   [(ngModel)]="contactInfo.phoneNumber " type="number" placeholder=" " id="phone" />
             <span class="input__label" [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Телефон *</span>
           </label>
         </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="email block">
           <label class="input" for="email">
-            <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" "  [(ngModel)]="contactInfo.email " id="email"/>
+            <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="email" placeholder=" "  [(ngModel)]="contactInfo.email " id="email"/>
             <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">E-mail адреса </span>
           </label>
         </div>
@@ -113,7 +113,7 @@
         <div class="promoCode" *ngIf="promoCode.promoField">
           <label class="input">
             <div class="input__field">
-              <input class="input__field2" [(ngModel)]="promoCode.usedPromoCode" type="text" placeholder=" ">
+              <input class="input__field3" [(ngModel)]="promoCode.usedPromoCode" type="text" placeholder=" ">
               <div class="button" (click)="usePromoCode()">></div>
             </div>
             <span class="input__label">Промокод</span>

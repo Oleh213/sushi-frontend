@@ -10,7 +10,7 @@ import {Guid} from "guid-typescript";
 })
 export class UserOrdersComponent implements OnInit{
   @Output() close = new EventEmitter<void>()
-  public ordersInCart: OrderInCart[] = [];
+  public ordersInCart: OrderInCart[] = [] ;
   public orders: Order[] = [];
 
   constructor(private shopService: ShopService) {

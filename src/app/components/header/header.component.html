@@ -25,7 +25,7 @@
       >
       </app-user-orders>
     </div>
-    <a class="menu" routerLink="" [ngClass]="{'activated': route.url === ''}">Головна</a>
+    <a class="menu" routerLink="" [ngClass]="{'activated': route.url === '/'}">Головна</a>
     <a class="menu" routerLink="/menu"  [ngClass]="{'activated': route.url === '/menu'}">Меню</a>
     <a class="menu" routerLink="/contact"  [ngClass]="{'activated': route.url === '/contact'}">Контакти</a>
     <a class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">

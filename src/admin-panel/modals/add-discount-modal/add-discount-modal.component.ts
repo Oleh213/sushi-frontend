@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../../app/models/product";
 import {ShopService} from "../../../app/services/shop.service";
 import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-discount-modal',
@@ -12,6 +13,7 @@ export class AddDiscountModalComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Output() updateProduct = new EventEmitter<void>();
   @Input() product: Product = new Product();
+  private subscriptions: Subscription[]=[];
   constructor(private shop: ShopService,
               private toastService: ToastService,
               ) {

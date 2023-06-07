@@ -11,7 +11,6 @@ import {CartInfo} from "../models/cartInfo";
 import {ResponseModel} from "../models/ResponseModel";
 import {ContactInfo} from "../models/contactInfo";
 import {DeliveryOption} from "../models/deliveryOption";
-import {PromoCode} from "../models/promoCode";
 import {UserRole} from "../models/user";
 import {Order, OrderStatus, PaymentMethod} from "../models/orders";
 import {Guid} from "guid-typescript";
@@ -22,6 +21,9 @@ import {ProductOption} from "../../admin-panel/models/productOption";
 import {EditProduct} from "../../admin-panel/models/editProduct";
 import {AddNewProduct} from "../../admin-panel/models/addNewProduct";
 import {TimeLine} from "../../admin-panel/models/timeLine";
+import {PromoCode} from "../models/promoCode";
+import {PromoCodeModel} from "../models/promoCodeModel";
+import * as moment from "moment";
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +35,23 @@ export class ShopService {
               @Inject(STORE_API_URL) private apiUrl: string,
               private header: HttpClient) { }
 
-  getProducts(): Observable<Product[]>
-  {
+  getProducts(): Observable<Product[]> {
     return this.auth.getRequest<Product[]>(`${this.baseApiUrl}ProductController/ShowProducts`)
   }
-  getProductOptions(): Observable<ProductOption[]>
-  {
+  getProductOptions(): Observable<ProductOption[]> {
     return this.auth.getRequest<ProductOption[]>(`${this.baseApiUrl}ProductController/GetProductOptions`)
+  }
+  getPromoCodes(): Observable<ResponseModel<PromoCode[]>> {
+    return this.auth.getRequest<ResponseModel<PromoCode[]>>(`${this.baseApiUrl}PromoCodeController/GetAllPromoCodes`)
+  }
+  addNewPromo(promo: PromoCode): Observable<ResponseModel<string>> {
+    return this.auth.postRequest<ResponseModel<string>>(`${this.baseApiUrl}PromoCodeController/AddNewPromoCode`,promo)
+  }
+  deletePromoCode(promoCodeId: Guid): Observable<ResponseModel<string>> {
+    return this.auth.delRequest<ResponseModel<string>>(`${this.baseApiUrl}PromoCodeController/DeletePromoCode?promoCodeId=${promoCodeId}`)
+  }
+  editPromoCode(promoCode: PromoCode): Observable<ResponseModel<string>> {
+    return this.auth.patchRequest<ResponseModel<string>>(`${this.baseApiUrl}PromoCodeController/EditPromoCode`,promoCode)
   }
   getCategory(): Observable<Category[]>{
     return this.auth.getRequest<Category[]>(`${this.apiUrl}CategoryController/GetAllCategories`)
@@ -100,6 +112,9 @@ export class ShopService {
   closeShop(): Observable<boolean>{
     return this.auth.postRequest<boolean>(`${this.apiUrl}TimeLineController/CloseShopTillToday`)
   }
+  openShop(): Observable<boolean>{
+    return this.auth.postRequest<boolean>(`${this.apiUrl}TimeLineController/OpenShopTillToday`)
+  }
   getTimeLines(): Observable<TimeLine[]>{
     return this.auth.getRequest<TimeLine[]>(`${this.apiUrl}TimeLineController/GetTimeLines`)
   }
@@ -113,11 +128,11 @@ export class ShopService {
     return this.auth.patchRequest<ResponseModel<number>>(`${this.apiUrl}OrderController/GetTotalPrice`,products)
   }
   getPromoDiscount(code: string): Observable<ResponseModel<number>>{
-    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromoCodeController/UsePromocode`,{
+    return this.auth.postRequest<ResponseModel<number>>(`${this.apiUrl}PromoCodeController/UsePromoCode`,{
       code:code
     })
   }
-  makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCode ): Observable<ResponseModel<OrderResponsModel>>{
+  makeOrder(cartItems: Array<LocalCartItem>, contactInfo: ContactInfo, deliveryInfo: DeliveryOption, paymentMethod: PaymentMethod, promoCode: PromoCodeModel ): Observable<ResponseModel<OrderResponsModel>>{
     return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}OrderController/Buy`,{cartItems,contactInfo,deliveryInfo,paymentMethod,promoCode})
   }
   getOrder(orderId: string): Observable<Order> {
@@ -157,6 +172,7 @@ export class ShopService {
     let order =  new OrderInCart();
     order.orderId = orderId;
     order.paymentLink = paymentLink;
+    order.paymentDay = new Date();
     if(!localCart){
       localStorage.setItem('orders',JSON.stringify([order]))
     }
@@ -174,10 +190,6 @@ export class ShopService {
         if (res === null || res.length <1){
           localStorage.removeItem('orders')
         }
-        // for (let order of res){
-        //   if (order.orderTime < new Date()){
-        //   }
-        // }
       },
         error => {
           localStorage.removeItem('orders')
@@ -188,8 +200,25 @@ export class ShopService {
     }
   }
 
+  checkOrderTime(orders: OrderInCart[]):OrderInCart[]{
+    let ordersSorted: OrderInCart[] = []
+    const currentTime = new Date();
+    if(orders === null || orders === undefined){
+      return ordersSorted;
+    }
+    for (let order of orders){
+      const orderDate = new Date(order.paymentDay);
+      const futureTime = new Date(orderDate.getTime() + (2 * 24 * 60 * 60 * 1000)); // Adding 2 days in milliseconds
+      if(futureTime.getTime() > currentTime.getTime()){
+        ordersSorted.push(order);
+      }
+    }
+    return ordersSorted;
+  }
+
   ordersInCartInfo(): OrderInCart[] {
-    return JSON.parse(localStorage.getItem('orders')!);
+    console.log(this.checkOrderTime(JSON.parse(localStorage.getItem('orders')!)))
+    return this.checkOrderTime(JSON.parse(localStorage.getItem('orders')!));
   }
 
   cartInfo(): CartInfo{
@@ -250,4 +279,5 @@ export class ShopService {
 export class OrderInCart{
   public orderId: string = '';
   public paymentLink: string | null = '';
+  public paymentDay: Date = new Date();
 }

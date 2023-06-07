@@ -38,6 +38,8 @@ import {NgbCarousel, NgbSlide, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { OrderDataFormatPipe } from './pipes/order-data-format.pipe';
 import { UserOrdersComponent } from './modals/user-orders/user-orders.component';
 import { TestComponent } from './components/test/test.component';
+import { ConfirmationModalComponent } from './confirmation/confirmation-modal/confirmation-modal.component';
+import {ConfirmationService} from "./confirmation/confirmation.service";
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -64,6 +66,7 @@ export function tokenGetter() {
     OrderDataFormatPipe,
     UserOrdersComponent,
     TestComponent,
+    ConfirmationModalComponent,
 
   ],
   imports: [
@@ -100,29 +103,31 @@ providers: [{
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true,
     },
-  // {
-  //   provide:LocationStrategy, useClass: HashLocationStrategy,
-  // },
   {
     provide: ShopService
   },
-
-    {
-      provide: ToastComponent
-    },
-    {
-      provide: HeaderComponent
-    },
-    {
-      provide: HumburgerComponent
-    },
-    {
-      provide: STORE_API_URL,
-      useValue: environments.authApi,
-
-    }],
+  {
+    provide: ToastComponent
+  },
+  {
+    provide: HeaderComponent
+  },
+  {
+    provide: ConfirmationService
+  },
+  {
+    provide: ConfirmationModalComponent
+  },
+  {
+    provide: HumburgerComponent
+  },
+  {
+    provide: STORE_API_URL,
+    useValue: environments.authApi,
+  }],
   exports: [
-    SpinnerComponent
+    SpinnerComponent,
+    ConfirmationModalComponent
   ],
   bootstrap: [AppComponent]
 })

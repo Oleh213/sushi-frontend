@@ -17,6 +17,10 @@
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/slider'}">Слайдер</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/slider'"></div>
       </li>
+      <li class="settings item" (click)="location.href = '/admin-panel/promo-codes'">
+        <div class="label" [ngClass]="{activated: router.url === '/admin-panel/promo-codes'}">Промокоди</div>
+        <div class="underline" *ngIf="router.url === '/admin-panel/promo-codes'"></div>
+      </li>
       <li class="settings item" (click)="location.href = '/admin-panel/shop-setting'">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/shop-setting'}">Налаштування</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/shop-setting'"></div>

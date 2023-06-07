@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit{
 
   checkOrders():boolean {
     let orders = this.shop.ordersInCartInfo()
-    return !(orders === null || orders.length < 0);
+    return !(orders === null || orders.length < 1);
   }
 }

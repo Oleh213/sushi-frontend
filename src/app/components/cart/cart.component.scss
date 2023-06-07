@@ -146,7 +146,6 @@
       align-self: center;
       width: 60%;
       height: 50px;
-      background: #b06c1b;
       border-radius: 10px;
       color: white;
       font-weight: 600;
@@ -154,6 +153,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background: var(--main-color);
+
+      &:hover{
+        background: #b06c1b;
+
+      }
     }
   }
 }

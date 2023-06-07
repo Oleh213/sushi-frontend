@@ -11,7 +11,7 @@ export class TimeLine{
   public note: string = '';
 }
 
-export enum SorterTimeLine{
+export enum SorterPromoCode{
   From,
   To,
   Priority,

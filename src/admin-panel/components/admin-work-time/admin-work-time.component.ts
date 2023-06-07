@@ -1,25 +1,40 @@
-import {Component, OnInit} from '@angular/core';
-import {SorterTimeLine, TimeConfig, TimeConfigValue, TimeLine, TimeLineModalOption,} from "../../models/timeLine";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SorterPromoCode, TimeConfig, TimeConfigValue, TimeLine, TimeLineModalOption,} from "../../models/timeLine";
 import {ShopService} from "../../../app/services/shop.service";
 import {Days} from "../../../manager-menu/pipes/date-format.pipe";
+import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
+import {Subscription} from "rxjs";
+import {ConfirmationService} from "../../../app/confirmation/confirmation.service";
 
 @Component({
   selector: 'app-admin-work-time',
   templateUrl: './admin-work-time.component.html',
   styleUrls: ['./admin-work-time.component.scss']
 })
-export class AdminWorkTimeComponent implements OnInit {
+export class AdminWorkTimeComponent implements OnInit, OnDestroy{
   public timeLines: TimeLine[] = [];
   public timeLinesOriginal: TimeLine[] = [];
   public modalShow = false;
   public selectedTimeLine: TimeLine = new TimeLine();
   public sorterTimeLineStorage = new SorterTimeLineStorage()
   public timeLineModalOption: TimeLineModalOption;
-  constructor(private shopService: ShopService) {
+  private subscriptions: Subscription[]=[];
+
+  constructor(private shopService: ShopService,
+              private toastService: ToastService,
+              private confirmService: ConfirmationService,
+              ) {
   }
 
   ngOnInit(): void {
     this.getTimeLines()
+    this.subscriptions.push(this.confirmService.getResult().subscribe(result => {
+      if(result){
+        this.shopService.deleteTimeInterval(this.selectedTimeLine.timeLineId).subscribe(res=>{
+            this.toastService.showToast('Успішно!','Графік видалено!', ToastStatus.Success);
+            this.getTimeLines();
+        })}
+    }));
   }
   getTimeLines() {
     this.shopService.getTimeLines().subscribe(res => {
@@ -27,8 +42,8 @@ export class AdminWorkTimeComponent implements OnInit {
       this.timeLinesOriginal = res;
     })
   }
-  sortedBy(key: SorterTimeLine) {
-    if (key === SorterTimeLine.Priority){
+  sortedBy(key: SorterPromoCode) {
+    if (key === SorterPromoCode.Priority){
       if (this.sorterTimeLineStorage.priority){
         this.sorterTimeLineStorage.priority = !this.sorterTimeLineStorage.priority;
         this.timeLines = this.timeLinesOriginal.sort((a, b) => b.priority - a.priority);
@@ -38,7 +53,7 @@ export class AdminWorkTimeComponent implements OnInit {
         this.timeLines = this.timeLinesOriginal.sort((a, b) => a.priority - b.priority);
       }
     }
-    else if (key === SorterTimeLine.From){
+    else if (key === SorterPromoCode.From){
       if (this.sorterTimeLineStorage.from) {
         this.sorterTimeLineStorage.from = !this.sorterTimeLineStorage.from;
         this.timeLines = this.timeLinesOriginal.sort((a, b) => {
@@ -52,7 +67,7 @@ export class AdminWorkTimeComponent implements OnInit {
         });
       }
     }
-    else if (key === SorterTimeLine.To){
+    else if (key === SorterPromoCode.To){
       if (this.sorterTimeLineStorage.to) {
         this.sorterTimeLineStorage.to = !this.sorterTimeLineStorage.to;
         this.timeLines = this.timeLinesOriginal.sort((a, b) => {
@@ -66,7 +81,7 @@ export class AdminWorkTimeComponent implements OnInit {
         });
       }
     }
-    else if (key === SorterTimeLine.TimeConfig){
+    else if (key === SorterPromoCode.TimeConfig){
       if (this.sorterTimeLineStorage.to) {
         this.sorterTimeLineStorage.timeConfig = !this.sorterTimeLineStorage.timeConfig;
         this.timeLines = this.timeLinesOriginal.sort((a, b) => {
@@ -80,7 +95,7 @@ export class AdminWorkTimeComponent implements OnInit {
         });
       }
     }
-    else if (key === SorterTimeLine.IsOpen){
+    else if (key === SorterPromoCode.IsOpen){
       if (this.sorterTimeLineStorage.isOpen) {
         this.sorterTimeLineStorage.isOpen = !this.sorterTimeLineStorage.isOpen;
         this.timeLines = this.timeLinesOriginal.sort((a, b) => {
@@ -130,14 +145,16 @@ export class AdminWorkTimeComponent implements OnInit {
   }
 
   deleteTimeLine(timeLine: TimeLine){
-    this.shopService.deleteTimeInterval(timeLine.timeLineId).subscribe(res=>
-    this.getTimeLines()
-    );
+    this.selectedTimeLine = timeLine;
+    this.confirmService.openModal(`Видалити даний графік? (${timeLine.note})`)
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(x=> x.unsubscribe());
   }
 
   protected readonly TimeConfigValue = TimeConfigValue;
   protected readonly TimeLine = TimeLine;
-  protected readonly SorterTimeLine = SorterTimeLine;
+  protected readonly SorterTimeLine = SorterPromoCode;
 
 }
 export class SorterTimeLineStorage{

@@ -35,34 +35,31 @@ export class AddProductModalComponent {
   }
 
   checkSubmit(): boolean{
-
-    if(this.newProduct.productName === undefined || this.newProduct.productName.length < 1){
-      this.toastService.showToast("Помилка", "Ведіть ім'я", ToastStatus.Fail)
+    if (!this.newProduct.productName || this.newProduct.productName.length < 1) {
+      this.toastService.showToast("Помилка", "Ведіть ім'я", ToastStatus.Fail);
       return false;
     }
-    if(this.newProduct.categoryName === undefined || this.newProduct.categoryName.length < 1){
-      this.toastService.showToast("Помилка", "Ведіть категорію", ToastStatus.Fail)
+    if (!this.newProduct.categoryName || this.newProduct.categoryName.length < 1) {
+      this.toastService.showToast("Помилка", "Ведіть категорію", ToastStatus.Fail);
       return false;
     }
-    if(this.newProduct.price === null || this.newProduct.price === undefined){
-      this.toastService.showToast("Помилка", "Ведіть ціну", ToastStatus.Fail)
+    if (this.newProduct.price === null || this.newProduct.price === undefined) {
+      this.toastService.showToast("Помилка", "Ведіть ціну", ToastStatus.Fail);
       return false;
     }
-    if(this.newProduct.available === null || this.newProduct.available === undefined){
-      this.toastService.showToast("Помилка", "Ведіть доступку кількість", ToastStatus.Fail)
+    if (this.newProduct.available === null || this.newProduct.available === undefined) {
+      this.toastService.showToast("Помилка", "Ведіть доступку кількість", ToastStatus.Fail);
       return false;
     }
-    if(this.newProduct.weight === null || this.newProduct.weight === undefined){
-      this.toastService.showToast("Помилка", "Ведіть вагу", ToastStatus.Fail)
+    if (this.newProduct.weight === null || this.newProduct.weight === undefined) {
+      this.toastService.showToast("Помилка", "Ведіть вагу", ToastStatus.Fail);
       return false;
     }
-    if(this.uploadedImage === null || this.uploadedImage === undefined){
-      this.toastService.showToast("Помилка", "Загузіть картинку", ToastStatus.Fail)
+    if (!this.uploadedImage) {
+      this.toastService.showToast("Помилка", "Загузіть картинку", ToastStatus.Fail);
       return false;
     }
-    else {
-      return true;
-    }
+    return true;
   }
 
   submit(){

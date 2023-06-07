@@ -59,12 +59,15 @@
       }
     }
     .menu{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       font-weight: 500;
       cursor: pointer;
       &:hover{
         color: var(--main-color);
-        transition: 0.3s;
-        font-weight: 600;
+        transition: 0.2s;
       }
     }
     .activated{

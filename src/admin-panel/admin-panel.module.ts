@@ -5,7 +5,6 @@ import {RouterOutlet} from "@angular/router";
 import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import {SharedModule} from "../shared/shared.module";
-import {AgGridModule} from 'ag-grid-angular';
 import { AdminShopSettingComponent } from './components/admin-shop-setting/admin-shop-setting.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { ProductEditModalComponent } from './modals/product-edit-modal/product-edit-modal.component'
@@ -15,8 +14,11 @@ import { AddProductModalComponent } from './modals/add-product-modal/add-product
 import { AdminWorkTimeComponent } from './components/admin-work-time/admin-work-time.component';
 import { WorkTimeEditModalComponent } from './modals/work-time-edit-modal/work-time-edit-modal.component';
 import { AdminSlidersComponent } from './components/admin-sliders/admin-sliders.component';
-import { AdminPromocodesComponent } from './components/admin-promocodes/admin-promocodes.component';
 import { SliderImageModalComponent } from './modals/slider-image-modal/slider-image-modal.component';
+import {AddPromoCodeModalComponent} from "./modals/add-promo-code-modal/add-promo-code-modal.component";
+import { AdminPromoCodesOptionsComponent } from './components/admin-promo-codes-options/admin-promo-codes-options.component';
+import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.component';
+import {AppModule} from "../app/app.module";
 
 
 @NgModule({
@@ -32,17 +34,19 @@ import { SliderImageModalComponent } from './modals/slider-image-modal/slider-im
     AdminWorkTimeComponent,
     WorkTimeEditModalComponent,
     AdminSlidersComponent,
-    AdminPromocodesComponent,
     SliderImageModalComponent,
+    AddPromoCodeModalComponent,
+    AdminPromoCodesOptionsComponent,
+    AddUserModalComponent,
   ],
   imports: [
     CommonModule,
     RouterOutlet,
     SharedModule,
-    AgGridModule,
     ReactiveFormsModule,
     FormsModule,
     NgOptimizedImage,
-  ]
+    AppModule
+  ],
 })
 export class AdminPanelModule { }

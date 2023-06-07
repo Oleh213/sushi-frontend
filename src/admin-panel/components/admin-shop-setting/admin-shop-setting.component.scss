@@ -2,9 +2,11 @@
   display:flex;
   align-items: center;
   justify-content: center;
+  column-gap: 20px;
+  flex-wrap: wrap;
   .close{
     margin: 30px 0 0 0;
-    width: 180px;
+    width: 190px;
     font-size: 20px;
     height: 40px;
     background: red;
@@ -14,5 +16,12 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    &:hover{
+      opacity: 70%;
+    }
+  }
+  .open{
+    background: #4e9d04;
   }
 }

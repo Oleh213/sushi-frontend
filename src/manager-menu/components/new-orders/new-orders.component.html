@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="content">
+  <div class="content" [ngClass]="{newOrdersBorder: getCount(statuses.AwaitingConfirm)> 0}">
     <div class="title">Нові замовлення</div>
     <div class="filter">
       <div class="filterItem"  [ngClass]="{active: currentFilter === 10}" (click)="changeCategory(10); changeFilter(10)">Усі <span class="count" *ngIf="getCount(10)>0">{{getCount(10)}}</span></div>
