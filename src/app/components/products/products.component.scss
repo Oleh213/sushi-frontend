@@ -1,7 +1,25 @@
 .container{
-  padding: 10px 50px 0 50px ;
+  padding: 0 50px 0 50px ;
   width: 100%;
+  .routing{
+    margin: 10px 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-self: start;
+    align-items: start;
+    font-size: 14px;
+    color: #7f7e7e;
+    column-gap: 10px;
+    font-weight: 600;
+    .router-item{
+      cursor: pointer;
+      &:hover{
+        opacity: 70%;
+      }
+    }
+  }
   .categories {
+    margin: 10px 0 0 0;
     border-radius: 10px;
     z-index: 1;
     display: flex;

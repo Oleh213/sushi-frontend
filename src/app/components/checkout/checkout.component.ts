@@ -208,4 +208,5 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   protected readonly PaymentMethod = PaymentMethod;
   protected readonly DeliveryType = DeliveryType;
   protected readonly ToastStatus = ToastStatus;
+  protected readonly location = location;
 }

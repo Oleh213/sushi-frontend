@@ -22,10 +22,11 @@
 .container {
   position: fixed;
   justify-self: center;
-  top: 20%;
-  left: 25%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 5;
-  width: 50%;
+  width: 330px;
   height: 400px;
   overflow-y: scroll;
   border-radius: 10px;
@@ -154,8 +155,5 @@
 }
 
 @media (max-width: 632px) {
-  .container {
-    left: 5%;
-    width: 90%;
-  }
+
 }

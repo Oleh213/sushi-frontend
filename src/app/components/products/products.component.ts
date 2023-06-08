@@ -1,5 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
-import {first, Subscription} from "rxjs";
+import {
+
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+import {BehaviorSubject, filter, first, forkJoin, Subject, Subscription} from "rxjs";
 import {ShopService} from "../../services/shop.service";
 import {Product} from "../../models/product";
 import {Category} from "../../models/category";
@@ -10,6 +16,7 @@ import {LocalCartItem} from "../../models/localCartItem";
 import {ErrorHandlerService} from "../../errorHandler/errorHandler";
 import {style} from "@angular/animations";
 import {NgOptimizedImage} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -20,39 +27,50 @@ export class ProductsComponent implements OnInit, OnDestroy{
   public products: Array<Product> = new Array<Product>();
   public filterCategory: Array<Product> = new Array<Product>();
   public categories: Array<Category> = Array<Category>();
-  public selectedCategory: string = 'Сети';
+  public selectedCategory: string = 'Меню';
   private subscriptions: Subscription[] = [];
   public cart = new CartInfo();
   public cartItems = Array<LocalCartItem>();
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
-  public show = false;
   constructor(private shop: ShopService,
               private el: ElementRef,
               private header: HeaderComponent,
               private error: ErrorHandlerService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
   ){}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.shop.getProducts()
-      .pipe(first())
-      .subscribe(res => {
-        this.products = res.filter(x=> x.available > 0)
-        this.filterCategory = res.filter(x=> x.available > 0)
-        this.changeCategory('Сети')
-      },
-        error => {
-        this.error.handleError(error);
+    const queryCategory$ = new Subject<''>();
+    forkJoin([this.shop.getProducts(), this.shop.getCategory(), queryCategory$])
+      .subscribe(([products, categories, categoryName]) => {
+          this.products = products.filter(x=> x.available > 0);
+          this.filterCategory = products.filter(x=> x.available > 0);
+          this.categories = categories;
+          if(categories.some(x=> x.categoryName === categoryName)){
+            this.changeCategory(categoryName);
+          }
         },
-        ))
-
-    this.subscriptions.push(this.shop.getCategory()
-      .subscribe(res => {
-        this.categories = res
-      }))
+        error => {
+          console.log('error')
+          this.error.handleError(error);
+        });
+    this.activatedRoute.queryParams.subscribe(params=> {
+      if (params['category'] !== undefined){
+        const categoryName = params['category'].toString();
+        queryCategory$.next(categoryName);
+        queryCategory$.complete();
+      }
+      else {
+        queryCategory$.next('');
+        queryCategory$.complete();
+      }
+    })
 
     this.cart = this.shop.cartInfo();
-
     this.userCart = JSON.parse(localStorage.getItem('localCart')!);
+  }
+  ngAfterContentChecked(): void {
 
   }
   ngOnDestroy() {
@@ -97,6 +115,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   changeCategory(categoryName: string) {
     this.selectedCategory ='';
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: { category: categoryName},
+        queryParamsHandling: 'merge',
+      });
     this.filterCategory = this.products
       .filter((a:any)=>{
         if(a.categoryName == categoryName || categoryName== ''){
@@ -106,11 +131,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       })
   }
 
-  test(){
-   this.show = true;
-
-  }
 
   protected readonly style = style;
   protected readonly location = location;
+
 }

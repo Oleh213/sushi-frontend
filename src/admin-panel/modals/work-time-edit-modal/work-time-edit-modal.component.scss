@@ -157,17 +157,6 @@
     }
   }
 }
-.safariLabel{
-  top:-50px;
-}
-.safariField{
-  &:focus,
-  &:not(:placeholder-shown) {
-    & + .input__label {
-      top:-75px;
-    }
-  }
-}
 .selectdiv {
   position: relative;
   /*Don't really need this just for demo styling*/
@@ -306,6 +295,7 @@ input {
 .red{
   border:red;
 }
+
 @media (max-width: 800px) {
   .container {
     left: 5%;

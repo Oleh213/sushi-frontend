@@ -22,12 +22,13 @@
 .container {
   position: fixed;
   justify-self: center;
-  top: 30px;
-  left: 25%;
+  top: 50%;
+  left: 50%;
   z-index: 5;
   width: 50%;
-  height: 90%;
-  //min-height: 680px;
+  //height: 90%;
+  transform: translate(-50%, -50%);
+  min-height: 400px;
   overflow-y: scroll;
   border-radius: 10px;
   background: #FFFFFF;
@@ -109,9 +110,9 @@
   }
 
 }
-@media (max-width: 800px) {
-  .container {
-    left: 5%;
-    width: 90%;
-  }
-}
+//@media (max-width: 800px) {
+//  .container {
+//    left: 5%;
+//    width: 90%;
+//  }
+//}

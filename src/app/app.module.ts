@@ -40,6 +40,7 @@ import { UserOrdersComponent } from './modals/user-orders/user-orders.component'
 import { TestComponent } from './components/test/test.component';
 import { ConfirmationModalComponent } from './confirmation/confirmation-modal/confirmation-modal.component';
 import {ConfirmationService} from "./confirmation/confirmation.service";
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -67,6 +68,7 @@ export function tokenGetter() {
     UserOrdersComponent,
     TestComponent,
     ConfirmationModalComponent,
+    ProductDetailsComponent,
 
   ],
   imports: [

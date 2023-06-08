@@ -217,7 +217,6 @@ export class ShopService {
   }
 
   ordersInCartInfo(): OrderInCart[] {
-    console.log(this.checkOrderTime(JSON.parse(localStorage.getItem('orders')!)))
     return this.checkOrderTime(JSON.parse(localStorage.getItem('orders')!));
   }
 

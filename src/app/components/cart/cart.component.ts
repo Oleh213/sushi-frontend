@@ -77,4 +77,5 @@ export class CartComponent implements OnInit{
     return totalPrice;
   }
 
+    protected readonly location = location;
 }

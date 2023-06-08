@@ -1,17 +1,21 @@
 <div class="container">
-    <div class="categories">
-      <div class="category" *ngFor="let category of categories"  (click)="changeCategory(category.categoryName)" [ngClass]="{active2: selectedCategory === category.categoryName}">
-        <div class="image-container">
-          <img class="image" ngSrc="{{category.categoryImage}}" fill/>
-        </div>
-        <div class="name" [ngClass]="{active: selectedCategory === category.categoryName}">{{category.categoryName.toUpperCase()}}</div>
+  <div class="routing">
+    <div class="main router-item" (click)="location.href = ''">Головна</div>
+    <div class="cut ">></div>
+    <div class="cart router-item">{{selectedCategory}}</div>
+  </div>
+  <div class="categories">
+    <div class="category" *ngFor="let category of categories"  (click)="changeCategory(category.categoryName)" [ngClass]="{active2: selectedCategory === category.categoryName}">
+      <div class="image-container">
+        <img class="image" ngSrc="{{category.categoryImage}}" fill alt=""/>
       </div>
+      <div class="name" [ngClass]="{active: selectedCategory === category.categoryName}">{{category.categoryName.toUpperCase()}}</div>
     </div>
-
+  </div>
   <div class="products">
     <div class="product" *ngFor="let product of filterCategory" [ngClass]="{inCart: checkProductInCart(product.productId)}">
       <div class="product-image" >
-        <img class="image" ngSrc="{{product.image}}" fill/>
+        <img class="image" priority ngSrc="{{product.image}}" fill alt=""/>
       </div>
       <div class="name-weight">
         <div class="product-weight" *ngIf="product.weight>0">{{product.weight}}г</div>
@@ -30,9 +34,7 @@
       <div class="new popular" *ngIf="product.productOption && product.productOption.name ==='Popular'">Популярний сет</div>
     </div>
   </div>
-
 </div>
-
 <div class="cart-container" routerLink="/cart" *ngIf="cart.count>0">
   <span class="count" *ngIf="cart.count>0">{{cart.count}} </span>
   <div class="cart">
