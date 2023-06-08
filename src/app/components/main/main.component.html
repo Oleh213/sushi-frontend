@@ -37,7 +37,7 @@
     </div>
     <div class="label-container margin70" *ngIf="actionsProducts.length>0" >
       <div class="label" >Акції</div>
-      <div class="menu" (click)="location.href = 'menu'"  *ngIf="newProducts.length>0" >меню</div>
+      <div class="menu" (click)="location.href = 'menu'" >меню</div>
     </div>
     <div class="products">
       <div class="product" *ngFor="let product of actionsProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
@@ -63,7 +63,7 @@
     </div>
     <div class="label-container margin70" *ngIf="popularProducts.length>0" >
       <div class="label" >Популярні сети</div>
-      <div class="menu" (click)="location.href = 'menu'" *ngIf="newProducts.length>0" >меню</div>
+      <div class="menu" (click)="location.href = 'menu'" >меню</div>
     </div>
     <div class="products">
       <div class="product" *ngFor="let product of popularProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
