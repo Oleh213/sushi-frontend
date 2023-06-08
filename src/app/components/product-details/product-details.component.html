@@ -1,1 +1,43 @@
-<p>product-details works!</p>
+<div class="container">
+  <div class="routing">
+    <div class="main router-item" (click)="location.href = ''">Головна</div>
+    <div class="cut ">></div>
+    <div class="cart router-item" (click)="location.href = 'menu?category='+ product.categoryName">{{product.categoryName}}</div>
+    <div class="cut ">></div>
+    <div class="checkout router-item">{{product.productName}}</div>
+  </div>
+  <div class="product" *ngIf="product.productName.length > 0">
+    <div class="image-details">
+      <div class="image-container" >
+        <img class="image" src="{{product.image}}" alt=""/>
+      </div>
+      <div class="details">
+        <div class="name-container">{{product.productName}}</div>
+        <div class="weight-container">
+          <div class="weight">{{product.weight}} г</div>
+          <div class="defis"> / </div>
+          <div class="calories">500 ккал</div>
+        </div>
+        <div class="price">
+          <div class="new-price">{{product.price}} ₴</div>
+          <div class="old-price" *ngIf="product.discount>0">{{product.price + product.discount}}₴</div>
+        </div>
+        <div class="description">{{product.description}}</div>
+        <div class="add-to-cart" *ngIf="!checkProductInCart(product.productId)" (click)="addToCart()">Додати в кошик</div>
+        <div class="buy-box" *ngIf="checkProductInCart(product.productId)">
+          <i class="fa fa-minus item" aria-hidden="true" (click)="remove()"></i>
+          <div class="count">{{getCount()}} шт.</div>
+          <i class="fa fa-plus item" aria-hidden="true" (click)="add()"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cart-container" routerLink="/cart" *ngIf="cart.count>0">
+  <span class="count" *ngIf="cart.count>0">{{cart.count}} </span>
+  <div class="cart">
+    <img class="car-image" src="https://vinnitsya.sushi-master.ua/img/header/cart.svg" alt="cart" >
+  </div>
+  <span class="price" *ngIf="cart.count>0">{{cart.totalPrice}} ₴</span>
+</div>
+<app-spinner></app-spinner>

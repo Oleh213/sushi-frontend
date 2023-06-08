@@ -138,6 +138,9 @@ export class ShopService {
   getOrder(orderId: string): Observable<Order> {
     return this.auth.getRequest<Order>(`${this.baseApiUrl}OrderController/GetOrderById?orderId=${orderId}`)
   }
+  getProduct(productId: string): Observable<Product> {
+    return this.auth.getRequest<Product>(`${this.baseApiUrl}ProductController/GetOneProduct?ProductId=${productId}`)
+  }
 
   addToCart(data: Product){
     let cartData = [];
@@ -225,8 +228,8 @@ export class ShopService {
     let cart = new CartInfo()
     if(items !== null){
       for(let item of items) {
-        cart.count += 1;
-        cart.totalPrice += item.price;
+        cart.count += item.count;
+        cart.totalPrice += item.price * item.count;
       }
       return cart;
     }

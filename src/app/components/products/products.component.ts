@@ -1,11 +1,10 @@
 import {
-
   Component,
   ElementRef,
   OnDestroy,
   OnInit
 } from '@angular/core';
-import {BehaviorSubject, filter, first, forkJoin, Subject, Subscription} from "rxjs";
+import {forkJoin, Subject, Subscription} from "rxjs";
 import {ShopService} from "../../services/shop.service";
 import {Product} from "../../models/product";
 import {Category} from "../../models/category";
@@ -17,6 +16,7 @@ import {ErrorHandlerService} from "../../errorHandler/errorHandler";
 import {style} from "@angular/animations";
 import {NgOptimizedImage} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-products',
@@ -32,13 +32,17 @@ export class ProductsComponent implements OnInit, OnDestroy{
   public cart = new CartInfo();
   public cartItems = Array<LocalCartItem>();
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
+  public isShow: boolean = false;
   constructor(private shop: ShopService,
               private el: ElementRef,
               private header: HeaderComponent,
               private error: ErrorHandlerService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-  ){}
+              private titleService:Title,
+  ) {
+    this.titleService.setTitle("Меню");
+  }
 
   ngOnInit(): void {
     const queryCategory$ = new Subject<''>();
@@ -49,7 +53,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
           this.categories = categories;
           if(categories.some(x=> x.categoryName === categoryName)){
             this.changeCategory(categoryName);
+            this.titleService.setTitle(categoryName);
           }
+          this.isShow = true;
         },
         error => {
           console.log('error')
@@ -66,17 +72,12 @@ export class ProductsComponent implements OnInit, OnDestroy{
         queryCategory$.complete();
       }
     })
-
     this.cart = this.shop.cartInfo();
     this.userCart = JSON.parse(localStorage.getItem('localCart')!);
-  }
-  ngAfterContentChecked(): void {
-
   }
   ngOnDestroy() {
     this.subscriptions.forEach((x: Subscription) => x.unsubscribe());
   }
-
 
   addToCart(product: Product){
     let ok = true;
@@ -90,14 +91,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
     if(ok){
       if(product) {
         this.shop.addToCart(product);
-        let myTag = this.el.nativeElement.querySelector(".product");
-        if (myTag != null) {
-          myTag.classList.add('addProductAnimate');
-          setTimeout(() => {
-            myTag.classList.add("deActive");
-          }, 2000);
-          myTag.classList.remove('deActive');
-        }
       }
       this.cart.count++;
       this.cart.totalPrice += product.price;
@@ -114,6 +107,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   changeCategory(categoryName: string) {
+    this.titleService.setTitle(categoryName);
     this.selectedCategory ='';
     this.router.navigate(
       [],

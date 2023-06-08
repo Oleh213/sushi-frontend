@@ -62,6 +62,12 @@
         </div>
       </div>
     </div>
+    <div class="available-container item">
+      <label class="input" for="description">
+        <input class="input__field" [(ngModel)]="product.description"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="description"/>
+        <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Опис</span>
+      </label>
+    </div>
     <div class="submit-container">
       <div class="submit" (click)="submit()">Підтвердити</div>
     </div>

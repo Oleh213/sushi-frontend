@@ -9,6 +9,7 @@ import {ToastService, ToastStatus} from "../../toast-notofication/toast.service"
 import {MapService} from "../../services/map.service";
 import {PaymentMethod} from "../../models/orders";
 import * as moment from "moment";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -31,7 +32,9 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
   constructor(private shop: ShopService,
               public toastService: ToastService,
               public mapService: MapService,
-              ) {
+              private titleService:Title,
+  ) {
+    this.titleService.setTitle("Оформеленя замовленя");
   }
   ngOnInit(): void {
     this.cartItems = JSON.parse(localStorage.getItem('localCart')!)

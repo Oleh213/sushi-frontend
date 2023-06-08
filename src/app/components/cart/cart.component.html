@@ -1,51 +1,64 @@
 <div class="container">
-  <div class="routing">
-    <div class="main router-item" (click)="location.href = ''">Головна</div>
-    <div class="cut ">></div>
-    <div class="cart router-item">Корзина</div>
-  </div>
-  <div class="title-container">
-    <div class="title">Мій кошик</div>
-    <div class="clearCart" (click)="dellAll()">ОЧИСТИТИ КОШИК</div>
-  </div>
-  <div class="cartItems">
-    <div class="cartItem" *ngFor="let item of cartItems">
-      <div class="productInfo">
-        <div class="imageContainer">
-          <img class="image" ngSrc="{{item.image}}" fill alt="">
+  <div class="left">
+    <div class="routing">
+      <div class="main router-item" (click)="location.href = ''">Головна</div>
+      <div class="cut ">></div>
+      <div class="cart router-item" (click)="location.href = 'menu'">Меню</div>
+      <div class="cut ">></div>
+      <div class="cart router-item">Кошик</div>
+    </div>
+    <div class="title-container" *ngIf="cartItems.length>0">
+      <div class="title">Мій кошик</div>
+      <div class="clearCart" (click)="dellAll()">ОЧИСТИТИ КОШИК</div>
+    </div>
+    <div class="cartItems">
+      <div class="cartItem" *ngFor="let item of cartItems">
+        <div class="productInfo">
+          <div class="imageContainer" (click)="location.href = 'product-details/'+item.productId">
+            <img class="image" ngSrc="{{item.image}}" fill alt="">
+          </div>
+          <div class="name-weight">
+            <div class="name-dell">
+              <div class="name" (click)="location.href = 'product-details/'+item.productId">{{item.productName.toUpperCase()}}</div>
+              <div class="dell" (click)="dellItem(item.productId)">X</div>
+            </div>
+            <div class="weight" *ngIf="item.weight>0">{{item.weight}} г</div>
+          </div>
         </div>
-        <div class="name-weight">
-          <div class="name-dell">
-            <div class="name">{{item.productName.toUpperCase()}}</div>
+        <div class="count-price">
+          <div class="price-dell Phone">
+            <div class="dell" (click)="dellItem(item.productId)">X</div>
+            <div class="price">{{item.price}} ₴</div>
+
+          </div>
+          <div class="count-container">
+            <div class="remove" (click)="remove(item.productId)">-</div>
+            <div class="count">{{item.count}} шт</div>
+            <div class="add" (click)="add(item.productId)">+</div>
+          </div>
+          <div class="price-dell PC">
+            <div class="price">{{item.price}} ₴</div>
             <div class="dell" (click)="dellItem(item.productId)">X</div>
           </div>
-          <div class="weight" *ngIf="item.weight>0">{{item.weight}} г</div>
-        </div>
-      </div>
-      <div class="count-price">
-        <div class="price-dell Phone">
-          <div class="dell" (click)="dellItem(item.productId)">X</div>
-          <div class="price">{{item.price}} ₴</div>
-
-        </div>
-        <div class="count-container">
-          <div class="remove" (click)="remove(item.productId)">-</div>
-          <div class="count">{{item.count}} шт</div>
-          <div class="add" (click)="add(item.productId)">+</div>
-        </div>
-        <div class="price-dell PC">
-          <div class="price">{{item.price}} ₴</div>
-          <div class="dell" (click)="dellItem(item.productId)">X</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="checkout" *ngIf="show">
-    <div class="totalPrice">
-      <label class="price-lable">РАЗОМ</label>
-      <span class="price">{{countTotalPrice()}} ₴</span>
+  <div class="right">
+    <div class="checkout" *ngIf="cartItems.length>0">
+      <div class="totalPrice">
+        <label class="price-lable">РАЗОМ</label>
+        <span class="price">{{countTotalPrice()}} ₴</span>
+      </div>
+      <div class="go" routerLink="/checkout">ПЕРЕЙТИ ДО ОФОРМЛЕННЯ</div>
     </div>
-    <div class="go" routerLink="/checkout">ПЕРЕЙТИ ДО ОФОРМЛЕННЯ</div>
+  </div>
+</div>
+<div class="empty-cart" *ngIf="show && cartItems.length===0" >
+  <div class="context">
+    <img class="image" src="https://vinnitsya.sushi-master.ua/img/products/cart-empty.svg">
+    <div class="label">Кошик порожній, додайте що-небудь з меню</div>
+    <div class="button" (click)="location.href = 'menu' "> В  МЕНЮ</div>
   </div>
 </div>
 

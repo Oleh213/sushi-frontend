@@ -15,7 +15,7 @@
     </div>
     <div class="products">
       <div class="product" *ngFor="let product of newProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
-        <div class="product-image" >
+        <div class="product-image"  (click)="location.href = 'product-details/'+product.productId">
           <img class="image" ngSrc="{{product.image}}" fill alt=""/>
         </div>
         <div class="name-weight">
@@ -28,7 +28,9 @@
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
-          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
+          <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">
+            <img class="image" src="https://img.icons8.com/windows/320/FFFFFF/shopping-bag.png" alt="shopping-bag"/>
+          </div>
         </div>
         <div class="new">Новинка</div>
       </div>
@@ -39,7 +41,7 @@
     </div>
     <div class="products">
       <div class="product" *ngFor="let product of actionsProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
-        <div class="product-image" >
+        <div class="product-image"  (click)="location.href = 'product-details/'+product.productId">
           <img class="image" src="{{product.image}}" alt=""/>
         </div>
         <div class="name-weight">
@@ -52,7 +54,9 @@
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
-          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
+          <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">
+            <img class="image" src="https://img.icons8.com/windows/320/FFFFFF/shopping-bag.png" alt="shopping-bag"/>
+          </div>
         </div>
         <div class="new action">Акція</div>
       </div>
@@ -63,7 +67,7 @@
     </div>
     <div class="products">
       <div class="product" *ngFor="let product of popularProducts" [ngClass]="{inCart: checkProductInCart(product.productId)}">
-        <div class="product-image" >
+        <div class="product-image"  (click)="location.href = 'product-details/'+product.productId">
           <img class="image" ngSrc="{{product.image}}" fill alt=""/>
         </div>
         <div class="name-weight">
@@ -76,7 +80,9 @@
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
-          <div class="productCartActivated" (click)="location.href = '/cart'" *ngIf="checkProductInCart(product.productId)">В КОШИКУ</div>
+          <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">
+            <img class="image" src="https://img.icons8.com/windows/320/FFFFFF/shopping-bag.png" alt="shopping-bag"/>
+          </div>
         </div>
         <div class="new popular">Популярний сет</div>
       </div>
@@ -86,7 +92,7 @@
 <div class="cart-container" routerLink="/cart" *ngIf="cart.count>0">
   <span class="count" *ngIf="cart.count>0">{{cart.count}} </span>
   <div class="cart">
-    <img class="car-image" ngSrc="https://img.icons8.com/material-outlined/384/null/shopping-basket-2.png" alt="cart" fill>
+    <img class="car-image" src="https://vinnitsya.sushi-master.ua/img/header/cart.svg" alt="cart" >
   </div>
   <span class="price" *ngIf="cart.count>0">{{cart.totalPrice}} ₴</span>
 </div>

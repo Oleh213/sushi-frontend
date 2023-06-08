@@ -8,6 +8,7 @@ import {Product} from "../../models/product";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {CartInfo} from "../../models/cartInfo";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -28,7 +29,9 @@ export class MainComponent implements OnInit{
               public router: Router,
               private errorService: ErrorHandlerService,
               public mapService: MapService,
-) {
+              private titleService:Title,
+  ) {
+    this.titleService.setTitle("Umami sushi");
   }
   ngOnInit() {
     this.shop.getImagesSlider().subscribe(res=> {

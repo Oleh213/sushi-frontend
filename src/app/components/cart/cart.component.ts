@@ -5,6 +5,7 @@ import {ShopService} from "../../services/shop.service";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {MapService} from "../../services/map.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-cart',
@@ -13,21 +14,23 @@ import {MapService} from "../../services/map.service";
 })
 export class CartComponent implements OnInit{
   public cartItems: Array<CartItem> = [];
-  public items: Array<LocalCartItem> = Array<LocalCartItem>();
   public show: boolean = false;
   constructor(private shop: ShopService,
+              private titleService:Title,
   ) {
+    this.titleService.setTitle("Кошик");
   }
   ngOnInit(): void {
     let items = JSON.parse(localStorage.getItem('localCart')!)
     if(items != null){
-      this.shop.getCartItems(items).subscribe(res=> this.cartItems = res)
-      this.show = true;
-    }
+      this.shop.getCartItems(items).subscribe(res=>{
+        this.cartItems = res
+        if(res.length > 0){
+          this.show = true;}
+      })}
   }
 
   dellItem(productId: Guid){
-    this.items = JSON.parse(localStorage.getItem('localCart')!);
     let newItems = this.cartItems.filter(x=> x.productId !== productId);
     localStorage.removeItem('localCart');
     localStorage.setItem('localCart',JSON.stringify(newItems))
@@ -76,6 +79,5 @@ export class CartComponent implements OnInit{
     }
     return totalPrice;
   }
-
-    protected readonly location = location;
+  protected readonly location = location;
 }

@@ -20,6 +20,7 @@ import {AdminShopSettingComponent} from "../admin-panel/components/admin-shop-se
 import {AdminWorkTimeComponent} from "../admin-panel/components/admin-work-time/admin-work-time.component";
 import {AdminSlidersComponent} from "../admin-panel/components/admin-sliders/admin-sliders.component";
 import {AdminPromoCodesOptionsComponent} from "../admin-panel/components/admin-promo-codes-options/admin-promo-codes-options.component";
+import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 
 
 const routes: Routes = [
@@ -31,6 +32,9 @@ const routes: Routes = [
   },
   {
     path: 'checkout', component: CheckoutComponent,
+  },
+  {
+    path: 'product-details/:productId', component: ProductDetailsComponent,
   },
   {
     path: 'contact', component: ContactComponent,
