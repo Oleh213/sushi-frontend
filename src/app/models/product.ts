@@ -3,7 +3,6 @@ import {Guid} from "guid-typescript";
 export class Product{
   public productId: Guid =  Guid.createEmpty();
   public productName: string = '';
-  public name: string = '';
   public categoryName: string = '';
   public price: number = 0;
   public description: string = '';

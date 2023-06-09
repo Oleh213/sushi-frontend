@@ -31,7 +31,7 @@
   overflow-y: scroll;
   border-radius: 10px;
   background: #FFFFFF;
-  box-shadow: 3px 3px 15px rgb(143, 143, 143);
+  box-shadow: 0px 0px 20px hsla(236,6%,49%,.15);
   padding: 0 20px 20px 20px;
   overflow-x: hidden;
   .productInfo{
@@ -90,6 +90,56 @@
             width: 100%;
             height: 90%;
             object-fit: scale-down;
+          }
+        }
+      }
+    }
+    .product-items-container{
+      .product-items{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .product-item{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          column-gap: 10px;
+          align-items: center;
+          justify-content: center;
+          .remove{
+            width: 10%;
+            font-size: 18px;
+            color: red;
+            font-weight: 700;
+            cursor: pointer;
+            &:hover{
+              opacity: 50%;
+            }
+          }
+          .name{
+            width: 90%;
+          }
+        }
+        .input-container{
+          width: 100%;
+          position: relative;
+          margin: 10px;
+          .product-input{
+            display: flex;
+            height: 50px;
+            box-sizing: border-box;
+            justify-content: space-between;
+            width: 100%;
+            border: 1.5px solid #dadada;
+            padding: 5px 5px 5px 10px;
+            cursor: initial;
+            color: black;
+            border-radius: .5rem;
+            font-weight: 500;
+            outline: none !important;
+            font-size: 18px;
           }
         }
       }
@@ -241,3 +291,48 @@ select::-ms-expand {
   }
 }
 
+.switch-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 30px 0;
+  #switch{
+    display: none;
+  }
+  .switch-label{
+    width: 60px;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+    .switch-rail{
+      transition: all 0.2s ease-in-out;
+      position: absolute;
+      width: 60px;
+      height: 30px;
+      background: #e3342f;
+      border-radius: 50px;
+      overflow: hidden;
+      .switch-slider{
+        transition: all 0.2s ease-in-out;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+      }
+    }
+  }
+  #switch:checked + .switch-label {
+    .switch-rail{
+      transition: all 0.2s ease-in-out;
+      background: #38c172;
+      .switch-slider{
+        transition: all 0.2s ease-in-out;
+        transform: translateX(30px);
+      }
+    }
+  }
+}

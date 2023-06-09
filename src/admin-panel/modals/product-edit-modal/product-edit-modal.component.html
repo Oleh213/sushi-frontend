@@ -68,30 +68,32 @@
         <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Опис</span>
       </label>
     </div>
-    <div class="item product-items">
-      <input type="checkbox" [checked]="productItems" (change)="checkShowProductItems($event)">
-      <div class="items" *ngIf="productItems">
-        <div class="item" *ngFor="let item of product.items">
-          <div class="name">{{item.name}}</div>
-          <div class="remove"> - </div>
-        </div>
-
-        <div class="input-container">
-          <div class="container-sdf">
-            <div class="address0sdf">
-              <div class="cover">
-                <input [ngModel]="searchTerm"
-                       (ngModelChange)="onSearchTermChange(text.value)"
-                       type="text" class="addressInput" id="pac-input" #text>
-              </div>
-            </div>
-            <app-search-product-modal
-              *ngIf='modal '
-              (close)='modal = false'
-              [products]="sortedProducts"
-            ></app-search-product-modal>
+    <div class="item product-items-container">
+      <div class="switch-container">
+        <input type="checkbox" id="switch" [checked]="productItems" (change)="checkShowProductItems($event)">
+        <label for="switch" class="switch-label">
+          <div class="switch-rail">
+            <div class="switch-slider"></div>
           </div>
+        </label>
+      </div>
+      <div class="product-items" *ngIf="productItems">
+        <div class="product-item" *ngFor="let item of product.items">
+          <div class="name">{{item.productName}}</div>
+          <i class="fa fa-remove item remove" aria-hidden="true" (click)="removeItem(item.productId.toString())"></i>
+        </div>
+        <div class="input-container">
+                <input [(ngModel)]="searchTerm"
+                       (ngModelChange)="onSearchTermChange()"
+                       type="text" class="product-input" id="pac-input">
 
+              <app-search-product-modal
+                *ngIf='modal '
+                (close)='modal = false'
+                (addedItem)="addItemToProducts($event)"
+                [products]="sortedProducts"
+                [productId]="product.productId"
+              ></app-search-product-modal>
         </div>
       </div>
     </div>

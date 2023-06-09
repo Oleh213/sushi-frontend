@@ -123,10 +123,28 @@ export class ProductEditModalComponent implements OnInit{
       reader.readAsDataURL(file);
     }
   }
-  onSearchTermChange(term: string){
-    console.log(term)
-    this.modal = term.length > 0;
-    this.sortedProducts = this.products.filter(x=> x.productName.toLowerCase().includes(term.toLowerCase()));
+  onSearchTermChange(){
+    this.sortedProducts = this.products.filter(x=> x.productName.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    this.modal = this.searchTerm.length > 0 && this.sortedProducts.length > 0;
+  }
+  addItemToProducts(productId: Guid){
+    this.searchTerm = '';
+    let product = this.products.find(x=> x.productId === productId)!;
+    if(this.product.items !== undefined && this.product.items !== null){
+      this.product.items.push(product);
+    }
+    else {
+      const products: Product[] = [];
+      products.push(product);
+      this.product.items = products;
+
+    }
+  }
+
+  removeItem(itemId: string){
+    this.shopService.dellItemFromProduct(this.productId.toString(),itemId,).subscribe(res=> {
+      this.product.items = this.product.items!.filter(x=> x.productId.toString() !== itemId)!;
+    })
   }
 
 

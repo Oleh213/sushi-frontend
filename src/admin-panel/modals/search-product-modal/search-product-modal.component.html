@@ -3,7 +3,7 @@
   <div class="products" >
     <div class="product" *ngFor="let product of products" >
       <div class="product">
-        <div class="productName">{{product.productName}}</div>
+        <div class="productName" (click)="addItem(product.productId)">{{product.productName}}</div>
       </div>
     </div>
   </div>

@@ -73,6 +73,18 @@ export class ShopService {
   addNewProduct(addNewProduct: any): Observable<ResponseModel<OrderResponsModel>>{
     return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}ProductController/AddProduct`,addNewProduct)
   }
+  addItemToProduct(productId: string, itemId: string): Observable<ResponseModel<OrderResponsModel>>{
+    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}ProductController/AddItemToProduct`,{
+      productId: productId,
+      itemId: itemId,
+    })
+  }
+  dellItemFromProduct(productId: string, itemId: string): Observable<ResponseModel<OrderResponsModel>>{
+    return this.auth.postRequest<ResponseModel<OrderResponsModel>>(`${this.apiUrl}ProductController/DellItemFromProduct`,{
+      productId: productId,
+      itemId: itemId,
+    })
+  }
   getImagesSlider(): Observable<ImagesSlider[]>{
     return this.auth.getRequest<ImagesSlider[]>(`${this.apiUrl}ImagesSliderController/GetImagesSlider`)
   }
@@ -274,8 +286,6 @@ export class ShopService {
 
     return editProduct;
   }
-
-
 }
 
 export class OrderInCart{
