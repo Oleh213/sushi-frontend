@@ -4,8 +4,8 @@
     margin: 10px 0 0 0;
     width: 100%;
     display: flex;
-    justify-self: start;
-    align-items: start;
+    justify-self: flex-start;
+    align-items: flex-start;
     font-size: 13px;
     color: #8c8b8b;
     column-gap: 10px;
@@ -71,9 +71,17 @@
           }
         }
         .description{
-          margin: 20px 0 0 0;
-          color: #7a7979;
-          font-size: 16px;
+          margin: 30px 0 0 0;
+          display: flex;
+          column-gap: 10px;
+          .label{
+            font-weight: 600;
+            display: flex;
+          }
+          .text{
+            color: #7a7979;
+            font-size: 16px;
+          }
         }
         .add-to-cart{
           margin: 20px 0 0 0 ;

@@ -22,7 +22,10 @@
           <div class="new-price" [ngClass]="{'has-discount': product.discount > 0}">{{product.price}} ₴</div>
           <div class="old-price" *ngIf="product.discount>0">{{product.price + product.discount}}₴</div>
         </div>
-        <div class="description">{{product.description}}</div>
+        <div class="description">
+          <div class="label">Склад:</div>
+          <div class="text">{{product.description}}</div>
+        </div>
         <div class="add-to-cart" *ngIf="!checkProductInCart(product.productId)" (click)="addToCart()">Додати в кошик</div>
         <div class="buy-box" *ngIf="checkProductInCart(product.productId)">
           <i class="fa fa-minus item minus" aria-hidden="true" (click)="remove()"></i>
