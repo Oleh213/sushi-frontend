@@ -15,13 +15,19 @@
         <div class="name block">
           <label class="input" for="name">
             <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"  [(ngModel)]="contactInfo.name" type="text" placeholder=" " id="name"  />
-            <span class="input__label" [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Імʼя *</span>
+            <span class="input__label" [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">
+              <span class="label">Імʼя</span>
+              <span class="star">*</span>
+            </span>
           </label>
         </div>
         <div class="phoneNumber block">
           <label class="input" for="phone">
             <input class="input__field" [ngClass]="{safariField: detectBrowserName() === 'safari'}"   [(ngModel)]="contactInfo.phoneNumber " type="number" placeholder=" " id="phone" />
-            <span class="input__label" [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Телефон *</span>
+            <span class="input__label" [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">
+              <span class="label">Телефон</span>
+              <span class="star">*</span>
+            </span>
           </label>
         </div>
         <div class="surname block">

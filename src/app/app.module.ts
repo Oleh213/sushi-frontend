@@ -127,10 +127,11 @@ providers: [{
     provide: STORE_API_URL,
     useValue: environments.authApi,
   }],
-  exports: [
-    SpinnerComponent,
-    ConfirmationModalComponent
-  ],
+    exports: [
+        SpinnerComponent,
+        ConfirmationModalComponent,
+        SearchComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 .container{
-  padding: 0 40px;
+  margin: 0 40px;
   .routing{
     margin: 10px 0 0 0;
     width: 100%;
@@ -91,6 +91,9 @@
           &:hover{
             opacity: 70%;
           }
+          &:checked{
+            opacity: 80%;
+          }
         }
         .buy-box{
           margin: 20px 0 0 0 ;
@@ -104,11 +107,77 @@
           column-gap: 40px;
           color: white;
           font-weight: 500;
+          transition: 0.5s;
+          &:active {
+            opacity: 70%;
+          }
           .item{
             cursor: pointer;
             font-size: 20px;
             font-weight: 700;
+            transition: 0.1s;
           }
+          .plus:hover{
+            color: #2b7f3a;
+          }
+          .minus:hover{
+            color: red;
+          }
+        }
+      }
+    }
+    .title{
+      font-size: 40px;
+      font-weight: 600;
+      margin: 40px 0 0 15px;
+      height: 41px;
+    }
+    .product-data{
+      margin: 10px 0 0 0;
+      overflow-x: scroll;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      overflow-y: hidden;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+      .products-items{
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        height: 280px;
+        margin: 0 15px;
+        width: fit-content;
+      }
+      .product-item{
+        display: flex;
+        flex-direction: column;
+        height: 190px;
+        width: 160px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(126, 126, 126, 0.21);
+        padding: 0 20px 0 0;
+        .image-container{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          width: 150px;
+          height: 110px;
+          .image{
+            object-fit: contain;
+            width: 140px;
+            height: 100px;
+          }
+        }
+        .name{
+          padding: 0 5px;
+        }
+        .weight{
+          padding: 0 5px;
+          color: #a1a1a1;
+          font-weight: 500;
         }
       }
     }
@@ -183,7 +252,7 @@
 }
 @media (max-width: 890px) {
   .container{
-    padding: 0 10px;
+    margin: 0 10px;
     .product{
       .image-details {
         flex-direction: column;
@@ -217,4 +286,7 @@
   .cart-container {
     left: 80%;
   }
+}
+.has-discount{
+  color: red;
 }

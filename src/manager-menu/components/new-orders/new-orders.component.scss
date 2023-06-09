@@ -161,13 +161,11 @@
         -ms-overflow-style: none; /* Internet Explorer 10+ */
         overflow-x: scroll;
         overflow-y: hidden;
+        width: 100%;
         &::-webkit-scrollbar {
           width: 0;
           height: 0;
         }
-
-        width: 100%;
-
         .filterItem {
           min-width: fit-content;
         }

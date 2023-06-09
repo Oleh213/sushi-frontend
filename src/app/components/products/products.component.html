@@ -18,7 +18,7 @@
         <img class="image" priority ngSrc="{{product.image}}" fill alt="" (click)="location.href = 'product-details/'+product.productId"/>
       </div>
       <div class="name-weight">
-        <div class="product-weight" *ngIf="product.weight>0">{{product.weight}}г</div>
+        <div class="product-weight" *ngIf="product.weight>0">{{product.weight}} г</div>
         <div class="products-name" data-hover="">{{product.productName.toUpperCase()}}</div>
       </div>
       <div class="product-buyBox">
@@ -35,7 +35,7 @@
       </div>
       <div class="new action" *ngIf="product.productOption && product.productOption.name ==='Action'">Акція</div>
       <div class="new" *ngIf="product.productOption && product.productOption.name ==='New'">Новинка</div>
-      <div class="new popular" *ngIf="product.productOption && product.productOption.name ==='Popular'">Популярний сет</div>
+      <div class="new popular" *ngIf="product.productOption && product.productOption.name ==='Popular'">Популярний</div>
     </div>
   </div>
 </div>

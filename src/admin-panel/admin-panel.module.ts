@@ -19,8 +19,7 @@ import {AddPromoCodeModalComponent} from "./modals/add-promo-code-modal/add-prom
 import { AdminPromoCodesOptionsComponent } from './components/admin-promo-codes-options/admin-promo-codes-options.component';
 import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.component';
 import {AppModule} from "../app/app.module";
-
-
+import { SearchProductModalComponent } from './modals/search-product-modal/search-product-modal.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -38,6 +37,7 @@ import {AppModule} from "../app/app.module";
     AddPromoCodeModalComponent,
     AdminPromoCodesOptionsComponent,
     AddUserModalComponent,
+    SearchProductModalComponent,
   ],
   imports: [
     CommonModule,

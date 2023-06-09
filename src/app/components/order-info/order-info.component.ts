@@ -5,6 +5,7 @@ import {DeliveryTypeValue, Order, OrderStatus} from "../../models/orders";
 import {OrderService} from "../../services/order.service";
 import {Subscription} from "rxjs";
 import {DeliveryTimeOptions, DeliveryType} from "../../models/deliveryOption";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-order-info',
@@ -21,7 +22,9 @@ export class OrderInfoComponent implements OnInit{
   constructor(private activeRoute:ActivatedRoute,
               private shop: ShopService,
               private orderService: OrderService,
-              ) {
+              private titleService:Title,
+  ) {
+    this.titleService.setTitle("Інформація про замовленя");
   }
   ngOnInit(): void {
     this.orderId = this.activeRoute.snapshot.paramMap.get('orderId');
@@ -64,8 +67,10 @@ export class OrderInfoComponent implements OnInit{
   protected readonly OrderStatus = OrderStatus;
 
   addToInbox(obj: Order) {
-    this.order.orderStatus = obj.orderStatus;
-    this.checkOrderStatus(obj.orderStatus)
+    if(obj.orderId === this.order.orderId){
+      this.order.orderStatus = obj.orderStatus;
+      this.checkOrderStatus(obj.orderStatus)
+    }
   }
 
   checkDeliveryType(order: Order){

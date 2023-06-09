@@ -6,6 +6,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {CartInfo} from "../../models/cartInfo";
+import {style} from "@angular/animations";
 
 
 @Component({
@@ -17,6 +18,8 @@ export class ProductDetailsComponent implements OnInit{
   public product: Product = new Product();
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
   public cart = new CartInfo();
+  public showItems: boolean = false;
+
   constructor(private shopService: ShopService,
               private activeRoute: ActivatedRoute) {
   }
@@ -24,8 +27,8 @@ export class ProductDetailsComponent implements OnInit{
     let productId = this.activeRoute.snapshot.paramMap.get('productId')!;
     this.shopService.getProduct(productId).subscribe(res=>{
       this.product = res;
-      console.log(res.image)
     });
+
     this.cart = this.shopService.cartInfo();
     this.userCart = JSON.parse(localStorage.getItem('localCart')!);
   }
@@ -93,7 +96,9 @@ export class ProductDetailsComponent implements OnInit{
       localStorage.setItem('localCart',JSON.stringify(this.userCart))
     }
   }
-
+  isShowItems():boolean{
+    return (this.product.items === null || this.product.items === undefined || this.product.items.length < 0);
+  }
   dellItem(){
     let productId = this.product.productId;
     let newItems = this.userCart.filter(x=> x.productId !== productId);
@@ -102,4 +107,5 @@ export class ProductDetailsComponent implements OnInit{
     this.userCart = this.userCart.filter(x=> x.productId !== productId);
   }
   protected readonly location = location;
+  protected readonly style = style;
 }

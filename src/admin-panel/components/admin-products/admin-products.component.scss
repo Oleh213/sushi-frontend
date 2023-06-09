@@ -54,7 +54,7 @@
         justify-content: center;
       }
       .productName{
-        width: 150px;
+        width: 200px;
         display: flex;
         justify-content: center;
       }
@@ -87,12 +87,12 @@
         }
       }
       .productName{
-        width: 150px;
+        padding: 0 10px;
+        width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         display: flex;
-        justify-content: center;
         &:active{
           overflow: visible;
           white-space: normal;

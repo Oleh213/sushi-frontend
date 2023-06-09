@@ -137,11 +137,9 @@
     font-weight: 500;
     outline: none !important;
     font-size: 18px;
-
     &:hover {
       border: 2px solid #a8a7a7;
     }
-
     &:focus,
     &:not(:placeholder-shown) {
       & + .input__label {

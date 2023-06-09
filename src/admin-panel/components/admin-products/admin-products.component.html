@@ -5,7 +5,6 @@
 <div class="container">
   <div class="products">
     <div class="header">
-      <div class="productId">ID</div>
       <div class="productName">Ім'я</div>
       <div class="price label1">Ціна</div>
       <div class="discount label1">Знижка</div>
@@ -15,7 +14,6 @@
       <div class="weight label1">Вага</div>
     </div>
     <div class="product" *ngFor="let product of products; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
-      <div class="productId">{{product.productId}}</div>
       <div class="productName">{{product.productName}}</div>
       <div class="price item1">{{product.price}}</div>
       <div class="discount item1">{{product.discount}}</div>
@@ -31,7 +29,7 @@
 <app-product-edit-modal
   *ngIf="modal === true"
   (close)="closeModal()"
-  [product]="product"
+  [productId]="product.productId"
   (updateProduct)="getProducts()"
 >
 </app-product-edit-modal>

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="routing">
-    <div class="main router-item" (click)="location.href = ''">Головна</div>
+    <a class="main router-item" (click)="location.href = ''">Головна</a>
     <div class="cut ">></div>
-    <div class="cart router-item" (click)="location.href = 'menu?category='+ product.categoryName">{{product.categoryName}}</div>
+    <a class="cart router-item" (click)="location.href = 'menu?category='+ product.categoryName">{{product.categoryName}}</a>
     <div class="cut ">></div>
-    <div class="checkout router-item">{{product.productName}}</div>
+    <a class="checkout router-item">{{product.productName}}</a>
   </div>
   <div class="product" *ngIf="product.productName.length > 0">
     <div class="image-details">
@@ -19,15 +19,27 @@
           <div class="calories">500 ккал</div>
         </div>
         <div class="price">
-          <div class="new-price">{{product.price}} ₴</div>
+          <div class="new-price" [ngClass]="{'has-discount': product.discount > 0}">{{product.price}} ₴</div>
           <div class="old-price" *ngIf="product.discount>0">{{product.price + product.discount}}₴</div>
         </div>
         <div class="description">{{product.description}}</div>
         <div class="add-to-cart" *ngIf="!checkProductInCart(product.productId)" (click)="addToCart()">Додати в кошик</div>
         <div class="buy-box" *ngIf="checkProductInCart(product.productId)">
-          <i class="fa fa-minus item" aria-hidden="true" (click)="remove()"></i>
+          <i class="fa fa-minus item minus" aria-hidden="true" (click)="remove()"></i>
           <div class="count">{{getCount()}} шт.</div>
-          <i class="fa fa-plus item" aria-hidden="true" (click)="add()"></i>
+          <i class="fa fa-plus item plus" aria-hidden="true" (click)="add()"></i>
+        </div>
+      </div>
+    </div>
+    <div class="title" *ngIf="!isShowItems()">Складові сету</div>
+    <div class="product-data" *ngIf="!isShowItems()">
+      <div class="products-items">
+        <div class="product-item" *ngFor="let item of product.items">
+          <div class="image-container">
+            <img class="image" (click)="location.href = '/product-details/'+ item.productId" src="{{item.image}}">
+          </div>
+          <div class="name">{{item.name}}</div>
+          <div class="weight">{{item.weight}} г</div>
         </div>
       </div>
     </div>

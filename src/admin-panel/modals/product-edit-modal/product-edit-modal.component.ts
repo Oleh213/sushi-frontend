@@ -1,10 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Product} from "../../../app/models/product";
 import {Category} from "../../../app/models/category";
 import {ShopService} from "../../../app/services/shop.service";
 import {ProductOption} from "../../models/productOption";
 import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
 import {EditProduct} from "../../models/editProduct";
+import {Guid} from "guid-typescript";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-product-edit-modal',
@@ -14,32 +16,49 @@ import {EditProduct} from "../../models/editProduct";
 export class ProductEditModalComponent implements OnInit{
   @Output() close = new EventEmitter<void>()
   @Output() updateProduct = new EventEmitter<void>()
-  @Input() product: Product = new Product();
+  @Input() productId: Guid = Guid.createEmpty();
   public categories: Category[] = [];
   public productOptions: ProductOption[] = [];
   public imageSrc: string | ArrayBuffer | null = '';
   public uploadedImage: File;
+  public product: Product = new Product();
   public editProduct: EditProduct = new EditProduct();
   public productOptionName: string = 'Не вказано';
-  constructor(private shop: ShopService,
+  public productItems: boolean = false;
+  public searchTerm: string = '';
+  public products: Product[] = [];
+  public modal: boolean = false;
+  public sortedProducts: Product[] = [];
+
+  constructor(private shopService: ShopService,
               public toastService: ToastService,
   ) {
   }
   ngOnInit(): void {
-    this.editProduct = this.shop.transferProductData(this.product);
-    this.shop.getCategory().subscribe(res=>{
-      this.categories = res
+    forkJoin([this.shopService.getProduct(this.productId.toString()), this.shopService.getCategory(), this.shopService.getProductOptions()])
+      .subscribe(([product, categories, productOptions]) => {
+          this.product = product;
+          this.imageSrc = this.product.image;
+          if(product.productOption){
+            this.productOptionName = product.productOption.name;
+          }
+          if(product.items !== null && product.items !== undefined && product.items.length>0){
+            this.productItems = true;
+          }
+          this.categories = categories;
+          this.productOptions = productOptions;
+
+        },
+        error => {
+          console.log('error')
+        });
+    this.editProduct = this.shopService.transferProductData(this.product);
+    this.shopService.getProducts().subscribe(res=> {
+      this.products = res;
     })
-    this.shop.getProductOptions().subscribe(res=>{
-      this.productOptions = res;
-    })
-    this.imageSrc = this.product.image;
-    if(this.product.productOption){
-      this.productOptionName = this.product.productOption.name;
-    }
   }
   detectBrowserName(): string {
-    return this.shop.detectBrowserName()
+    return this.shopService.detectBrowserName()
   }
   checkSubmit(): boolean{
     if(this.product.productName.length < 1){
@@ -70,10 +89,9 @@ export class ProductEditModalComponent implements OnInit{
       return true;
     }
   }
-
   submit(){
     if(this.checkSubmit()){
-      this.editProduct = this.shop.transferProductData(this.product);
+      this.editProduct = this.shopService.transferProductData(this.product);
       const formData = new FormData();
       formData.append('file', this.uploadedImage)
       formData.append('price',this.editProduct.price.toString());
@@ -84,13 +102,16 @@ export class ProductEditModalComponent implements OnInit{
       formData.append('weight',this.editProduct.weight.toString());
       formData.append('productOptionName',this.productOptionName);
       formData.append('categoryName',this.editProduct.categoryName);
-      this.shop.updateProduct(formData).subscribe(res=> {
+      this.shopService.updateProduct(formData).subscribe(res=> {
         this.toastService.showToast("Успішно!", "Дані оновлено", ToastStatus.Success);
         this.updateProduct.emit();
         this.close.emit();
         }
       )
     }
+  }
+  checkShowProductItems(event: any){
+    this.productItems = event.target.checked;
   }
 
   readURL(event: any): void {
@@ -102,4 +123,11 @@ export class ProductEditModalComponent implements OnInit{
       reader.readAsDataURL(file);
     }
   }
+  onSearchTermChange(term: string){
+    console.log(term)
+    this.modal = term.length > 0;
+    this.sortedProducts = this.products.filter(x=> x.productName.toLowerCase().includes(term.toLowerCase()));
+  }
+
+
 }

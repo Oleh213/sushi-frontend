@@ -68,7 +68,7 @@ export class AddProductModalComponent {
       formData.append('file', this.uploadedImage)
       formData.append('price',this.newProduct.price.toString());
       formData.append('productName',this.newProduct.productName);
-      formData.append('description','None');
+      formData.append('description',this.newProduct.description);
       formData.append('available',this.newProduct.available.toString());
       formData.append('weight',this.newProduct.weight.toString());
       formData.append('productOptionName',this.newProduct.productOptionName);
