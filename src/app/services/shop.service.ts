@@ -235,6 +235,10 @@ export class ShopService {
     return this.checkOrderTime(JSON.parse(localStorage.getItem('orders')!));
   }
 
+  checkOrderInCartById(orderId: Guid):boolean{
+    let orderInCart = this.ordersInCartInfo();
+    return (orderInCart.some(x=> x.orderId.toString() === orderId.toString()));
+  }
   cartInfo(): CartInfo{
     let items = JSON.parse(localStorage.getItem('localCart')!)
     let cart = new CartInfo()

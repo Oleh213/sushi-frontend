@@ -107,5 +107,4 @@ export class ProductDetailsComponent implements OnInit{
     this.userCart = this.userCart.filter(x=> x.productId !== productId);
   }
   protected readonly location = location;
-  protected readonly style = style;
 }

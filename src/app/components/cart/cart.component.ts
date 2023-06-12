@@ -13,7 +13,7 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit{
-  public cartItems: Array<CartItem> = [];
+  public cartItems: CartItem[] = [];
   public show: boolean = false;
   constructor(private shop: ShopService,
               private titleService:Title,
@@ -22,12 +22,18 @@ export class CartComponent implements OnInit{
   }
   ngOnInit(): void {
     let items = JSON.parse(localStorage.getItem('localCart')!)
-    if(items != null){
+    if(items !== null && items.length > 0){
       this.shop.getCartItems(items).subscribe(res=>{
         this.cartItems = res
         if(res.length > 0){
           this.show = true;}
-      })}
+      })
+    }
+    else {
+      this.show = true;
+      this.cartItems = [];
+    }
+    console.log(this.cartItems.length)
   }
 
   dellItem(productId: Guid){

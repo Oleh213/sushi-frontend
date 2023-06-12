@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   public filterCategory: Array<Product> = new Array<Product>();
   public categories: Array<Category> = Array<Category>();
   public selectedCategory: string = 'Меню';
+  public queryCategory: string = '';
   private subscriptions: Subscription[] = [];
   public cart = new CartInfo();
   public cartItems = Array<LocalCartItem>();
@@ -45,7 +46,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    const queryCategory$ = new Subject<''>();
+    const queryCategory$ = new Subject<string>();
     forkJoin([this.shop.getProducts(), this.shop.getCategory(), queryCategory$])
       .subscribe(([products, categories, categoryName]) => {
           this.products = products.filter(x=> x.available > 0);
@@ -55,7 +56,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
             this.changeCategory(categoryName);
             this.titleService.setTitle(categoryName);
           }
-          this.isShow = true;
+          this.isShow = this.queryCategory.length > 0;
         },
         error => {
           console.log('error')
@@ -63,11 +64,12 @@ export class ProductsComponent implements OnInit, OnDestroy{
         });
     this.activatedRoute.queryParams.subscribe(params=> {
       if (params['category'] !== undefined){
-        const categoryName = params['category'].toString();
-        queryCategory$.next(categoryName);
+        this.queryCategory = params['category'].toString();
+        queryCategory$.next(this.queryCategory.toString());
         queryCategory$.complete();
       }
       else {
+        this.isShow = false;
         queryCategory$.next('');
         queryCategory$.complete();
       }
@@ -119,6 +121,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.filterCategory = this.products
       .filter((a:any)=>{
         if(a.categoryName == categoryName || categoryName== ''){
+          this.isShow = true;
           this.selectedCategory = categoryName;
           return a;
         }
@@ -128,5 +131,4 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   protected readonly style = style;
   protected readonly location = location;
-
 }

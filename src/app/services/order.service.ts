@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {STORE_API_URL} from "../models/app-injections-tokens";
 import {ResponseModel} from "../models/ResponseModel";
+import {ShopService} from "./shop.service";
 
 
 @Injectable({
@@ -19,8 +20,11 @@ export class OrderService {
   readonly POST_URL = `${this.apiUrl}OrderController/Buy`
   private receivedMessageObject: Order = new Order();
   private sharedObj = new Subject<Order>();
+  private sharedObjForOrderInfo = new Subject<Order>();
+
   constructor(private http: HttpClient,
               private auth: AuthService,
+              private shopService: ShopService,
               @Inject(STORE_API_URL) private apiUrl: string,
   ) {
     this.connection.onclose(async () => {
@@ -39,6 +43,10 @@ export class OrderService {
   }
 
   private mapReceivedOrders(order: Order): void {
+    if(this.shopService.checkOrderInCartById(order.orderId)){
+      this.sharedObjForOrderInfo.next(order);
+      console.log('Yes!')
+    }
     this.receivedMessageObject = order;
     this.sharedObj.next(this.receivedMessageObject);
   }
@@ -49,5 +57,8 @@ export class OrderService {
 
   public retrieveMappedObject(): Observable<Order> {
     return this.sharedObj.asObservable();
+  }
+  public retrieveMappedObjectForOrderInfo(): Observable<Order> {
+    return this.sharedObjForOrderInfo.asObservable();
   }
 }

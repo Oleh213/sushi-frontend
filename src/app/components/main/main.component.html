@@ -24,8 +24,9 @@
         </div>
         <div class="product-buyBox">
           <div class="product-price">
-            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
+
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
           <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">
@@ -50,8 +51,8 @@
         </div>
         <div class="product-buyBox">
           <div class="product-price">
-            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
           <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">
@@ -76,8 +77,8 @@
         </div>
         <div class="product-buyBox">
           <div class="product-price">
-            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
             <div class="products-oldPrice" *ngIf="product.discount>0">{{product.price+product.discount}} ₴</div>
+            <div class="products-currentPrice" [ngClass]="{discount: product.discount>0}" >{{product.price}} ₴</div>
           </div>
           <div class="product-cart" (click)="addToCart(product); checkProductInCart(product.productId)" *ngIf="!checkProductInCart(product.productId)">В КОШИК</div>
           <div class="productCartActivated" (click)="location.href = 'cart'" *ngIf="checkProductInCart(product.productId)">

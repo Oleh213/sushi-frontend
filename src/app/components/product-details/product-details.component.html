@@ -2,6 +2,8 @@
   <div class="routing">
     <a class="main router-item" (click)="location.href = ''">Головна</a>
     <div class="cut ">></div>
+    <a class="main router-item" (click)="location.href = 'menu'">Меню</a>
+    <div class="cut ">></div>
     <a class="cart router-item" (click)="location.href = 'menu?category='+ product.categoryName">{{product.categoryName}}</a>
     <div class="cut ">></div>
     <a class="checkout router-item">{{product.productName}}</a>
@@ -14,13 +16,13 @@
       <div class="details">
         <div class="name-container">{{product.productName}}</div>
         <div class="weight-container">
-          <div class="weight">{{product.weight}} г</div>
-          <div class="defis"> / </div>
+          <div class="weight" *ngIf="product.weight >0">{{product.weight}} г</div>
+          <div class="defis" *ngIf="product.weight >0"> / </div>
           <div class="calories">500 ккал</div>
         </div>
         <div class="price">
           <div class="new-price" [ngClass]="{'has-discount': product.discount > 0}">{{product.price}} ₴</div>
-          <div class="old-price" *ngIf="product.discount>0">{{product.price + product.discount}}₴</div>
+          <div class="old-price" *ngIf="product.discount>0">{{product.price + product.discount}} ₴</div>
         </div>
         <div class="description">
           <div class="label">Склад:</div>

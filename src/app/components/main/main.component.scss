@@ -53,7 +53,7 @@
         grid-auto-flow: row;
         transition-duration: 0.22s;
         font-weight: 450;
-        height: 350px;
+        height: 360px;
         border-radius: 10px;
         transition: .3s;
         &:hover{
@@ -61,7 +61,6 @@
         }
         .product-image{
           cursor: pointer;
-
           position: relative;
           transition: .3s;
           display: flex;
@@ -101,7 +100,6 @@
             padding: 0 0 20px 0 ;
           }
           .product-price{
-            display: flex;
             column-gap: 7px;
             .products-oldPrice{
               color: #929292;
@@ -111,9 +109,9 @@
             }
             .products-currentPrice{
               color: black;
-              font-size: 16px;
+              font-size: 20px;
               font-weight: 600;
-              margin: 0 0 0 4px;
+              margin: -3px 0 0 4px;
               &.discount {
                 color: #e31837;
               }
@@ -259,7 +257,7 @@
       .products {
         grid-template-columns: repeat(auto-fill, minmax(162px, 1fr));
         .product{
-          height: 248px;
+          height: 260px;
           .product-image{
             width: 100%;
             justify-content: center;
@@ -279,7 +277,7 @@
               }
               .products-currentPrice{
                 color: black;
-                font-size: 14px;
+                font-size: 18px;
                 font-weight: 600;
                 margin: 0 0 0 4px;
                 &.discount {
