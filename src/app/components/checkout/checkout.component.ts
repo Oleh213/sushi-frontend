@@ -150,7 +150,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
     }
   }
   checkSubmit(): boolean{
-    if(this.contactInfo.name.length> 1 && this.contactInfo.phoneNumber.length >= 7){
+    if(this.contactInfo.name.length> 1 && this.contactInfo.phoneNumber >= 99999999){
       if(this.deliveryOption.deliveryType == DeliveryType.OnAddress && this.mapService.selectedAddress.length < 5 ){
         this.toastService.showToast('Помилка','Ведіть адресу доставки!', ToastStatus.Fail)
        return false;
