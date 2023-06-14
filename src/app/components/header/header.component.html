@@ -25,14 +25,17 @@
       >
       </app-user-orders>
     </div>
-    <a class="menu" routerLink="" [ngClass]="{'activated': route.url === '/'}">Головна</a>
-    <a class="menu" routerLink="/menu"  [ngClass]="{'activated': route.url === '/menu'}">Меню</a>
-    <a class="menu" routerLink="/contact"  [ngClass]="{'activated': route.url === '/contact'}">Контакти</a>
-    <a class="cart" *ngIf="user === UserRole.Manager || user === UserRole.Admin " routerLink="/manager-menu/new-orders">
-      <img src="https://img.icons8.com/ios/500/null/admin-settings-male.png" class="manager-menu" alt="">
+<!--    <a class="menu" (click)="location.href = ''" [ngClass]="{'activated': route.url === '/'}">Головна</a>-->
+    <a class="menu" routerLink="menu" [ngClass]="{'activated': route.url === '/menu'}">Меню</a>
+<!--    <a class="menu" (click)="location.href = '/contact'"   [ngClass]="{'activated': route.url === '/contact'}">Контакти</a>-->
+    <a class="manager-menu" *ngIf="checkManager()" (click)="go()">
+      <img src="https://images-shop-angular.s3.eu-west-1.amazonaws.com/icons/user.svg" class="manager-menu-image" alt="">
+      <div class="manager-menu-text">{{checkButton()}}</div>
     </a>
   </div>
 
 </div>
-<app-humburger>
+<app-humburger
+  *ngIf="window.innerWidth <= 1050"
+>
 </app-humburger>

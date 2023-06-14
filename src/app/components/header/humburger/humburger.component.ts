@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core
 import {Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {ShopService} from "../../../services/shop.service";
-import {UserRole} from "../../../models/user";
+import {User, UserRole} from "../../../models/user";
 
 @Component({
   selector: 'app-humburger',
@@ -10,7 +10,7 @@ import {UserRole} from "../../../models/user";
   styleUrls: ['./humburger.component.scss']
 })
 export class HumburgerComponent implements OnInit{
-  public user: UserRole = UserRole.User;
+  public user: User = new User();
   constructor(private el: ElementRef,
               private router: Router,
               private auth: AuthService,
@@ -19,9 +19,9 @@ export class HumburgerComponent implements OnInit{
   }
   ngOnInit(): void {
     if(this.auth.isAuthenticated()) {
-      this.shop.getUser().subscribe(res=>
-        this.user = res
-      )
+      this.shop.getUser().subscribe(res=>{
+          this.user = res;
+      })
     }
   }
 
@@ -48,8 +48,14 @@ export class HumburgerComponent implements OnInit{
     location.href = '';
     this.onClose();
   }
-  checkOrders(){
-
+  checkManager():boolean{
+    let manager = localStorage.getItem('manager');
+    return manager!==null &&  manager !== undefined && !this.auth.isAuthenticated();
+  }
+  goToLogin(){
+    this.router.navigate(['manager-menu-login']).then(r => {
+      this.onClose();
+    })
   }
 
   onClose() {

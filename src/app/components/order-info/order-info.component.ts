@@ -38,8 +38,9 @@ export class OrderInfoComponent implements OnInit{
     },error => {
       location.href = '/error-page'
     }, )
+    console.log(this.orderId + " One")
     this.subscriptions.push(
-      this.orderService.retrieveMappedObjectForOrderInfo()
+      this.orderService.retrieveMappedObjectForOrderInfo(this.orderId )
         .pipe()
         .subscribe( (receivedObj: Order) => { this.addToInbox(receivedObj);}));
   }

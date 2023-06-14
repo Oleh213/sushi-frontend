@@ -158,7 +158,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit{
       else{
         if(this.deliveryOption.deliveryTimeOptions == DeliveryTimeOptions.OnTime && this.deliveryOption.deliveryTime.length < 1){
           this.toastService.showToast('Помилка','Ведіть час доставки!', ToastStatus.Fail)
-
           return false;
         }
         else {

@@ -1,4 +1,4 @@
-import {ErrorHandler, forwardRef, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProductsComponent } from './components/products/products.component';
 import {AUTH_API_URL, STORE_API_URL} from "./models/app-injections-tokens";
 import {environments} from "../enviroments/environment";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {ShopService} from "./services/shop.service";
 import {JwtModule} from "@auth0/angular-jwt";
 import {ACCESS_TOKEN_KEY} from "./services/auth.service";
@@ -38,12 +38,22 @@ import {NgbCarousel, NgbSlide, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { OrderDataFormatPipe } from './pipes/order-data-format.pipe';
 import { UserOrdersComponent } from './modals/user-orders/user-orders.component';
 import { TestComponent } from './components/test/test.component';
+// import { AngularFireModule} from "@angular/fire/compat";
 import { ConfirmationModalComponent } from './confirmation/confirmation-modal/confirmation-modal.component';
 import {ConfirmationService} from "./confirmation/confirmation.service";
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
 @NgModule({
   declarations: [
@@ -72,6 +82,13 @@ export function tokenGetter() {
 
   ],
   imports: [
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     SharedModule,
     BrowserModule,
     AppRoutingModule,
@@ -96,6 +113,10 @@ export function tokenGetter() {
     NgbCarousel,
     NgbSlide,
     NgbModule,
+    // AngularFireModule.initializeApp(environments.firebase),
+    // AngularFirestoreModule,
+    FormsModule,
+    // AngularFireAuthModule,
   ],
 
 providers: [{

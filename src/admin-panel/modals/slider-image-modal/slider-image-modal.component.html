@@ -1,8 +1,8 @@
 <div class='backdrop' (click)='close.emit()'></div>
 <div class="container">
-  <div class="image-container item">
+  <div class="image-container ">
     <div class="image">
-      <div class="image-preview-container" *ngIf="sliderType !== SliderModal.Add">
+      <div class="image-preview-container old" *ngIf="sliderType !== SliderModal.Add">
         <img class="image-preview" [src]="slider.image" alt="your image"/>
       </div>
       <input type='file' style="display: none" (change)="readURL($event);" #values/>
@@ -14,6 +14,18 @@
         <img style="color: white" width="24" height="24" src="https://img.icons8.com/material-sharp/240/000000/attach.png" alt="attach"/>
       </div>
     </div>
+  </div>
+  <div class="available-container item">
+    <label class="input" for="number">
+      <input class="input__field" [(ngModel)]="imagesSlider.imageNumber"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="number" placeholder=" " id="number"/>
+      <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Номер</span>
+    </label>
+  </div>
+  <div class="available-container item">
+    <label class="input" for="description">
+      <input class="input__field" [(ngModel)]="imagesSlider.description"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="description"/>
+      <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Опис</span>
+    </label>
   </div>
   <div class="submit-container">
     <div class="submit" (click)="submit()">Підтвердити</div>

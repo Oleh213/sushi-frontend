@@ -29,7 +29,6 @@ export class ProductEditModalComponent implements OnInit{
   public products: Product[] = [];
   public modal: boolean = false;
   public sortedProducts: Product[] = [];
-
   constructor(private shopService: ShopService,
               public toastService: ToastService,
   ) {

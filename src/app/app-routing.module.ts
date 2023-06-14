@@ -21,6 +21,7 @@ import {AdminWorkTimeComponent} from "../admin-panel/components/admin-work-time/
 import {AdminSlidersComponent} from "../admin-panel/components/admin-sliders/admin-sliders.component";
 import {AdminPromoCodesOptionsComponent} from "../admin-panel/components/admin-promo-codes-options/admin-promo-codes-options.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
+import {LoginPageComponent} from "../user-cabinet/login-page/login-page.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'menu', component: ProductsComponent,
   },
+  {
+    path: 'test', component: LoginPageComponent,
+  },
+
   {
     path: 'checkout', component: CheckoutComponent,
   },
@@ -43,10 +48,10 @@ const routes: Routes = [
     path: 'manager-menu-login', component: LoginComponent,
   },
   {
-    path: 'error-page', component: ErrorPageComponent,
+    path: 'error-status/:status', component: ErrorPageComponent,
   },
   {
-    path: '', component: MainComponent,
+  path: '', component: MainComponent,
   },
   {
     path: 'order-info/:orderId', component: OrderInfoComponent,
@@ -96,6 +101,11 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: '**',
+    redirectTo: 'error-status/404'
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

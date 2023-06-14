@@ -1,5 +1,6 @@
 export class User{
-  public userRole: UserRole = 1;
+  public userRole: UserRole = UserRole.User;
+  public userName: string = '';
 }
 export enum UserRole{
   Admin,

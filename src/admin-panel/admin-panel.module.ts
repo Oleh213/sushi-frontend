@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import {SharedModule} from "../shared/shared.module";
@@ -39,14 +39,15 @@ import { SearchProductModalComponent } from './modals/search-product-modal/searc
     AddUserModalComponent,
     SearchProductModalComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgOptimizedImage,
-    AppModule
-  ],
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgOptimizedImage,
+        AppModule,
+        RouterLink
+    ],
 })
 export class AdminPanelModule { }

@@ -1,27 +1,27 @@
 <div class="content" *ngIf="adminPanel">
   <div class="navbarContainer">
     <ul class="navbar">
-      <li class="statistic item"  (click)="location.href = '/admin-panel' ">
+      <li class="statistic item" routerLink="/admin-panel">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel'}">Статитстика</div>
         <div class="underline" *ngIf="router.url === '/admin-panel'"></div>
       </li>
-      <li class="products item activated"  (click)="location.href = '/admin-panel/products-edit'" >
+      <li class="products item activated" routerLink="/admin-panel/products-edit">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/products-edit'}">Продукти</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/products-edit'"></div>
       </li>
-      <li class="workTime item" (click)="location.href = '/admin-panel/work-time'">
+      <li class="workTime item" routerLink="/admin-panel/work-time">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/work-time'}">Робочий час</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/work-time'"></div>
       </li>
-      <li class="slider item" (click)="location.href = '/admin-panel/slider'">
+      <li class="slider item" routerLink="/admin-panel/slider">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/slider'}">Слайдер</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/slider'"></div>
       </li>
-      <li class="settings item" (click)="location.href = '/admin-panel/promo-codes'">
+      <li class="settings item" routerLink="/admin-panel/promo-codes">
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/promo-codes'}">Промокоди</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/promo-codes'"></div>
       </li>
-      <li class="settings item" (click)="location.href = '/admin-panel/shop-setting'">
+      <li class="settings item" routerLink="/admin-panel/shop-setting" >
         <div class="label" [ngClass]="{activated: router.url === '/admin-panel/shop-setting'}">Налаштування</div>
         <div class="underline" *ngIf="router.url === '/admin-panel/shop-setting'"></div>
       </li>

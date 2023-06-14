@@ -18,7 +18,7 @@ export class LayoutComponent implements OnInit{
 
   ngOnInit() {
     this.shop.getUser().subscribe(res=> {
-      if (res === 0) {
+      if (res.userRole === 0) {
         this.adminPanel = true;
       }
     })

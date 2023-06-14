@@ -8,7 +8,7 @@
       <a class="navbarLink newOrdersLink" [ngClass]="{ isActive: router.url === '/manager-menu/new-orders' }">Нові замовлення</a>
     </li>
     <div class="underline"></div>
-    <li routerLink="/admin-panel/" class="navbarItem newOrders" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }" *ngIf="user === UserRole.Admin">
+    <li routerLink="/admin-panel/" class="navbarItem newOrders" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }" *ngIf="user.userRole === UserRole.Admin">
       <a class="navbarLink newOrdersLink" [ngClass]="{ isActive: router.url === '/manager-menu/admin-menu' }">Меню адміністратора</a>
     </li>
     <div class="underline"></div>

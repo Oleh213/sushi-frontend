@@ -7,6 +7,7 @@ import {ShopService} from "../../../app/services/shop.service";
 import {Title} from "@angular/platform-browser";
 import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
 import {ToastService, ToastStatus} from "../../../app/toast-notofication/toast.service";
+import {ContactInfo} from "../../../app/models/contactInfo";
 
 @Component({
   selector: 'app-login',
@@ -41,11 +42,17 @@ export class LoginComponent implements OnDestroy{
         .pipe(first())
         .subscribe(res=> {
           location.href = 'manager-menu/new-orders'
+          this.addToLocalStorage();
         }, errorData => {
           this.toastService.showToast('Помилка!','Некоректні дані!', ToastStatus.Fail)
         }))
     }
-
+  }
+  addToLocalStorage(){
+    let manager = localStorage.getItem('manager');
+    if(manager === null){
+      localStorage.setItem('manager','manager')
+    }
   }
 
   isLogin():boolean{

@@ -12,11 +12,12 @@ import {Route, Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  public user: UserRole = 1;
+  public user: User = new User();
   public orders: OrderInCart[] = [];
   public model: boolean = false;
   public modelMobile: boolean = false;
-  constructor(private shop: ShopService,
+  public language: Languages.Ukraine;
+  constructor(private shopService: ShopService,
               private auth: AuthService,
               private el: ElementRef,
               private burger: HumburgerComponent,
@@ -24,22 +25,43 @@ export class HeaderComponent implements OnInit{
   ) {
   }
   ngOnInit(): void {
+    this.shopService.ping().subscribe(res=> {},error => {
+      if (error.status ===0){
+        this.route.navigate(['error-status/503']);
+      }
+    })
     if(this.auth.isAuthenticated()) {
-      this.shop.getUser().subscribe(res=>
+      this.shopService.getUser().subscribe(res=>
         this.user = res)
     }
-    this.orders = this.shop.ordersInCartInfo();
-    this.shop.checkOrders();
+    this.orders = this.shopService.ordersInCartInfo();
+    this.shopService.checkOrders();
   }
   open(){
     this.burger.onOpen();
   }
-
+  checkOrders():boolean {
+    let orders = this.shopService.ordersInCartInfo()
+    return !(orders === null || orders.length < 1);
+  }
+  checkManager():boolean{
+    let manager = localStorage.getItem('manager');
+    return manager!==null &&  manager !== undefined;
+  }
   protected readonly UserRole = UserRole;
   protected readonly location = location;
 
-  checkOrders():boolean {
-    let orders = this.shop.ordersInCartInfo()
-    return !(orders === null || orders.length < 1);
+  go() {
+    this.auth.isAuthenticated()? this.route.navigate(['manager-menu/new-orders']) : this.route.navigate(['manager-menu-login'])
   }
+  checkButton():string{
+    return this.auth.isAuthenticated()?this.user.userName !== undefined? this.user.userName : '' : 'Увійти';
+  }
+
+  protected readonly window = window;
+  protected readonly Languages = Languages;
+}
+enum Languages {
+  English,
+  Ukraine,
 }

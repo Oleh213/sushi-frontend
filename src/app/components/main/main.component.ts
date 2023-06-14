@@ -9,6 +9,7 @@ import {Guid} from "guid-typescript";
 import {LocalCartItem} from "../../models/localCartItem";
 import {CartInfo} from "../../models/cartInfo";
 import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -24,12 +25,12 @@ export class MainComponent implements OnInit{
   public popularProducts: Product[] = [];
   public userCart: Array<LocalCartItem> = new Array<LocalCartItem>();
   public cart = new CartInfo();
-
   constructor(private shop: ShopService,
               public router: Router,
               private errorService: ErrorHandlerService,
               public mapService: MapService,
-              private titleService:Title,
+              private titleService: Title,
+              private translateService: TranslateService,
   ) {
     this.titleService.setTitle("Umami sushi");
   }

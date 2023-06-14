@@ -11,7 +11,7 @@ export class ErrorHandlerService {
   constructor() { }
 
   public handleError = (error: HttpErrorResponse) => {
-    if (error.status === 500) {
+    if (error.status === 0) {
       location.href = 'error-page'
     }
   }

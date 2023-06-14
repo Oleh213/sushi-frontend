@@ -5,12 +5,13 @@
     <div class="selection">
       <div class="menu item" (click)="goToPage('menu')">Меню</div>
       <div class="underline" ></div>
+      <div class="sig-in item" (click)="goToLogin()" *ngIf="checkManager();">Увійти</div>
       <div class="item" (click)="goToPage('contact')">Контакти</div>
-      <div class="profile item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/profile')">Профіль</div>
-      <div class="newOrders item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="goToPage('manager-menu/new-orders')">Нові замовлення</div>
-      <div class="newOrders item" *ngIf="user === UserRole.Admin" (click)="goToPage('admin-panel')">Меню адміністратора</div>
-      <div class="underline" *ngIf="user === UserRole.Admin || user === UserRole.Manager"></div>
-      <div class="exit item" *ngIf="user === UserRole.Admin || user === UserRole.Manager" (click)="logout()">Вийти</div>
+      <div class="profile item" *ngIf="user.userRole! === UserRole.Admin || user.userRole === UserRole.Manager" (click)="goToPage('manager-menu/profile')">Профіль</div>
+      <div class="newOrders item" *ngIf="user.userRole! === UserRole.Admin || user.userRole === UserRole.Manager" (click)="goToPage('manager-menu/new-orders')">Нові замовлення</div>
+      <div class="newOrders item" *ngIf="user.userRole! === UserRole.Admin" (click)="goToPage('admin-panel')">Меню адміністратора</div>
+      <div class="underline" *ngIf="user.userRole! === UserRole.Admin || user.userRole === UserRole.Manager"></div>
+      <div class="exit item" *ngIf="user.userRole! === UserRole.Admin || user.userRole === UserRole.Manager" (click)="logout()">Вийти</div>
     </div>
   </div>
   <div class="container2" (click)="onClose()">

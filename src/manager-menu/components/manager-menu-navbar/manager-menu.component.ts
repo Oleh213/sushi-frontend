@@ -12,7 +12,7 @@ import {ErrorHandlerService} from "../../../app/errorHandler/errorHandler";
 })
 export class ManagerMenuComponent implements OnInit{
 
-  public user: UserRole = 1;
+  public user: User = new User();
   constructor(public router: Router,
               private auth: AuthService,
               private shop: ShopService,

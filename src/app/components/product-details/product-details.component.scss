@@ -37,7 +37,7 @@
           border-top-left-radius: 10px;
           border-top-right-radius: 10px;
           width: 100%;
-          max-height: 100%;
+          max-height: 400px;
           object-fit: scale-down;
         }
       }
@@ -140,52 +140,55 @@
       margin: 50px 0 0 15px;
       height: 41px;
     }
-    .product-data{
+    .product-data {
       //margin: 10px 0 0 0;
       overflow-x: scroll;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       overflow-y: hidden;
+
       &::-webkit-scrollbar {
         width: 0;
         height: 0;
       }
-      .products-items{
+
+      .products-items {
         display: flex;
         column-gap: 10px;
         align-items: center;
         margin: 0 15px;
         width: fit-content;
         height: 220px;
-      }
-      .product-item{
-        display: flex;
-        flex-direction: column;
-        height: 190px;
-        width: 160px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(126, 126, 126, 0.21);
-        padding: 0 20px 0 0;
-        .image-container{
+        .product-item {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          width: 150px;
-          height: 110px;
-          .image{
-            object-fit: contain;
-            width: 140px;
-            height: 100px;
+          flex-direction: column;
+          height: 190px;
+          width: 160px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(126, 126, 126, 0.21);
+          .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            width: 150px;
+            height: 110px;
+            .image {
+              object-fit: contain;
+              width: 140px;
+              height: 100px;
+            }
           }
-        }
-        .name{
-          padding: 0 5px;
-        }
-        .weight{
-          padding: 0 5px;
-          color: #a1a1a1;
-          font-weight: 500;
+          .name {
+            height: 53px;
+            padding: 0 7px;
+          }
+
+          .weight {
+            padding: 0 10px;
+            color: #a1a1a1;
+            font-weight: 500;
+          }
         }
       }
     }

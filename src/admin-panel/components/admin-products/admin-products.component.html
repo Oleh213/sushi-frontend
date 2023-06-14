@@ -6,23 +6,27 @@
   <div class="products">
     <div class="header">
       <div class="productName">Ім'я</div>
-      <div class="price label1">Ціна</div>
-      <div class="discount label1">Знижка</div>
-      <div class="option label1">Опція</div>
-      <div class="category label1">Категорія</div>
-      <div class="available label1">Доступно</div>
-      <div class="weight label1">Вага</div>
+      <div class="overflow">
+        <div class="price label1">Ціна</div>
+        <div class="discount label1">Знижка</div>
+        <div class="option label1">Опція</div>
+        <div class="category label1">Категорія</div>
+        <div class="available label1">Доступно</div>
+        <div class="weight label1">Вага</div>
+      </div>
     </div>
     <div class="product" *ngFor="let product of products; let i = index" [ngClass]="{'grey-bg': i % 2 !== 0}">
-      <div class="productName">{{product.productName}}</div>
-      <div class="price item1">{{product.price}}</div>
-      <div class="discount item1">{{product.discount}}</div>
-      <div class="option item1">{{product?.productOption?.name ?? ''}}</div>
-      <div class="category item1">{{product.categoryName}}</div>
-      <div class="available item1">{{product.available}}</div>
-      <div class="weight item1">{{product.weight}}</div>
-      <img (click)="editProduct(product)" class="image" src="https://img.icons8.com/external-febrian-hidayat-gradient-febrian-hidayat/512/external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat"/>
-      <img (click)="addDiscount(product)" class="image" ngSrc="https://img.icons8.com/fluency/480/discount.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat" height="30" width="30"/>
+      <div class="productName" [ngClass]="{'grey-bg-name': i % 2 !== 0}">{{product.productName}}</div>
+      <div class="overflow">
+        <div class="price item1">{{product.price}}</div>
+        <div class="discount item1">{{product.discount}}</div>
+        <div class="option item1">{{product?.productOption?.name ?? ''}}</div>
+        <div class="category item1">{{product.categoryName}}</div>
+        <div class="available item1">{{product.available}}</div>
+        <div class="weight item1">{{product.weight}}</div>
+        <img (click)="editProduct(product)" class="image" src="https://img.icons8.com/external-febrian-hidayat-gradient-febrian-hidayat/512/external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat"/>
+        <img (click)="addDiscount(product)" class="image" ngSrc="https://img.icons8.com/fluency/480/discount.png" alt="external-edit-user-interface-febrian-hidayat-gradient-febrian-hidayat" height="30" width="30"/>
+      </div>
     </div>
   </div>
 </div>

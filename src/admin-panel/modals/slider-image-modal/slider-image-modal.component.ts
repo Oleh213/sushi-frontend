@@ -18,14 +18,16 @@ export class SliderImageModalComponent implements OnInit, OnDestroy{
   public uploadedImage: File;
   @Input() sliderType: SliderModal;
   private subscriptions: Subscription[]= [];
+  public imagesSlider: ImagesSlider = new ImagesSlider();
   constructor(private shopService: ShopService,
               private confirmService: ConfirmationService,
               private toastService: ToastService,
               ) {
   }
   ngOnInit(): void {
+    let data = this.slider;
     this.imageSrc = this.slider.image;
-    console.log(this.imageSrc);
+    this.imagesSlider = data;
     this.subscriptions.push(this.confirmService.getResult().subscribe(result => {
       if(result){
         this.shopService.deleteImageSlide(this.slider.imageNumber).subscribe(res=> {
@@ -53,11 +55,17 @@ export class SliderImageModalComponent implements OnInit, OnDestroy{
       this.updateImageSlider();
     }
   }
+  detectBrowserName(): string {
+    return this.shopService.detectBrowserName()
+  }
   updateImageSlider() {
-    if(this.uploadedImage != null){
+    if(this.imagesSlider.imageNumber > 0){
+      console.log(this.imagesSlider.imagesSliderId.toString())
       const formData = new FormData();
-      formData.append('file', this.uploadedImage)
-      formData.append('imageNumber', this.slider.imageNumber.toString())
+      formData.append('file', this.uploadedImage);
+      formData.append('imageNumber', this.imagesSlider.imageNumber.toString());
+      formData.append('description', this.imagesSlider.description);
+      formData.append('imageSliderId', this.imagesSlider.imagesSliderId.toString());
       this.shopService.editImageSlide(formData).subscribe(res=> {
         this.close.emit();
         this.update.emit();

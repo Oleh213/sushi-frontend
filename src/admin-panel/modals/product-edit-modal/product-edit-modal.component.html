@@ -64,7 +64,7 @@
     </div>
     <div class="available-container item">
       <label class="input" for="description">
-        <input class="input__field" [(ngModel)]="product.description"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"  type="text" placeholder=" " id="description"/>
+        <textarea id="description" name="w3review" class="input__field text-area" rows="4" cols="50" [(ngModel)]="product.description"  [ngClass]="{safariField: detectBrowserName() === 'safari'}"></textarea>
         <span class="input__label"  [ngClass]="{safariLabel: detectBrowserName() === 'safari'}">Опис</span>
       </label>
     </div>

@@ -21,6 +21,9 @@
       font-size: 25px;
       color: var(--main-color);
       letter-spacing: 5px;
+      .text{
+        cursor: pointer;
+      }
     }
     .order-button{
       display: none;
@@ -51,11 +54,26 @@
       font-weight: 500;
       cursor: pointer;
     }
-    .cart{
+    .manager-menu{
       cursor: pointer;
-      .manager-menu{
-        height: 30px;
-        width: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s;
+      height: 40px;
+      width: 100px;
+      &:hover{
+        background: #efefef;
+        border-radius: 7px;
+      }
+      .manager-menu-image{
+        height: 20px;
+        width: 20px;
+      }
+      .manager-menu-text{
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0 0 0 5px;
       }
     }
     .menu{
@@ -73,7 +91,7 @@
     .activated{
       color: var(--main-color);
       font-weight: 600;
-      font-size: 18px;
+      //font-size: 18px;
     }
   }
   .burger{
@@ -103,7 +121,7 @@
       .logo {
         display: flex;
         align-items: center;
-        margin: 0 35px 0 0;
+        margin: 0 40px 0 0;
       }
       .orders-mobile{
         display: flex;

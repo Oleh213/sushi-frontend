@@ -10,4 +10,5 @@ export const environments = {
   storeApi: 'https://web-shop.herokuapp.com/api/',
   tokenWhiteListedDomains: ['https://web-shop.herokuapp.com/api/'],
 };
+//
 

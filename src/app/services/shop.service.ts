@@ -11,7 +11,7 @@ import {CartInfo} from "../models/cartInfo";
 import {ResponseModel} from "../models/ResponseModel";
 import {ContactInfo} from "../models/contactInfo";
 import {DeliveryOption} from "../models/deliveryOption";
-import {UserRole} from "../models/user";
+import {User, UserRole} from "../models/user";
 import {Order, OrderStatus, PaymentMethod} from "../models/orders";
 import {Guid} from "guid-typescript";
 import {ImagesSlider} from "../models/imagesSlider";
@@ -37,6 +37,9 @@ export class ShopService {
 
   getProducts(): Observable<Product[]> {
     return this.auth.getRequest<Product[]>(`${this.baseApiUrl}ProductController/ShowProducts`)
+  }
+  ping(): Observable<any> {
+    return this.auth.getRequest(`${this.baseApiUrl}UserController/Ping`)
   }
   getProductOptions(): Observable<ProductOption[]> {
     return this.auth.getRequest<ProductOption[]>(`${this.baseApiUrl}ProductController/GetProductOptions`)
@@ -130,8 +133,8 @@ export class ShopService {
   getTimeLines(): Observable<TimeLine[]>{
     return this.auth.getRequest<TimeLine[]>(`${this.apiUrl}TimeLineController/GetTimeLines`)
   }
-  getUser(): Observable<UserRole>{
-    return this.auth.getRequest<UserRole>(`${this.apiUrl}UserController/GetUser`)
+  getUser(): Observable<User>{
+    return this.auth.getRequest<User>(`${this.apiUrl}UserController/GetUser`)
   }
   getCartItems(products: Array<LocalCartItem>): Observable<CartItem[]>{
     return this.auth.patchRequest<CartItem[]>(`${this.apiUrl}CartItemController/ShowCart`,products)

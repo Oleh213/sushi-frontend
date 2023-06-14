@@ -6,25 +6,24 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {STORE_API_URL} from "../models/app-injections-tokens";
 import {ResponseModel} from "../models/ResponseModel";
-import {ShopService} from "./shop.service";
+import {HubConnection, HubConnectionBuilder} from "@microsoft/signalr";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private connection: any = new signalR.HubConnectionBuilder().withUrl(`${this.apiUrl}order`)
+  private connection: HubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.apiUrl}order`)
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
   readonly POST_URL = `${this.apiUrl}OrderController/Buy`
   private receivedMessageObject: Order = new Order();
   private sharedObj = new Subject<Order>();
-  private sharedObjForOrderInfo = new Subject<Order>();
-
+  public orderId: string = '';
+  public admin = false;
   constructor(private http: HttpClient,
               private auth: AuthService,
-              private shopService: ShopService,
               @Inject(STORE_API_URL) private apiUrl: string,
   ) {
     this.connection.onclose(async () => {
@@ -36,17 +35,19 @@ export class OrderService {
   }
   public async start() {
     try {
-      await this.connection.start();
+      await this.connection.start()
+      await this.connection.invoke('AddToGroup', {
+        orderId: this.orderId
+      });
+      if(this.admin){
+        await this.connection.invoke('AddToAdmins' )
+        }
     } catch (err) {
+      console.log(err);
       setTimeout(() => this.start(), 5000);
     }
   }
-
   private mapReceivedOrders(order: Order): void {
-    if(this.shopService.checkOrderInCartById(order.orderId)){
-      this.sharedObjForOrderInfo.next(order);
-      console.log('Yes!')
-    }
     this.receivedMessageObject = order;
     this.sharedObj.next(this.receivedMessageObject);
   }
@@ -56,9 +57,12 @@ export class OrderService {
   }
 
   public retrieveMappedObject(): Observable<Order> {
+    this.admin = true;
+
     return this.sharedObj.asObservable();
   }
-  public retrieveMappedObjectForOrderInfo(): Observable<Order> {
-    return this.sharedObjForOrderInfo.asObservable();
+  public retrieveMappedObjectForOrderInfo(orderId: string): Observable<Order> {
+    this.orderId = orderId;
+    return this.sharedObj.asObservable();
   }
 }
